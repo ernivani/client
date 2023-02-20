@@ -167,7 +167,7 @@ const ContentContainer = () => {
 
 const Post = ({ name, timestamp, text }) => {
 
-  const seed = name;
+  const seed = randomSeed(name);
   return (
     <div className={'post'}>
       <div className='avatar-wrapper'>

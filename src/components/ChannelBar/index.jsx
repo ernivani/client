@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { BsHash } from 'react-icons/bs';
 import { FaChevronDown, FaChevronRight, FaPlus } from 'react-icons/fa';
 
-const topics = ['tailwind-css', 'react'];
-const questions = ['jit-compilation', 'purge-files', 'dark-mode'];
-const random = ['variants', 'plugins'];
+const topics = ['hello'];
+const questions = ['test'];
+const random = ['test'];
 
 const ChannelBar = () => {
   return (
@@ -19,7 +19,7 @@ const ChannelBar = () => {
   );
 };
 
-const Dropdown = ({ header, selections }) => {
+const Dropdown = ({ header=null, selections }) => {
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -32,7 +32,7 @@ const Dropdown = ({ header, selections }) => {
           {header}
         </h5>
         <FaPlus size='12' className='text-accent text-opacity-80 my-auto ml-auto' />
-      </div>
+      </div>      
       {expanded && selections && selections.map((selection, index) => (
         <TopicSelection key={index} selection={selection} />
       ))}

@@ -6,18 +6,19 @@ const SideBar = () => {
     <div className="fixed top-0 left-0 h-screen w-16 flex flex-col
                   bg-white dark:bg-gray-900 shadow-lg">
                     
-        <SideBarIcon icon={<FaFire size="28" />} />
+        <SideBarIcon icon={<FaFire size="28" />} text="Messages Privé" />
         <Divider />
-        <SideBarIcon icon={<BsPlus size="32" />} />
-        <SideBarIcon icon={<BsFillLightningFill size="20" />} />
-        <SideBarIcon icon={<FaPoo size="20" />} />
+        <SideBarIcon icon={<BsFillLightningFill size="20" />} text="Server 1" />
+        <SideBarIcon icon={<FaPoo size="20" />} text="Server 2" />
+        <SideBarIcon icon={<BsPlus size="32" />} text="Créer un serveur" />
         <Divider />
-        <SideBarIcon icon={<BsGearFill size="22" />} />
+        <SideBarIcon icon={<BsGearFill size="22" />} text="Settings" />
     </div>
   );
 };
 
 const SideBarIcon = ({ icon, text = 'tooltip 💡' }) => (
+  console.log(icon),
   <div className="sidebar-icon group">
     {icon}
     <span className="sidebar-tooltip group-hover:scale-100">
