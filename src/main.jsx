@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 
+import './index.css';
+
 const root = document.getElementById('root');
 const app = (
   <BrowserRouter>
@@ -11,4 +13,3 @@ const app = (
 );
 
 createRoot(root).render(app);
-
