@@ -2,9 +2,21 @@ import { useState } from 'react';
 import { BsHash } from 'react-icons/bs';
 import { FaChevronDown, FaChevronRight, FaPlus } from 'react-icons/fa';
 
-const topics = ['hello'];
-const questions = ['test'];
-const random = ['test'];
+const topics = [
+  'General',
+  'Random',
+  'Programming',
+  'Music']
+const questions = [
+  'How do I...',
+  'What is the best way to...',
+  'Why does my code not work?']
+const random = [
+  'I like turtles',
+  'I like cheese',
+  'I like pizza']
+
+
 
 const ChannelBar = () => {
   return (
