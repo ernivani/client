@@ -110,7 +110,6 @@
   .post-content {
     @apply w-4/5 
     flex flex-col justify-start 
-    ml-auto;
   }
 
   .post-text {
@@ -124,8 +123,6 @@
 
   .avatar-wrapper {
     @apply flex flex-col items-center
-    w-12 
-    m-0 ml-auto mb-auto;
   }
 
   .avatar {
@@ -213,6 +210,14 @@
     transition duration-300 ease-in-out 
     hover:text-pink-500 dark:hover:text-gray-500
     cursor-pointer;
+  }
+  .bottom-bar-icon {
+    @apply text-gray-400
+    mr-3 ml-4
+    hover:text-white
+    cursor-pointer
+    /* when hovered augment the size with transition */
+    
   }
 }
 

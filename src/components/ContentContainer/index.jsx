@@ -146,7 +146,6 @@ const ContentContainer = () => {
     <div className='content-container'>
       <TopNavigation />
       <div className='content-list'>
-        <div className='content-list'>
           {messages.map((message) => (
             <Post
               key={message.id}
@@ -155,8 +154,6 @@ const ContentContainer = () => {
               text={message.text}
             />
           ))}
-        </div>
-
       </div>
     <div className='bottom-bar'>
       <PlusIcon />
@@ -191,7 +188,7 @@ const Post = ({ name, timestamp, text }) => {
 const PlusIcon = () => (
   <BsPlusCircleFill
     size='22'
-    className='text-green-500 dark:shadow-lg mx-2 dark:text-primary'
+    className='bottom-bar-icon'
   />
 );
 
