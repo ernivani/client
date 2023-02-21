@@ -11,7 +11,6 @@ import Home from './Pages/Home';
 import { Route , Routes } from 'react-router-dom';
 
 
-import './index.css';
 
 function App() {
   return (

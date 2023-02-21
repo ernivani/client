@@ -4,6 +4,9 @@ import React, { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 import SignInForm from './SignInForm/';
+import SignUpForm from './SignUpForm/';
+
+import './index.css';
 
 
 function Login ( props )
@@ -33,12 +36,15 @@ function Login ( props )
         <div className='connection-form'>
             <div className='form-container'>
                 <ul>
-                    <li onClick={handleModal} id="register" className={signUpModal ? "active" : ""}>S'inscrire</li>
-                    <li onClick={handleModal} id="login" className={signInModal ? "active" : ""}>Se connecter</li>
+                    <li onClick={handleModal} id="register" className={signUpModal ? "active b" : "b"}>S'inscrire</li>
+                    <li onClick={handleModal} id="login" className={signInModal ? "active b" : "b" }>Se connecter</li>
                 </ul>
-                {signUpModal && <SignUpForm />}
+                {signUpModal && <SignInForm />}
                 {signInModal && <SignInForm />}
             </div>
+
+            mail : z@z.com <br></br>
+            mdp : z
         </div>
     )
 

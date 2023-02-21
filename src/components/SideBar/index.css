@@ -1,118 +1,32 @@
-root {
-    --bg-gray-900: #202225;
-    --bg-gray-800: #2f3136;
-    --bg-gray-700: #36393f;
-    --bg-gray-600: #4f545c;
-    --bg-gray-500: #6e757d;
-    --bg-gray-400: #8e9297;
-    --bg-gray-300: #b9bbbe;
-    --bg-gray-200: #d6d8da;
-    --bg-gray-100: #e9ebed;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-html body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: #fff;
-    background: #2f3136;
+ul[class] {
+	list-style: none;
 }
 
-/* fixed top-0 left-0 h-screen w-16 flex flex-col
-                  bg-white dark:bg-gray-900 shadow-lg */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4.5rem;
-    display: flex;
-    flex-direction: column;
-    background: #202225;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    scrollbar-width: none;
-    
-}
-.sidebar::-webkit-scrollbar {
-    display: none;
-}
-.sidebar::-moz-horizontal-scrollbar {
-    display: none;
-}
-.sidebar-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    background: #333;
-    color: #fff;
-    border-radius: 2rem;
-    cursor: pointer;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-icon:hover {
-    background: #5865F2;
-    color: #fff;
-    transition: 0.3s;
-    border-radius: 1rem;
-}
-
-.sidebar-tooltip {
-    position: absolute;
-    width: auto;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    min-width: max-content;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    background: #333;
-    color: #f5f5f5;
-    font-size: 0.75rem;
-    font-weight: 700;
-    transition: all 0.1s ease-in-out;
-    transform: scale(0);
-    transform-origin: left;
-    left: 3.5rem;
-}
-
-.sidebar-icon:hover .sidebar-tooltip {
-    transform: scale(1);
+button {
+  font: inherit;
 }
 
 .sidebar-hr {
-    /* bg-gray-200 dark:bg-gray-800 
-    border border-gray-200 dark:border-gray-800 rounded-full
-    mx-2; */
-    background: #2f3136;
-    border: 1px solid #2f3136;
+    background: #4c4f57;
+    border: 1.5px solid #2f3136;
     border-radius: 1rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 
 }
 
-.sidebar-icon-active > .sidebar-icon {
-    background: #5865F2;
-    color: #fff;
-    border-radius: 1rem;
-}
-  
-.sidebar-icon a {
-    text-decoration: none;
-    color: #fff;
+
+.loading {
+    /* text au centre de la page */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
 }
 
-.sidebar-icon a:hover {
-    text-decoration: none;
-    color: #fff;
-}

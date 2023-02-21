@@ -33,10 +33,19 @@ export const connectSocket = () => {
     };
 
     const createServer = (server) => {
+        console.log(server);
         socket.emit('createServer',server);
     };
 
+    const getChannelList = (channel) => {
+        socket.emit('getChannel',channel);
+    };
 
-  return { socket, login, sendMessage, getHistory, getServerList, register };
+    const createChannel = (channel) => {
+        socket.emit('createChannel',channel);
+    };
+
+
+  return { socket, login, sendMessage, getHistory, getServerList, register , createServer, getChannelList, createChannel };
 };
 

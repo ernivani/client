@@ -1,0 +1,19 @@
+a.home {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+a.home:hover {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #fff;
+}
