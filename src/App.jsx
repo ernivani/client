@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
 import { AccountBox } from "./components/accountBox";
 import { Home } from "./components/home";
+import { Users } from "./components/users";
 
 import { useTranslation } from "react-i18next";
 
@@ -30,7 +31,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/log' element={<AccountBox />} />
-                <Route path='/channels/*' element={<AfficherApp />} />
+                <Route path='/channels/*' element={<Users />} />
                 <Route path='*' element={
                     <div>
                         <h1>{t('notFound')}</h1>
@@ -47,30 +48,3 @@ function App() {
 
 export default App;
 
-
-
-
-function AfficherApp() {
-//import { checkAuth } from "./components/accountBox/checkAuth";
-    {import ("./components/accountBox/checkAuth").then(module => {
-        (module.checkAuth());
-    }).catch(error => {
-        alert(error);
-    });
-    return (
-        <div>
-            <button onClick={(e) => {
-                import ("./assets/logout").then(module => {
-                    (module.logoutSend(e));
-                }).catch(error => {
-                    alert(error);
-                }
-                );
-            }
-            
-            }>Logout</button>
-        </div>
-    );
-  }
-}
-  

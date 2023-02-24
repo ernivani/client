@@ -17,7 +17,7 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
-  filter: drop-shadow(12px 11px 10px #2D2D2D);
+  filter: drop-shadow(0px 0px 15px #111);
 
   `;
 
