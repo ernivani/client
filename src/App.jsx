@@ -1,36 +1,54 @@
-import React  from 'react';
-import SideBar from './components/SideBar'; 
-import Channelbar from './components/ChannelBar';
-import ContentContainer from './components/ContentContainer';
-
-import LogApp from './components/LogApp';
-import Register from './Pages/Register';
-import Login from './Pages/Login';
-import Home from './Pages/Home';
-
-import { Route , Routes } from 'react-router-dom';
+import "./App.css";
+import styled from "styled-components";
 
 
+import { Routes, Route } from "react-router-dom";
+import { AccountBox } from "./components/accountBox";
+import { Home } from "./components/home";
+
+import { checkAuth } from "./components/accountBox/checkAuth";
+
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home/>}></Route>
-      <Route exact path="/login" element={<Login />}></Route> 
-      <Route path="/register" element={<Register />}></Route>
-      <Route path="/App" element={<div>App</div>}></Route>
-      <Route path="/channels" element={<div>channels</div>}></Route>
-      <Route path="/channels/:channelId" element={<AfficherApp />}></Route>
-      <Route path="*" element={<div>404</div>}></Route>
-    </Routes>
-  );
+
+    
+
+    return (
+        <AppContainer>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/log' element={<AccountBox />} />
+                <Route path='/channels/*' element={<AfficherApp />} />
+                <Route path='*' element={<h1>404 Not Found</h1>} />
+            </Routes>
+        </AppContainer>
+    );
+
+    
 }
+
+
 
 export default App;
 
-function AfficherApp() {
-  return (
-      <SideBar />
-  );
-}
 
+import { logout } from "./components/accountBox/LogSend/logout";
+
+function AfficherApp() {
+    checkAuth();
+    return (
+        <div>
+            <button onClick={logout}>Logout</button>
+        </div>
+    );
+  }
+  
+  
