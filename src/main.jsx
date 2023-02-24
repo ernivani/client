@@ -4,6 +4,11 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 import './index.css';
 
+import './i18n';
+
+
+
+
 const root = document.getElementById('root');
 const app = (
   <BrowserRouter>
