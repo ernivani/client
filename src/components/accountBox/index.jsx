@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
+import { checkAuth } from "./checkAuth";
+
 import { useTranslation } from "react-i18next";
 import { Marginer } from "../marginer";
 const BoxContainer = styled.div`
@@ -18,7 +20,10 @@ const BoxContainer = styled.div`
   position: relative;
   overflow: hidden;
   filter: drop-shadow(0px 0px 15px #111);
-
+  @media screen and (max-width: 480px) {
+    width: 330px;
+    min-height: 500px;
+  }
   `;
 
 const TopContainer = styled.div`
@@ -47,12 +52,17 @@ const BackDrop = styled(motion.div)`
     rgba(114, 137, 218, 1) 20%, /* #7289da */
     rgba(243, 172, 18, 1) 100% /* #f3ac12 */
   );
+  @media screen and (max-width: 480px) {
+    width: 200%;
+    height: 550px;
+    top: -310px;
+    left: -150px;
+  }
 `;
 
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
-  background-color: #424549;
   flex-direction: column;
 `;
 
@@ -103,6 +113,13 @@ const expandingTransition = {
 };
 
 export function AccountBox(props) {
+
+  // get the current link
+
+  const currentLink = window.location.pathname;
+  // check if the user is authenticated
+
+  checkAuth(currentLink);
 
   const { t } = useTranslation();
   const [isExpanded, setExpanded] = useState(false);

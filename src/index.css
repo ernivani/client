@@ -7,9 +7,9 @@ body {
 	height: 100vh;
 	font-family: "Comfortaa", Comfortaa;
 	color: #ffffff;
-  background-color: #515A5C;
-  background-color: #2C3E50;
   background-color: #1F2833;
+  user-select: none;
+
   
 }
 

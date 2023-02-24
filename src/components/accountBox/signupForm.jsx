@@ -89,6 +89,7 @@ export function SignupForm(props) {
       <BoldLink href="#" onClick={switchToSignin}>
         {t("already_have_account")}
       </BoldLink>
+      <Marginer direction="vertical" margin="1.6em" />
     </BoxContainer>
   );
 }
