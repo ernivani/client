@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { AccountBox } from "./components/accountBox";
 import { Home } from "./components/home";
 
-import { checkAuth } from "./components/accountBox/checkAuth";
+import { useTranslation } from "react-i18next";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -17,9 +17,13 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
+
 function App() {
 
-    
+    const { t, i18n } = useTranslation();
+
+    const language = navigator.language.split(/[-_]/)[0];
+    i18n.changeLanguage(language);
 
     return (
         <AppContainer>
@@ -27,7 +31,11 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/log' element={<AccountBox />} />
                 <Route path='/channels/*' element={<AfficherApp />} />
-                <Route path='*' element={<h1>404 Not Found</h1>} />
+                <Route path='*' element={
+                    <div>
+                        <h1>{t('notFound')}</h1>
+                    </div>
+                } />
             </Routes>
         </AppContainer>
     );
@@ -40,15 +48,29 @@ function App() {
 export default App;
 
 
-import { logout } from "./components/accountBox/LogSend/logout";
+
 
 function AfficherApp() {
-    checkAuth();
+//import { checkAuth } from "./components/accountBox/checkAuth";
+    {import ("./components/accountBox/checkAuth").then(module => {
+        (module.checkAuth());
+    }).catch(error => {
+        alert(error);
+    });
     return (
         <div>
-            <button onClick={logout}>Logout</button>
+            <button onClick={(e) => {
+                import ("./assets/logout").then(module => {
+                    (module.logoutSend(e));
+                }).catch(error => {
+                    alert(error);
+                }
+                );
+            }
+            
+            }>Logout</button>
         </div>
     );
   }
-  
+}
   
