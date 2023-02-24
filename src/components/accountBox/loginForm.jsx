@@ -10,9 +10,11 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
-
+import { useTranslation } from "react-i18next";
 
 export function LoginForm(props) {
+
+  const { t } = useTranslation();
   const { switchToSignup } = useContext(AccountContext);
 
   const [email, setEmail] = useState("");
@@ -37,16 +39,16 @@ export function LoginForm(props) {
 
       >
         <LabelInput>
-          E-MAIL 
+          {t("email_label")} 
           {/* if error place it else place * */}
           {error ? <ImportantSpan>- {error}</ImportantSpan> : <ImportantSpan>*</ImportantSpan>}
         </LabelInput>
         <Input 
         name='email' 
         type="email" 
-        placeholder="E-mail" 
+        placeholder={t("email_placeholder")}
         autoComplete="off" 
-        aria-label="E-mail ou numéro de téléphone" 
+        aria-label={t("email_placeholder")}
         spellCheck="false" 
         maxLength="999" 
         onChange={(e) => setEmail(e.target.value)} 
@@ -54,15 +56,15 @@ export function LoginForm(props) {
         required
         />
         <LabelInput>
-          MOT DE PASSE
+          {t("password_label")}
           {error ? <ImportantSpan>- {error}</ImportantSpan> : <ImportantSpan>*</ImportantSpan>}
         </LabelInput>
         <Input 
         name='password' 
         type="password" 
-        placeholder="Mot de passe" 
+        placeholder={t("password_placeholder")}
         autoComplete="off" 
-        aria-label="Mot de passe" 
+        aria-label={t("password_placeholder")}
         spellCheck="false" 
         maxLength="999" 
         onChange={(e) => setPassword(e.target.value)} 
@@ -70,15 +72,16 @@ export function LoginForm(props) {
         required
         />
         <Marginer direction="vertical" margin={10} />
-        <BoldLink href="#">Tu as oublié ton mot de passe ?</BoldLink>
+        <BoldLink href="#">{t('forgot_password')}</BoldLink>
         <Marginer direction="vertical" margin="1.6em" />
-        <SubmitButton type="submit">Connection</SubmitButton>
+        <SubmitButton type="submit">{t('login_button')}</SubmitButton>
       </FormContainer>
       <Marginer direction="vertical" margin="1em" />
-      <InfoLink href="#">
-        Besoin d'un compte ?{" "}
+      <InfoLink>
+        {t('dont_have_account')}
+        {" "}
         <BoldLink href="#" onClick={switchToSignup}>
-          S'inscrire
+          {t('register_link')}
         </BoldLink>
       </InfoLink>
     </BoxContainer>

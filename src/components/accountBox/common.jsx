@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import {keyframes} from "styled-components";
+
 
 export const BoxContainer = styled.div`
   width: 100%;
@@ -24,7 +26,7 @@ text-decoration: none;
 pointer-events: none;
 `;
 
-export const BoldLink = styled.a`
+export const BoldLink = styled.span`
   font-size: 11px;
   color: rgb(114, 137, 218);
   color: linear-gradient(
@@ -37,6 +39,7 @@ export const BoldLink = styled.a`
   text-decoration: none;
   margin: 0 4px;
   pointer-events: visible;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -77,6 +80,20 @@ export const Input = styled.input`
   }
 `;
 
+const ernicaniBG = keyframes`
+
+  0% {
+    background-position: 0% 50%;
+    
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+
 export const SubmitButton = styled.button`
   width: 100%;
   padding: 15px;
@@ -94,10 +111,19 @@ export const SubmitButton = styled.button`
     rgba(243, 172, 18, 1) 100%
   );
 
+
+
+  background-size: 150% 150%;
+  animation: ${ernicaniBG};
+  animation-duration: 2s; 
+  animation-timing-function: ease-in-out; 
+  animation-play-state: paused;
+  animation-iteration-count: infinite;
   &:hover {
-    filter: brightness(0.7);
+    animation-play-state: running;
   }
 `;
+
 
 export const LabelInput = styled.label`
   font-size: 12px;

@@ -11,7 +11,11 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 
+import { useTranslation } from "react-i18next";
+
 export function SignupForm(props) {
+
+  const { t } = useTranslation();
   const { switchToSignin } = useContext(AccountContext);
 
   const [email, setEmail] = useState("");
@@ -29,18 +33,17 @@ export function SignupForm(props) {
           alert(error);
         });
       }}
-      // prevent default
       >
         <LabelInput>
-          E-MAIL 
+          {t("email_label")}
           {error ? <ImportantSpan>- {error}</ImportantSpan> : <ImportantSpan>*</ImportantSpan>}
         </LabelInput> 
         <Input 
         name='email' 
         type="email" 
-        placeholder="E-mail" 
+        placeholder={t("email_placeholder")}
         autoComplete="off" 
-        aria-label="E-mail ou numéro de téléphone" 
+        aria-label={t("email_placeholder")}
         spellCheck="false" 
         maxLength="999" 
         onChange={(e) => setEmail(e.target.value)} 
@@ -48,15 +51,15 @@ export function SignupForm(props) {
         required
         />
         <LabelInput>
-          NOM D'UTILISATEUR
+          {t("username_label")}
           {error ? <ImportantSpan>- {error}</ImportantSpan> : <ImportantSpan>*</ImportantSpan>}
         </LabelInput>
         <Input
           name='username'
           type="text"
-          placeholder="Nom d'utilisateur"
+          placeholder={t("username_placeholder")}
           autoComplete="off"
-          aria-label="Nom d'utilisateur"
+          aria-label={t("username_placeholder")}
           spellCheck="false"
           maxLength="999"
           onChange={(e) => setUsername(e.target.value)}
@@ -64,15 +67,15 @@ export function SignupForm(props) {
           required
         />
         <LabelInput>
-          CONFIRMER MOT DE PASSE 
+          {t("password_label")}
           {error ? <ImportantSpan>- {error}</ImportantSpan> : <ImportantSpan>*</ImportantSpan>}
         </LabelInput>
         <Input
           name='password'
           type="password"
-          placeholder="Mot de passe"
+          placeholder={t("password_placeholder")}
           autoComplete="off"
-          aria-label="Mot de passe"
+          aria-label={t("password_placeholder")}
           spellCheck="false"
           maxLength="999"
           onChange={(e) => setPassword(e.target.value)}
@@ -80,11 +83,11 @@ export function SignupForm(props) {
           required
         />
         <Marginer direction="vertical" margin={15} />
-        <SubmitButton type="submit">Inscription</SubmitButton>  
+        <SubmitButton type="submit">{t("register_button")}</SubmitButton>  
       </FormContainer>
       <Marginer direction="vertical" margin="1em" required />
       <BoldLink href="#" onClick={switchToSignin}>
-        Tu as déjà un compte ? 
+        {t("already_have_account")}
       </BoldLink>
     </BoxContainer>
   );

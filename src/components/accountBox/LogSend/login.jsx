@@ -14,14 +14,11 @@ export const loginSend = (e,setErrorMessage) => {
     const socket = io.connect('http://213.32.89.28:5000');
     socket.emit('login', data);
     socket.on('loginResponse', (data) => {
-        // reponse du serveur : status et message
         if (data.status === 'success') {
             localStorage.setItem('token', data.token); // set the token in local storage
             window.location.href = '/channels/@me'; // redirect to the home page
           } else {
-            //todo: afficher le message d'erreur dans le formulaire
             setErrorMessage(data.message);
-            // close the socket
             socket.disconnect();
         }
     });

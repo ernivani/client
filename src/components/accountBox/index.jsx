@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
+import { useTranslation } from "react-i18next";
+import { Marginer } from "../marginer";
 const BoxContainer = styled.div`
-  width: 280px;
+  width: 400px;
   min-height: 550px;
   display: flex;
   flex-direction: column;
@@ -15,8 +17,9 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
+  filter: drop-shadow(12px 11px 10px #2D2D2D);
 
-`;
+  `;
 
 const TopContainer = styled.div`
   width: 100%;
@@ -36,13 +39,13 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  top: -290px;
-  left: -70px;
+  top: -330px;
+  left: -170px;
   background: rgb(114, 137, 218);
   background: linear-gradient(
     58deg,
-    rgba(114, 137, 218, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
+    rgba(114, 137, 218, 1) 20%, /* #7289da */
+    rgba(243, 172, 18, 1) 100% /* #f3ac12 */
   );
 `;
 
@@ -95,11 +98,13 @@ const backdropVariants = {
 
 const expandingTransition = {
   type: "spring",
-  duration: 2.3,
+  duration: 2.5,
   stiffness: 30,
 };
 
 export function AccountBox(props) {
+
+  const { t } = useTranslation();
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
 
@@ -107,7 +112,7 @@ export function AccountBox(props) {
     setExpanded(true);
     setTimeout(() => {
       setExpanded(false);
-    }, expandingTransition.duration *  400);
+    }, expandingTransition.duration *  320);
   };
 
   const switchToSignup = () => {
@@ -138,14 +143,14 @@ export function AccountBox(props) {
           />
           {active === "signin" && (
             <HeaderContainer>
-              <HeaderText>Ah,</HeaderText>
-              <HeaderText>Te revoilà !</HeaderText>
-              <SmallText>Nous sommes si heureux de te revoir !</SmallText>
+              <HeaderText>{t('login_title')}</HeaderText>
+              <SmallText>{t('login_comment')}</SmallText>
             </HeaderContainer>
           )}
           {active === "signup" && (
             <HeaderContainer>
-              <HeaderText>Créer un compte</HeaderText>
+              <HeaderText>{t('register_title')}</HeaderText>
+              <Marginer direction="vertical" margin={15} />
             </HeaderContainer>
           )}
         </TopContainer>
