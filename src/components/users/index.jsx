@@ -42,8 +42,11 @@ export function Users() {
         socket.emit('getServerList', token);
         socket.on('getServerListResponse', (data) => {
           if (data.status === 'success') {
-            setServerList(data.server);
-            setLoading(false);
+            setServerList(data.server);    
+            setTimeout(() => {
+              setLoading(false);
+            }, 700);
+        
             socket.disconnect();
           } else {
             console.log(data.status);
@@ -51,6 +54,8 @@ export function Users() {
         });
       }
     }, []);
+
+
     
     
     if (loading) {
