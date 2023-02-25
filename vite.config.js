@@ -7,23 +7,16 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        app: './public/index.html',
+        app: './index.html',
       },
       port: 8080,
     },
   },
   dev : {
     port: 8080,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      } 
-    },
     rollupOptions: {
       input: {
-        app: './public/index.html',
+        app: './index.html',
       },
     },
   },

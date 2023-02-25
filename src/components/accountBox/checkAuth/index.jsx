@@ -8,6 +8,8 @@ export function checkAuth(link) {
     const navigate = useNavigate();
 
     
+
+    
     if (token) {
       const socket = io.connect('http://213.32.89.28:5000');
       socket.emit('auth', token);
@@ -31,7 +33,7 @@ export function checkAuth(link) {
       });
     } else {
         if (link !== '/log') {
-            navigate('/log');
+            window.location.href = '/log';
         }
     }
   };

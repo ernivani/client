@@ -3,6 +3,8 @@ import io from 'socket.io-client';
 import {SideBar}  from "./sideBar";
 import styled from 'styled-components';
 
+import { checkAuth } from '../accountBox/checkAuth';
+
 const FakeParent = styled.div`
   height: 100%;
   width: 100%;
@@ -19,11 +21,12 @@ const FakeParent = styled.div`
 `;
 
 
-import { checkAuth } from '../accountBox/checkAuth';
 
 const socket = io.connect('http://213.32.89.28:5000');
 
 export function Users() {
+
+  checkAuth();
 
     // get the current link
     const currentLink = window.location.pathname;
