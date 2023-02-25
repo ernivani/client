@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import {SideBar}  from "./sideBar";
+
 
 import { checkAuth } from '../accountBox/checkAuth';
 
@@ -23,35 +25,14 @@ export function Users() {
         
         socket.on('getServerResponse', (data) => {
           setServer(data.server);
+          socket.disconnect();
         });
-
-        return () => {
-            socket.off('getServerResponse');
-        };
 
     }, []);
     
   
     return (
-      <div>
-        <button onClick={(e) => {
-          import ("../../assets/logout").then(module => {
-            (module.logout(e));
-          }).catch(error => {
-            alert(error);
-          });
-        }}>Logout</button>
-        <div>Server list </div>
-        {servers.length > 0 ? (
-          <ul>
-            {servers.map((server) => (
-              <li key={server.id}>{server.server_name}</li>
-            ))}
-          </ul>
-        ) : (
-          <div>No servers found</div>
-        )}
-      </div>
+        <SideBar />
     );
   }
   

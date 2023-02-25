@@ -18,6 +18,8 @@ export const registerSend = (e,setErrorMessage) => {
         if (data.status === 'success') {
             localStorage.setItem('token', data.token); // set the token in local storage
             window.location.href = '/channels/@me'; // redirect to the home page
+            // close the socket
+            socket.disconnect();
           } else {
             setErrorMessage(data.message);
             // close the socket

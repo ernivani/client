@@ -17,6 +17,7 @@ export const loginSend = (e,setErrorMessage) => {
         if (data.status === 'success') {
             localStorage.setItem('token', data.token); // set the token in local storage
             window.location.href = '/channels/@me'; // redirect to the home page
+            socket.disconnect();
           } else {
             setErrorMessage(data.message);
             socket.disconnect();

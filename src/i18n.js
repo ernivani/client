@@ -26,8 +26,9 @@ i18next.use(LanguageDetector).use(initReactI18next).init({
         'forgot_password': 'Forgot your password ?',
         'dont_have_account': "Don't have an account ?",
         'register_link': 'Register',
-        'already_have_account': 'Already have an account ?'
-
+        'already_have_account': 'Already have an account ?',
+        'signIn': 'Login',
+        'signUp': 'Register',
       },
     },
     fr: {
@@ -49,9 +50,9 @@ i18next.use(LanguageDetector).use(initReactI18next).init({
         'forgot_password': 'Mot de passe oublié ?',
         'dont_have_account': "Vous n'avez pas de compte ?",
         'register_link': 'Inscription',
-        'already_have_account': 'Vous avez déjà un compte ?'
-        
-
+        'already_have_account': 'Vous avez déjà un compte ?',
+        'signIn': 'Connexion',
+        'signUp': 'Inscription',
       },
     },
   },

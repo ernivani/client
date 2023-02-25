@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
 import { motion } from "framer-motion";
@@ -9,6 +9,29 @@ import { checkAuth } from "./checkAuth";
 
 import { useTranslation } from "react-i18next";
 import { Marginer } from "../marginer";
+
+
+const ApplicationCenter = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+`;
+
+
+const AccountContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+
+
 const BoxContainer = styled.div`
   width: 400px;
   min-height: 550px;
@@ -112,18 +135,19 @@ const expandingTransition = {
   stiffness: 30,
 };
 
-export function AccountBox(props) {
+import { useLocation } from 'react-router-dom'
+export function AccountBox() {
 
-  // get the current link
+  
+  const location = useLocation();
+  
+  console.log(location.state);
 
-  const currentLink = window.location.pathname;
-  // check if the user is authenticated
-
-  checkAuth(currentLink);
+  checkAuth(window.location.pathname);
 
   const { t } = useTranslation();
   const [isExpanded, setExpanded] = useState(false);
-  const [active, setActive] = useState("signin");
+  const [active, setActive] = useState( location.state ? location.state : "signin" );
 
   const playExpandingAnimation = () => {
     setExpanded(true);
@@ -148,34 +172,42 @@ export function AccountBox(props) {
 
   const contextValue = { switchToSignup, switchToSignin };
 
+
+  // todo: check the current path and set the active state accordingly but we need to make sure that the animation is not played and the page does not load after the animation is done
+
+
   return (
-    <AccountContext.Provider value={contextValue}>
-      <BoxContainer>
-        <TopContainer>
-          <BackDrop
-            initial={false}
-            animate={isExpanded ? "expanded" : "collapsed"}
-            variants={backdropVariants}
-            transition={expandingTransition}
-          />
-          {active === "signin" && (
-            <HeaderContainer>
-              <HeaderText>{t('login_title')}</HeaderText>
-              <SmallText>{t('login_comment')}</SmallText>
-            </HeaderContainer>
-          )}
-          {active === "signup" && (
-            <HeaderContainer>
-              <HeaderText>{t('register_title')}</HeaderText>
-              <Marginer direction="vertical" margin={15} />
-            </HeaderContainer>
-          )}
-        </TopContainer>
-        <InnerContainer>
-          {active === "signin" && <LoginForm />}
-          {active === "signup" && <SignupForm />}
-        </InnerContainer>
-      </BoxContainer>
-    </AccountContext.Provider>
+    <ApplicationCenter>
+      <AccountContainer>
+        <AccountContext.Provider value={contextValue}>
+          <BoxContainer>
+            <TopContainer>
+              <BackDrop
+                initial={false}
+                animate={isExpanded ? "expanded" : "collapsed"}
+                variants={backdropVariants}
+                transition={expandingTransition}
+              />
+              {active === "signin" && (
+                <HeaderContainer>
+                  <HeaderText>{t('login_title')}</HeaderText>
+                  <SmallText>{t('login_comment')}</SmallText>
+                </HeaderContainer>
+              )}
+              {active === "signup" && (
+                <HeaderContainer>
+                  <HeaderText>{t('register_title')}</HeaderText>
+                  <Marginer direction="vertical" margin={15} />
+                </HeaderContainer>
+              )}
+            </TopContainer>
+            <InnerContainer>
+              {active === "signin" && <LoginForm />}
+              {active === "signup" && <SignupForm />}
+            </InnerContainer>
+          </BoxContainer>
+        </AccountContext.Provider>
+      </AccountContainer>
+    </ApplicationCenter>
   );
 }
