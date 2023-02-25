@@ -46,7 +46,6 @@ export function Users() {
             setTimeout(() => {
               setLoading(false);
             }, 700);
-        
             socket.disconnect();
           } else {
             console.log(data.status);
