@@ -2,145 +2,198 @@ import { FaFire, FaPlus, FaSignOutAlt, FaServer } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-
-import './index.css';
-
+import styled from 'styled-components';
 
 const socket = io.connect('http://213.32.89.28:5000');
 
+const FakeParent = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  --color-full-white: #fff;
+  --color-dark: #2c2f33;
+  --color-lighter-dark: #2f3136;
+  --color-not-quite-black: #36393f;
+  --color-actually-little-black: #2f3136;
+  --color-blurple: #7289da;
+  --color-yell-bubble: #f9f586;
+  --color-red-bubble: #ff5555;
+  --color-green-bubble: #57f287;
+`;
+
+const Parent = styled.div`
+  height: 100%;
+  width: 4.5rem;
+  background: var(--color-not-quite-black);
+  padding: 0.5rem 0;
+  overflow: hidden scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow: -moz-scrollbars-none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Serv = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 auto 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
+`;
+
+const Enfant = styled.span`
+  display: inline-block;
+  position: absolute;
+  background-color: #000;
+  padding: 8px 15px;
+  border-radius: 5px;
+  left: 5.5rem;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: -4px;
+    transform: rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background-color: inherit;
+  }
+`;
+
+const Squircle = styled(Link)`
+  background: var(--color-lighter-dark);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: border-radius 128ms, background 128ms, color 128ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-full-white);
+  &:hover {
+    border-radius: 36%;
+    background: ${props => props.a};
+  }
+`;
+
+const Divider = styled.hr`
+  background: var(--color-lighter-dark);
+  border: 1.5px solid var(--color-actually-little-black);
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+`;
+
 export function SideBar() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [spanPositions, setSpanPositions] = useState([]);
+  const [spanPositions, setSpanPositions] = useState(undefined);
 
-  const handleScroll = (event) => {
-    setScrollPosition(event.target.scrollTop);
-  };
-
-  const handleMouseEnter = (id, position) => {
-    const newSpanPositions = [...spanPositions];
-    newSpanPositions[id] = position + 5;
-    setSpanPositions(newSpanPositions);
+  const handleScroll = () => {
+    const positions = {};
+    const elements = document.querySelectorAll('.squircle');
+    elements.forEach((element) => {
+      positions[element.id] = element.getBoundingClientRect().top + window.scrollY;
+    });
+    setSpanPositions(positions);
   };
 
   const disconnect = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      socket.emit('logout', token);
-      localStorage.removeItem('token');
-      socket.once('logoutResponse', (data) => {
-        if (data.success) {
-          console.log('User logged out successfully');
-        } else {
-          console.log('Failed to log out user');
-        }
-      });
-    }
-    window.location.href = '/log';
+    // todo: handle disconnection
+    alert('todo: handle disconnection');
   };
 
-  useEffect(() => {
-    const cleanup = () => {
-      socket.off('logoutResponse');
-    };
-
-    return cleanup;
-  }, []);
-
   return (
-    <div className="fakeParent" onScroll={handleScroll}>
-      <div className="parent">
-            <SideBarIcon
-              icon={<FaFire />}
-              text="Messages privé"
-              active={false}
-              onMouseEnter={(event) =>
-                handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
-              }
-              type="green-boi"
-              id="@me"
-              spanPositions={spanPositions}
-            />
-          <Divider />
-          {[...Array(50)].map((e, i) => (
-            <SideBarIcon
-              key={i}
-              id={i}
-              icon={<FaServer />}
-              text={`Serveur ${i}`}
-              active={false}
-              type="yell-boi"
-              spanPositions={spanPositions}
-            />
-          ))}
-          <Divider />
-            <SideBarIcon
-              icon={<FaPlus />}
-              text="Créer un serveur"
-              active={false}
-              type="green-boi"
-              onClick={() => {
-                // todo: afficher la fenêtre de création de serveur
-                alert('todo: afficher la fenêtre de création de serveur');
-              }}
-              onMouseEnter={(event) =>
-                handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
-              }
-              spanPositions={spanPositions}
-            />
-            <SideBarIcon
-              icon={<FaSignOutAlt />}
-              text="Déconnexion"
-              active={false}
-              type="red-boi"
-              onClick={disconnect}
-              onMouseEnter={(event) =>
-                handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
-              }
-            />
-      </div>
-    </div>
+    <FakeParent onScroll={handleScroll}>
+      <Parent>
+        <SideBarIcon
+          icon={<FaFire />}
+          text="Messages privé"
+          active={true}
+          hoverColor={"var(--color-blurple)"}
+          spanPositions={spanPositions}
+
+          
+        />
+        <Divider />
+        {[...Array(5)].map((e, i) => (
+          <SideBarIcon
+            key={i}
+            id={i}
+            icon={<FaServer />}
+            text={`Serveur ${i}`}
+            active={false}
+            hoverColor={"var(--color-yell-bubble)"}
+            spanPositions={spanPositions}
+          />
+        ))}
+        <Divider />
+        <SideBarIcon
+          id={0}
+          icon={<FaPlus />}
+          text="Créer un serveur"
+          active={false}
+          hoverColor={"var(--color-green-bubble)"}
+          onClick={() => {
+            // todo: afficher la fenêtre de création de serveur
+            alert('todo: afficher la fenêtre de création de serveur');
+          }}
+          spanPositions={spanPositions}
+        />
+        <SideBarIcon
+          id={0}
+          icon={<FaSignOutAlt />}
+          text="Déconnexion"
+          active={false}
+          hoverColor={"var(--color-red-bubble)"}
+          onClick={disconnect}
+        />
+      </Parent>
+    </FakeParent>
   );
 }
 
 function SideBarIcon(props) {
-  const { icon, text, active, onClick, onMouseEnter, type, path, id, spanPositions } = props;
-  const clstype = 'squircle ' + type;
+  const { icon, text, active, onClick, onMouseEnter, hoverColor, id, spanPositions } = props;
   const [hoverPosition, setHoverPosition] = useState(null);
-  let pathModif = '/channels/' + id;
+  const pathModif = '/channels/' + id;
   let pos;
   if (spanPositions === undefined) {
     pos = 300;
   } else {
     pos = spanPositions[id];
   }
-  const handleMouseEnter = (event) => {
-    setHoverPosition(event.currentTarget.getBoundingClientRect().top + 10);
+  const handleMouseEnterInternal = (event) => {
+    setHoverPosition(event.currentTarget.getBoundingClientRect().top + 11);
   };
   const handleMouseLeave = () => {
     setHoverPosition(null);
   };
   return (
-    <div className="serv">
-      {hoverPosition && (
-        <span className="enfant" style={{ top: hoverPosition, height: 'fit-content' }}>
-          {text}
-        </span>
-      )}
-      <Link
-        className={clstype}
-        onClick={onClick}
-        onMouseEnter={(event) => {
-          handleMouseEnter(event);
-        }}
+    <Serv>
+      {hoverPosition && <Enfant style={{ top: hoverPosition, height: 'fit-content' }}>{text}</Enfant>}
+      <Squircle
+        onMouseEnter={onMouseEnter || handleMouseEnterInternal}
         onMouseLeave={handleMouseLeave}
+        a={hoverColor}
+        onClick={onClick}
         to={pathModif}
+        id={id}
+        className="squircle"
       >
         {icon ? icon : text[0]}
-      </Link>
-    </div>
+      </Squircle>
+    </Serv>
   );
 }
 
-
-const Divider = () => <hr className="sidebar-hr" />;
 
