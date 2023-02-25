@@ -26,6 +26,10 @@ body {
   overflow: hidden;
 }
 
+div {
+  outline: 0;
+}
+
 .fakeParent {
   position: relative;
   width: 100%;
@@ -33,15 +37,20 @@ body {
 }
 
 .parent {
-  overflow: scroll;
+  overflow: hidden scroll;
   height: 100%;
-  width: fit-content;
+  width: 4.5rem;
 	background: var(--color-not-quite-black);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow: -moz-scrollbars-none; /* Firefox */
+  padding: 0.5rem 0;
 }
 
 .parent::-webkit-scrollbar {
   display: none;
 }
+
 a.squircle{
   text-decoration: none;
   color: var(--color-full-white);
@@ -58,8 +67,6 @@ a.squircle{
   display: flex;
   justify-content: center;
   align-items: center;
-  /* rendre l'item deplaçable */
-  --webkit-app-region: drag;
 
 }
 .purple-boi:hover {
@@ -92,7 +99,7 @@ a.squircle{
   background-color: var(--color-actually-little-black);
   padding: 8px 15px;
   border-radius: 5px;
-  left: 90px;
+  left: 5.5rem;
   opacity: 0;
   visibility: hidden;
   font-size: 15px;
@@ -110,19 +117,30 @@ a.squircle{
   background-color: inherit;
 }
 
-.parent div {
+.parent div.serv {
   display: flex;
   align-items: center;
-  margin: 10px 15px;
+  margin: 0 auto 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
 }
 
 
 .parent div:hover .enfant {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease;
 }
+
+@media screen and (max-width: 600px) {
+  .parent div:hover .enfant {
+    visibility: hidden;
+  }
+}
+
+
 .parent .active {
   background-color: #22252E;
 }
@@ -134,9 +152,7 @@ a.squircle{
     background: #4c4f57;
     border: 1.5px solid #2f3136;
     border-radius: 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-
+    margin: 0.5rem 0;
 }
 
 #sidebar-enfant-container {    
