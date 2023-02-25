@@ -4,21 +4,12 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
-const socket = io.connect('http://213.32.89.28:5000');
+
 
 const FakeParent = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  --color-full-white: #fff;
-  --color-dark: #2c2f33;
-  --color-lighter-dark: #2f3136;
-  --color-not-quite-black: #36393f;
-  --color-actually-little-black: #2f3136;
-  --color-blurple: #7289da;
-  --color-yell-bubble: #f9f586;
-  --color-red-bubble: #ff5555;
-  --color-green-bubble: #57f287;
 `;
 
 const Parent = styled.div`
@@ -67,10 +58,15 @@ const Enfant = styled.span`
     height: 10px;
     background-color: inherit;
   }
+
+  /* media queries */
+  @media (max-width: 768px) {
+    visibility: hidden;
+  }
 `;
 
 const Squircle = styled(Link)`
-  background: var(--color-lighter-dark);
+  background: ${props => props.b ? props.a : "var(--color-dark)"};
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -86,6 +82,7 @@ const Squircle = styled(Link)`
     border-radius: 36%;
     background: ${props => props.a};
   }
+
 `;
 
 const Divider = styled.hr`
@@ -97,7 +94,26 @@ const Divider = styled.hr`
 
 export function SideBar() {
   const [spanPositions, setSpanPositions] = useState(undefined);
+  const [ serverList  , setServerList ] = useState([]);
 
+ 
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const socket = io.connect('http://213.32.89.28:5000');
+    if (token) {
+      socket.emit('getServerList', token);
+      socket.on('getServerListResponse', (data) => {
+        if (data.status === 'success') {
+          setServerList(data.server);
+        } else {
+          console.log(data.status);
+        }
+      });
+    }
+  }, []);
+  
+    
   const handleScroll = () => {
     const positions = {};
     const elements = document.querySelectorAll('.squircle');
@@ -107,53 +123,60 @@ export function SideBar() {
     setSpanPositions(positions);
   };
 
-  const disconnect = () => {
+  const { id } = useParams();
+
+
+  const disconnect = (e) => {
     // todo: handle disconnection
-    alert('todo: handle disconnection');
+    console.log(e)
+    console.log('todo: handle disconnection');
+  };
+
+  const addServer = (e) => {
+    // todo : handle add server
+    console.log(e)
+    console.log('todo : handle add server');
   };
 
   return (
     <FakeParent onScroll={handleScroll}>
       <Parent>
         <SideBarIcon
+          id="@me"
           icon={<FaFire />}
           text="Messages privé"
-          active={true}
+          active={id === "@me"}
           hoverColor={"var(--color-blurple)"}
           spanPositions={spanPositions}
 
           
         />
         <Divider />
-        {[...Array(5)].map((e, i) => (
+        {serverList.map((e) => (
           <SideBarIcon
-            key={i}
-            id={i}
+            key={e.id}
+            id={e.id}
             icon={<FaServer />}
-            text={`Serveur ${i}`}
-            active={false}
+            text={e.server_name}
+            active={id == e.id}
             hoverColor={"var(--color-yell-bubble)"}
             spanPositions={spanPositions}
           />
         ))}
-        <Divider />
         <SideBarIcon
-          id={0}
+          id="addServer"
           icon={<FaPlus />}
           text="Créer un serveur"
-          active={false}
+          active={0}
           hoverColor={"var(--color-green-bubble)"}
-          onClick={() => {
-            // todo: afficher la fenêtre de création de serveur
-            alert('todo: afficher la fenêtre de création de serveur');
-          }}
+          onClick={addServer}
           spanPositions={spanPositions}
         />
         <SideBarIcon
-          id={0}
+          id="disconnect"
           icon={<FaSignOutAlt />}
           text="Déconnexion"
-          active={false}
+          active={0}
           hoverColor={"var(--color-red-bubble)"}
           onClick={disconnect}
         />
@@ -166,14 +189,10 @@ function SideBarIcon(props) {
   const { icon, text, active, onClick, onMouseEnter, hoverColor, id, spanPositions } = props;
   const [hoverPosition, setHoverPosition] = useState(null);
   const pathModif = '/channels/' + id;
-  let pos;
-  if (spanPositions === undefined) {
-    pos = 300;
-  } else {
-    pos = spanPositions[id];
-  }
+  
+ 
   const handleMouseEnterInternal = (event) => {
-    setHoverPosition(event.currentTarget.getBoundingClientRect().top + 11);
+    setHoverPosition(event.currentTarget.getBoundingClientRect().top + 5);
   };
   const handleMouseLeave = () => {
     setHoverPosition(null);
@@ -188,8 +207,8 @@ function SideBarIcon(props) {
         onClick={onClick}
         to={pathModif}
         id={id}
-        className="squircle"
-      >
+        b= {active ? 1 : 0}
+        >
         {icon ? icon : text[0]}
       </Squircle>
     </Serv>

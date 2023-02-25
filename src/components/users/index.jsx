@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import {SideBar}  from "./sideBar";
+import styled from 'styled-components';
+
+const FakeParent = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  --color-full-white: #fff;
+  --color-dark: #2c2f33;
+  --color-lighter-dark: #2f3136;
+  --color-not-quite-black: #36393f;
+  --color-actually-little-black: #2f3136;
+  --color-blurple: #7289da;
+  --color-yell-bubble: #d0b34e;
+  --color-red-bubble: #ff5555;
+  --color-green-bubble: #57f287;
+`;
 
 
 import { checkAuth } from '../accountBox/checkAuth';
@@ -32,7 +48,9 @@ export function Users() {
     
   
     return (
-        <SideBar />
+      <FakeParent>
+      <SideBar />
+      </FakeParent>
     );
   }
   

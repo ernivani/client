@@ -30,7 +30,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/log' element={<AccountBox/>} />
-                <Route path='/channels/*' element={<Users />} />
+                <Route path='/channels/:id' element={<Users />} />
                 <Route path='*' element={
                     <div>
                         <h1>{t('notFound')}</h1>

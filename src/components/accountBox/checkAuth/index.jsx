@@ -1,8 +1,11 @@
 import io from 'socket.io-client';
 
+import { useNavigate } from 'react-router-dom';
+
 export function checkAuth(link) {
     const token = localStorage.getItem('token');
 
+    const navigate = useNavigate();
 
     
     if (token) {
@@ -11,24 +14,24 @@ export function checkAuth(link) {
       socket.on('authResponse', (data) => {
         if (data.status === 'success') {
             if (link === '/log') {
-                window.location.href = '/channels/@me';
+                navigate('/channels/@me');
             }
             socket.disconnect();
         } else {
           // user is not authenticated
             if (link !== '/log') {
-                window.location.href = '/log';
+                navigate('/log');
                 socket.disconnect();
             }
             console.log(data.status);
             localStorage.removeItem('token');
-            window.location.href = '/log'; // or show an error message
+            navigate('/log');
             socket.disconnect();
         }
       });
     } else {
         if (link !== '/log') {
-            window.location.href = '/log';
+            navigate('/log');
         }
     }
   };
