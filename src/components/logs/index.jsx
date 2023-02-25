@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Line } from 'react-chartjs-2';
 
-import { checkAuth } from '../accountBox/checkAuth';
+import  checkAuth  from '../accountBox/checkAuth';
 
 const socket = io.connect('http://213.32.89.28:5000');
 

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
-import { checkAuth } from "./checkAuth";
+import  checkAuth  from "./checkAuth";
 
 import { useTranslation } from "react-i18next";
 import { Marginer } from "../marginer";

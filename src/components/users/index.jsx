@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import {SideBar}  from "./sideBar";
+import SideBar  from "./sideBar";
 import styled from 'styled-components';
 
-import { checkAuth } from '../accountBox/checkAuth';
+import {useNavigate} from 'react-router-dom';
+
+import checkAuth from '../accountBox/checkAuth';
 
 const FakeParent = styled.div`
   height: 100%;
@@ -20,40 +22,55 @@ const FakeParent = styled.div`
   --color-green-bubble: #57f287;
 `;
 
+import './loading.css';
 
 
-const socket = io.connect('http://213.32.89.28:5000');
 
 export function Users() {
 
-  checkAuth();
+  const [loading, setLoading] = useState(true);
 
-    // get the current link
-    const currentLink = window.location.pathname;
-    // check if the user is authenticated
-    checkAuth(currentLink);
+    const [serverList, setServerList] = useState([]);
 
-    const [servers, setServer] = useState([]);
-
-    // get the token from local storage
-    const token = localStorage.getItem('token');
-
+    const navigate = useNavigate();
+  
     useEffect(() => {
-        socket.emit('getServer', token);
-
-        
-        socket.on('getServerResponse', (data) => {
-          setServer(data.server);
-          socket.disconnect();
+      checkAuth(navigate , window.location.pathname);
+      const token = localStorage.getItem('token');
+      const socket = io.connect('http://213.32.89.28:5000');
+      if (token) {
+        socket.emit('getServerList', token);
+        socket.on('getServerListResponse', (data) => {
+          if (data.status === 'success') {
+            setServerList(data.server);
+            setLoading(false);
+            socket.disconnect();
+          } else {
+            console.log(data.status);
+          }
         });
-
+      }
     }, []);
     
-  
-    return (
-      <FakeParent>
-      <SideBar />
-      </FakeParent>
-    );
-  }
+    
+    if (loading) {
+      return (
+        <div className='loading'>
+          <svg width="200" height="200" viewBox="0 0 100 100" className="loading">
+            <polyline className="line-cornered stroke-still" points="0,0 100,0 100,100" strokeWidth="10" fill="none"></polyline>
+            <polyline className="line-cornered stroke-still" points="0,0 0,100 100,100" strokeWidth="10" fill="none"></polyline>
+            <polyline className="line-cornered stroke-animation" points="0,0 100,0 100,100" strokeWidth="10" fill="none"></polyline>
+            <polyline className="line-cornered stroke-animation" points="0,0 0,100 100,100" strokeWidth="10" fill="none"></polyline>
+          </svg>
+        </div>
+      )
+    }else {
+      return (
+        <FakeParent>
+        <SideBar serverList={serverList} />
+        </FakeParent>
+      );
+    }
+
+}
   

@@ -1,7 +1,6 @@
 import { FaFire, FaPlus, FaSignOutAlt, FaServer } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import styled from 'styled-components';
 
 
@@ -92,27 +91,10 @@ const Divider = styled.hr`
   margin: 0.5rem 0;
 `;
 
-export function SideBar() {
+export default function SideBar(props) {
   const [spanPositions, setSpanPositions] = useState(undefined);
-  const [ serverList  , setServerList ] = useState([]);
+  const { serverList } = props;
 
- 
-  
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const socket = io.connect('http://213.32.89.28:5000');
-    if (token) {
-      socket.emit('getServerList', token);
-      socket.on('getServerListResponse', (data) => {
-        if (data.status === 'success') {
-          setServerList(data.server);
-        } else {
-          console.log(data.status);
-        }
-      });
-    }
-  }, []);
-  
     
   const handleScroll = () => {
     const positions = {};
