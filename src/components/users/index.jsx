@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import SideBar  from "./sideBar";
 import styled from 'styled-components';
-
 import {useNavigate} from 'react-router-dom';
+
+import SideBar  from "./sideBar";
+import ChannelBar from "./channelBar";
 
 import checkAuth from '../accountBox/checkAuth';
 
@@ -70,9 +71,12 @@ export function Users() {
       )
     }else {
       return (
-        <FakeParent>
-        <SideBar serverList={serverList} />
-        </FakeParent>
+        <div style={{ height: '100%', width: '100vh', overflow:'hidden' }}>
+          <FakeParent>
+            <SideBar serverList={serverList} />
+          </FakeParent>
+          <ChannelBar />
+        </div>
       );
     }
 

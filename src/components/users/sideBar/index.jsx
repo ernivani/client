@@ -80,8 +80,20 @@ const Squircle = styled(Link)`
   &:hover {
     border-radius: 36%;
     background: ${props => props.a};
+    
   }
-
+  &:before {
+    content: "";    
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 1em;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    background-color: var(--color-full-white);
+    opacity: ${props => props.b ? 1 : 0};
+  }
+  /* todo: change the before to an anthor element and made it appear on hover */
 `;
 
 const Divider = styled.hr`
@@ -121,7 +133,7 @@ export default function SideBar(props) {
   };
 
   return (
-    <FakeParent onScroll={handleScroll}>
+    <FakeParent>
       <Parent>
         <SideBarIcon
           id="@me"
@@ -168,7 +180,7 @@ export default function SideBar(props) {
 }
 
 function SideBarIcon(props) {
-  const { icon, text, active, onClick, onMouseEnter, hoverColor, id, spanPositions } = props;
+  const { icon, text, active, onClick, onMouseEnter, hoverColor, id } = props;
   const [hoverPosition, setHoverPosition] = useState(null);
   const pathModif = '/channels/' + id;
   
