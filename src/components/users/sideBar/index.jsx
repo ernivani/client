@@ -14,13 +14,13 @@ export function SideBar() {
 
   const handleMouseEnter = (id, position) => {
     const newSpanPositions = [...spanPositions];
-    newSpanPositions[id] = position;
+    newSpanPositions[id] = position  + 5;
     setSpanPositions(newSpanPositions);
   };
 
   useEffect(() => {
     // Initialize the spanPositions array with default values
-    setSpanPositions([...Array(100)].map(() => '30px'));
+    setSpanPositions([...Array(100)].map(() => '300px'));
     }, []);
   return (
     <div className="fakeParent" onScroll={handleScroll}>
@@ -30,14 +30,16 @@ export function SideBar() {
           <SideBarIcon
             icon={<FaFire />}
             text="Messages privé"
-            active={true}
+            active={false}
             onMouseEnter={(event) =>
               handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
             }
+            type="green-boi"
+            id="@me"
           />
         </div>
         <Divider />
-        {[...Array(10)].map((e, i) => (
+        {[...Array(50)].map((e, i) => (
           <div className='serv' key={i} onMouseEnter={(e) =>handleMouseEnter(i, e.currentTarget.getBoundingClientRect().top)}>
             <span
               className="enfant"
@@ -50,21 +52,64 @@ export function SideBar() {
               icon={<FaServer />}
               text="Serveur"
               active={false}
+              type="yell-boi"
             />
           </div>
         ))}
+        <Divider />
+        <div>
+          <span className="enfant">Créer un serveur</span>
+          <SideBarIcon
+            icon={<FaPlus />}
+            text="Créer un serveur"
+            active={false}
+            type="green-boi"
+            onClick={() => {
+              // todo: afficher la fenêtre de création de serveur
+              alert('todo: afficher la fenêtre de création de serveur');
+            }}
+            onMouseEnter={(event) =>
+              handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
+            }
+          />
+        </div>
+        <div>
+          <span className="enfant">Déconnexion</span>
+          <SideBarIcon
+            icon={<FaSignOutAlt />}
+            text="Déconnexion"
+            active={false}
+            type="red-boi"
+            onClick={() => {
+              // todo: afficher la fenêtre de création de serveur
+              //
+              localStorage.removeItem('token');
+              window.location.href = '/';
+            }}
+            onMouseEnter={(event) =>
+              handleMouseEnter(0, event.currentTarget.getBoundingClientRect().top)
+            }
+          />
+        </div>  
       </div>
     </div>
   );
 }
 
 function SideBarIcon(props) {
-  const { icon, text, active, onClick, onMouseEnter } = props;
-
+  const { icon, text, active, onClick, onMouseEnter, type, path,id} = props;
+  const clstype = 'squircle ' + type;
+  const pathModif = "/channels/" + id; 
+  console.log(pathModif);
   return (
-    <li className="squircle purple-boi" >
+    <Link 
+    className={clstype} 
+    onClick={onClick} 
+    onMouseEnter={onMouseEnter}
+    to={pathModif}
+    >
       {icon ? icon : text[0]}
-    </li>
+    </Link>
   );
 }
 

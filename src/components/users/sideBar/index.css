@@ -1,5 +1,8 @@
 :root {
 	--color-blurple: #7289da;
+  --color-yell-bubble: #f3b736;
+  --color-red-bubble: #e74c3c;
+  --color-green-bubble: #2ecc71;
 	--color-not-quite-black: #23272a;
 	--color-dark: #2c2f33;
 	--color-lighter-dark: #45494e;
@@ -8,7 +11,6 @@
 	--color-grey-dark: #242629;
   --color-actually-little-black: #131313;
 	--color-actually-black: #000000;
-	--color-fantastic-green: #00ae7a;
 }
 
 * {
@@ -21,6 +23,7 @@
 
 body {
   background-color: #F5F6F8;
+  overflow: hidden;
 }
 
 .fakeParent {
@@ -39,7 +42,10 @@ body {
 .parent::-webkit-scrollbar {
   display: none;
 }
-
+a.squircle{
+  text-decoration: none;
+  color: var(--color-full-white);
+}
 
 .squircle {
   background: var(--color-lighter-dark);
@@ -54,11 +60,26 @@ body {
   align-items: center;
   /* rendre l'item deplaçable */
   --webkit-app-region: drag;
-  
+
 }
-.squircle:hover {
+.purple-boi:hover {
 	border-radius: 36%;
   background: var(--color-blurple);
+}
+
+.yell-boi:hover {
+  border-radius: 36%;
+  background: var(--color-yell-bubble);
+}
+
+.red-boi:hover {
+  border-radius: 36%;
+  background: var(--color-red-bubble);
+}
+
+.green-boi:hover {
+  border-radius: 36%;
+  background: var(--color-green-bubble);
 }
 
 .enfant {
