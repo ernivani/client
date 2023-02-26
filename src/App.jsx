@@ -25,12 +25,13 @@ function App() {
 
     const { t, i18n } = useTranslation();
 
-    const language = navigator.language.split(/[-_]/)[0];
-    i18n.changeLanguage(language);
-    // todo: add a language selector
-    console.log(language);
+// is localStorage empty? if not, set language to localStorage value
 
-    
+    if (localStorage.getItem('i18nextLng') === null) {
+        localStorage.setItem('i18nextLng', 'en');
+    } else {
+        i18n.changeLanguage(localStorage.getItem('language'));
+    }
     return (
         <AppContainer>
             <Routes>
