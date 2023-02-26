@@ -16,6 +16,8 @@ export const loginSend = (e,setErrorMessage) => {
     socket.on('loginResponse', (data) => {
         if (data.status === 'success') {
             localStorage.setItem('token', data.token); // set the token in local storage
+            localStorage.setItem('username', data.username); // set the username in local storage
+            console.log(data.username);
             window.location.href = '/channels/@me'; // redirect to the home page
             socket.disconnect();
           } else {
