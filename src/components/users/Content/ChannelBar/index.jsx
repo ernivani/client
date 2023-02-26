@@ -179,7 +179,7 @@ const ChannelBar = () => {
                         </IconAvatar>
                         <NameTag>
                             <UsernameDiv>
-                                <Username>ernicani</Username>
+                                <Username>{username}</Username>
                             </UsernameDiv>
                             <Tag>#0001</Tag>
                         </NameTag>
