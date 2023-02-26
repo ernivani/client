@@ -110,14 +110,7 @@ export default function SideBar(props) {
   const { serverList } = props;
 
     
-  const handleScroll = () => {
-    const positions = {};
-    const elements = document.querySelectorAll('.squircle');
-    elements.forEach((element) => {
-      positions[element.id] = element.getBoundingClientRect().top + window.scrollY;
-    });
-    setSpanPositions(positions);
-  };
+  
 
   const { id } = useParams();
 
@@ -132,6 +125,10 @@ export default function SideBar(props) {
     // todo : handle add server
     console.log(e)
     console.log('todo : handle add server');
+    const serverName = prompt('Nom du serveur :');
+    if (serverName) {
+      console.log(serverName);
+    }
   };
 
   return (
@@ -184,8 +181,13 @@ export default function SideBar(props) {
 function SideBarIcon(props) {
   const { icon, text, active, onClick, onMouseEnter, hoverColor, id } = props;
   const [hoverPosition, setHoverPosition] = useState(null);
-  const pathModif = '/channels/' + id;
-  
+
+  let pathModif = '';
+  if (id === 'addServer' || id === 'disconnect') {
+    pathModif = '#';
+  } else {
+    pathModif = '/channels/' + id;
+  }
  
   
   const handleMouseEnterInternal = (event) => {
