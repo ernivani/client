@@ -4,13 +4,14 @@ import io from 'socket.io-client';
 
 
 const socket = io('http://213.32.89.28:5000');
-const ChannelBar = () => {
-  const [messages, setMessages] = useState([]);
+const ChannelBar = (messageList) => {
+  
+  const [messages, setMessages] = useState(messageList.messageList.messageList.a);
   const [inputValue, setInputValue] = useState('');
-  const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
 
   const [showuser, setShowuser] = useState(false);
+
 
 
   useEffect(() => {
@@ -20,40 +21,18 @@ const ChannelBar = () => {
     focusInput();
 
     // check in local storage for username
-    const savedUsername = localStorage.getItem('username');
-    if (savedUsername) {
-      setUsername(savedUsername);
-    } else {
-      // if no username, prompt user for one
-      const username = prompt('Please enter your username');
-      setUsername(username);
-      localStorage.setItem('username', username);
-    }
-
+    setUsername( localStorage.getItem('username'));
+    
 
 
     socket.on('message', (message) => {
-      message.timestamp = new Date(message.timestamp).addHours(parseInt(message.timestamp,10)).toISOString().slice(0, 19).replace('T', ' ');
+      message.timestamp = new Date(message.timestamp).addHours(2).toISOString().slice(0, 19).replace('T', ' ');
       setMessages((prevMessages) => [...prevMessages, message]);
-      setLoading(false);
     });
 
-    socket.on('history', (history) => {
-      history.forEach((message) => {
-        message.timestamp = new Date(message.timestamp).addHours(2).toISOString().slice(0, 19).replace('T', ' ');
-      });
-      setMessages(history);
-      setLoading(false);
-    });
-
-    socket.on('connect_error', (error) => {
-      console.error(error);
-      setLoading(true);
-    });
 
     return () => {
       socket.off('message');
-      socket.off('history');
       socket.off('connect_error');
     };
   }, []);
@@ -77,16 +56,16 @@ const ChannelBar = () => {
     if (inputValue.trim() === '') {
       return;
     }
-
+  
     const now = new Date();
     const message = {
       id: Date.now(),
       text: inputValue,
-      timestamp: now.toISOString().slice(0, 19).replace('T', ' '),
+      timestamp: now.addHours(2).toISOString().slice(0, 19).replace('T', ' '),
       username: username,
     };
+    console.log(message);
     socket.emit('message', message);
-    message.timestamp = new Date(message.timestamp).addHours(2).toISOString().slice(0, 19).replace('T', ' ');
     setMessages((prevMessages) => [...prevMessages, message]);
     setInputValue('');
     focusInput();
@@ -97,9 +76,6 @@ const ChannelBar = () => {
   }
 
   function handleUsernameChange() {
-    const newUsername = prompt('Please enter your new username');
-    setUsername(newUsername);
-    localStorage.setItem('username', newUsername);
     focusInput();
   }
 
@@ -112,30 +88,16 @@ const ChannelBar = () => {
   return (
     <div>
       <div className="messages">
-        {loading ? (
-          <div className="loading">Login in...</div>
-        ) : (
-          messages.map((message) => (
-            <div key={message.id} className="message">
-              <div className="message-header">
-                <strong className="username" onClick={handleShowUser}>{message.username}</strong>{' '}
-                <span className="message-timestamp">{message.timestamp}</span>
-              </div>
-              <div className="message-text">{message.text}</div>
-            </div>
-          ))
-        )}
-        {showuser ? (
-          <div className="showuser">
-            <div className="showuser-header">
-              <strong className="username">{username}</strong>{' '}
-              <span className="message-timestamp">Null</span>
-              </div>
-              <div className="showuser-text">desc</div>
-              </div>
-        ) : (
-          <div></div>
-        )}
+          {messages.map((message) => (
+           <div key={message.id} className="message">
+             <div className="message-header">
+               <strong className="username" onClick={handleShowUser}>{message.username}</strong>{' '}
+               <span className="message-timestamp">{message.timestamp}</span>
+             </div>
+             <div className="message-text">{message.text}</div>
+           </div>
+         ))
+        }
       </div>
       <div className="input-container">
         <input
@@ -146,11 +108,6 @@ const ChannelBar = () => {
           onKeyDown={handleKeyDown}
           placeholder="Type a message..."
         />
-      </div>
-      <div className="settings">
-        <button onClick={handleUsernameChange}>
-          Change username
-        </button>
       </div>
     </div>
   );

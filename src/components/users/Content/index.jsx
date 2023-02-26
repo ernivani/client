@@ -18,12 +18,12 @@ const Contenue = styled.div`
 
 
 
-const Content = () => {
+const Content = (messageList) => {
     return (
     <Base>
         <Contenue>
             <ChannelBar />
-            <ChatBar />
+            <ChatBar messageList={messageList} />
         </Contenue>
     </Base>
     );
