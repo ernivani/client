@@ -12,6 +12,13 @@ import { useTranslation } from "react-i18next";
 const AppContainer = styled.div`
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-attachment: scroll;
+    background-color: rgb(30, 31, 34);
+    overflow: hidden;
+
 `;
 
 

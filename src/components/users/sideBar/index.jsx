@@ -3,18 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { createRoot } from 'react-dom/client';
 
 
 const FakeParent = styled.div`
   height: 100%;
-  width: 100%;
   overflow: hidden;
 `;
 
-const Parent = styled.div`
-  height: 100%;
+const Parent = styled.nav`
+  display: flex;
+  flex-direction: column;
+  position: relative;
   width: 4.5rem;
-  background: var(--color-not-quite-black);
+  height: 100%;
   padding: 0.5rem 0;
   overflow: hidden scroll;
   scrollbar-width: none; /* Firefox */
@@ -29,7 +31,6 @@ const Serv = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto 8px;
-  cursor: pointer;
   transition: all 0.3s ease;
   width: 48px;
   height: 48px;
@@ -46,6 +47,7 @@ const Enfant = styled.span`
   letter-spacing: 0.5px;
   padding: 8px 15px;
   border-radius: 5px;
+  transition: all 0.3s ease;
   &:before {
     content: "";
     display: block;
@@ -185,15 +187,30 @@ function SideBarIcon(props) {
   const pathModif = '/channels/' + id;
   
  
+  
   const handleMouseEnterInternal = (event) => {
-    setHoverPosition(event.currentTarget.getBoundingClientRect().top + 5);
+    const pos = event.currentTarget.getBoundingClientRect().top + 5;
+    const enfant = <Enfant style={{ top: `${pos}px`, height: 'fit-content' }}>{text}</Enfant>;
+    const container = document.createElement('div');
+    container.setAttribute('id', 'popup');
+    document.querySelector('.user').appendChild(container);
+    createRoot(container).render(enfant);
+    
   };
+  
+  
+
   const handleMouseLeave = () => {
-    setHoverPosition(null);
+    const div = document.getElementById('popup');
+    if (div) {
+      div.remove();
+    }
+
   };
+  
+  
   return (
     <Serv>
-      {hoverPosition && <Enfant style={{ top: hoverPosition, height: 'fit-content' }}>{text}</Enfant>}
       <Squircle
         onMouseEnter={onMouseEnter || handleMouseEnterInternal}
         onMouseLeave={handleMouseLeave}

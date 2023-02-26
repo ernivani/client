@@ -10,17 +10,15 @@ import checkAuth from '../accountBox/checkAuth';
 
 const FakeParent = styled.div`
   height: 100%;
-  width: 100%;
   overflow: hidden;
-  --color-full-white: #fff;
-  --color-dark: #2c2f33;
-  --color-lighter-dark: #2f3136;
-  --color-not-quite-black: #36393f;
-  --color-actually-little-black: #2f3136;
-  --color-blurple: #7289da;
-  --color-yell-bubble: #d0b34e;
-  --color-red-bubble: #ff5555;
-  --color-green-bubble: #57f287;
+`;
+
+const User = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
 `;
 
 import './loading.css';
@@ -71,12 +69,14 @@ export function Users() {
       )
     }else {
       return (
-        <div style={{ height: '100%', width: '100vh', overflow:'hidden' }}>
-          <FakeParent>
-            <SideBar serverList={serverList} />
-          </FakeParent>
-          <ChannelBar />
-        </div>
+        <User id='uwu'>
+          <User className='user'>
+            <FakeParent className='fakeParent'>
+              <SideBar serverList={serverList} />
+            </FakeParent>
+            <ChannelBar />
+          </User>
+        </User>
       );
     }
 
