@@ -82,7 +82,7 @@ function SideBarIcon(props) {
   
   const handleMouseEnterInternal = (event) => {
     const pos = event.currentTarget.getBoundingClientRect().top + 5;
-    const enfant = <Enfant style={{ top: `${pos}px`, height: 'fit-content' }}>{text}</Enfant>;
+    const enfant = <Enfant style={{ top: `${pos}px`, height: 'fit-content', zIndex: '999' }}>{text}</Enfant>;
     const container = document.createElement('div');
     container.setAttribute('id', 'popup');
     document.querySelector('.user').appendChild(container);
