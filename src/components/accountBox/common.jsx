@@ -28,7 +28,7 @@ pointer-events: none;
 
 export const BoldLink = styled.span`
   font-size: 11px;
-  color: rgb(114, 137, 218);
+  color: rgb(114, 171, 218);
   color: linear-gradient(
     58deg,
     rgba(114, 137, 218, 1) 20%,
@@ -104,15 +104,12 @@ export const SubmitButton = styled.button`
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   transition: 240ms;
-  background: rgb(114, 137, 218);
+  background: rgb(131, 114, 218);
   background: linear-gradient(
     58deg,
-    rgba(114, 137, 218, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
+    rgba(131, 114, 218, 1) 20%,
+    rgba(212, 176, 19, 1) 100%
   );
-
-
-
   background-size: 150% 150%;
   animation: ${ernicaniBG};
   animation-duration: 2s; 
@@ -127,14 +124,16 @@ export const SubmitButton = styled.button`
 
 export const LabelInput = styled.label`
   font-size: 12px;
-  color: rgba(200, 200, 200, 0.8);
+  color: rgba(200, 200, 200, 1);
   font-weight: 500;
   text-decoration: none;
   pointer-events: none;
   font-weight: 600;
+  margin: 10px 0 10px 0px;
 `;
 
 export const ImportantSpan = styled.span`
+  font-size: 12px;
   color: rgb(250, 119, 123);
   color: linear-gradient(
     58deg,

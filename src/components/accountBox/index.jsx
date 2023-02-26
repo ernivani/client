@@ -69,11 +69,11 @@ const BackDrop = styled(motion.div)`
   transform: rotate(60deg);
   top: -330px;
   left: -170px;
-  background: rgb(114, 137, 218);
+  background: rgb(131, 114, 218);
   background: linear-gradient(
     58deg,
-    rgba(114, 137, 218, 1) 20%, /* #7289da */
-    rgba(243, 172, 18, 1) 100% /* #f3ac12 */
+    rgba(131, 114, 218, 1) 20%, /* #7289da */
+    rgba(212, 176, 19, 1) 100% /* #f3ac12 */
   );
   @media screen and (max-width: 480px) {
     width: 200%;
@@ -90,7 +90,7 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderText = styled.h2`
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 600;
   line-height: 1.24;
   color: #fff;
@@ -101,7 +101,7 @@ const HeaderText = styled.h2`
 const SmallText = styled.h5`
   color: #fff;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 12px;
   z-index: 10;
   margin: 0;
   margin-top: 7px;
@@ -141,7 +141,6 @@ export function AccountBox() {
   
   const location = useLocation();
   
-  console.log(location.state);
 
   checkAuth(window.location.pathname);
 
