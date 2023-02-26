@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import { AccountBox } from "./components/accountBox";
 import { Home } from "./components/home";
 import { Users } from "./components/users";
-import { Logs } from "./components/logs";
 
 import { useTranslation } from "react-i18next";
 
@@ -43,7 +42,6 @@ function App() {
                         <h1>{t('notFound')}</h1>
                     </div>
                 } />
-                <Route path='/api/logs' element={<Logs />} />
             </Routes>
         </AppContainer>
     );

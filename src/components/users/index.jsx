@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import styled from 'styled-components';
 
 import SideBar  from "./sideBar";
-import Content from "./content";
+import Content from "./Content";
 
 import checkAuth from '../accountBox/checkAuth';
 

@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 
 :root {
 	--color-full-white: #fff;
@@ -15,7 +16,7 @@
 html,
 body {
 	margin: 0;
-	font-family: "Comfortaa", Comfortaa;
+	font-family: "Quicksand", Quicksand;
 	color: #ffffff;
   	text-rendering: optimizeLegibility;
 

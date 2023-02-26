@@ -63,9 +63,9 @@ const Enfant = styled.span`
 
 const Squircle = styled(Link)`
   background: ${props => props.b ? props.a : "var(--color-dark)"};
+  border-radius: ${props => props.b ? "36%" : "50%"};
   width: 48px;
   height: 48px;
-  border-radius: 50%;
   cursor: pointer;
   position: relative;
   transition: border-radius 128ms, background 128ms, color 128ms;
@@ -77,7 +77,6 @@ const Squircle = styled(Link)`
   &:hover {
     border-radius: 36%;
     background: ${props => props.a};
-    
   }
   &:before {
     content: "";    
