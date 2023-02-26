@@ -15,6 +15,9 @@ export default function SideBar({ serverList }) {
   const disconnect = useCallback((e) => {
     console.log(e);
     console.log('todo: handle disconnection');
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    window.location.href = '/log';
   }, []);
 
   const addServer = useCallback((e) => {
