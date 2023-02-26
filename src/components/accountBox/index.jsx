@@ -141,7 +141,6 @@ export function AccountBox() {
   
   const location = useLocation();
   
-  console.log(location.state);
 
   checkAuth(window.location.pathname);
 

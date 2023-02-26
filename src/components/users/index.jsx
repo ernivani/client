@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom';
 
 import SideBar  from "./sideBar";
-import ChannelBar from "./channelBar";
+import Content from "./content";
 
 import checkAuth from '../accountBox/checkAuth';
 
@@ -31,15 +30,15 @@ export function Users() {
 
     const [serverList, setServerList] = useState([]);
 
-    const navigate = useNavigate();
   
     useEffect(() => {
-      checkAuth(navigate , window.location.pathname);
+      checkAuth(window.location.pathname);
       const token = localStorage.getItem('token');
       const socket = io.connect('http://213.32.89.28:5000');
       if (token) {
-        socket.emit('getServerList', token);
-        socket.on('getServerListResponse', (data) => {
+        socket.emit('getServer', token);
+        socket.on('getServerResponse', (data) => {
+          console.log(data);
           if (data.status === 'success') {
             setServerList(data.server);    
             setTimeout(() => {
@@ -47,7 +46,7 @@ export function Users() {
             }, 700);
             socket.disconnect();
           } else {
-            console.log(data.status);
+            console.log("ahhjikeafhj");
           }
         });
       }
@@ -74,7 +73,7 @@ export function Users() {
             <FakeParent className='fakeParent'>
               <SideBar serverList={serverList} />
             </FakeParent>
-            <ChannelBar />
+            <Content />
           </User>
         </User>
       );

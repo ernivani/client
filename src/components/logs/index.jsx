@@ -10,8 +10,8 @@ export function Logs() {
 
     // get the current link
     const currentLink = window.location.pathname;
-    // check if the user is authenticated
-    checkAuth(currentLink);
+
+    checkAuth(token, currentLink);
 
     const [logs, setLogs] = useState([]);
 
