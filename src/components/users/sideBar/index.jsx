@@ -1,34 +1,30 @@
 import { FaFire, FaPlus, FaSignOutAlt, FaServer } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 
 import { createRoot } from 'react-dom/client';
+
+// import alll the styles from css.jsx
 
 import  {FakeParent, Parent, Serv, Enfant, Squircle, Divider } from './css';
 
 
-export default function SideBar(props) {
-  const [spanPositions, setSpanPositions] = useState(undefined);
-  const { serverList } = props;
-
+export default function SideBar({ serverList }) {
   const { id } = useParams();
 
-
-  const disconnect = (e) => {
-    // todo: handle disconnection
-    console.log(e)
+  const disconnect = useCallback((e) => {
+    console.log(e);
     console.log('todo: handle disconnection');
-  };
+  }, []);
 
-  const addServer = (e) => {
-    // todo : handle add server
-    console.log(e)
+  const addServer = useCallback((e) => {
+    console.log(e);
     console.log('todo : handle add server');
     const serverName = prompt('Nom du serveur :');
     if (serverName) {
       console.log(serverName);
     }
-  };
+  }, []);
 
   return (
     <FakeParent>
@@ -37,39 +33,34 @@ export default function SideBar(props) {
           id="@me"
           icon={<FaFire />}
           text="Messages privé"
-          active={id === "@me"}
-          hoverColor={"var(--color-blurple)"}
-          spanPositions={spanPositions}
-
-          
+          active={id === '@me'}
+          hoverColor="var(--color-blurple)"
         />
         <Divider />
-        {serverList.map((e) => (
+        {serverList.map(({ id: serverId, server_name }) => (
           <SideBarIcon
-            key={e.id}
-            id={e.id}
+            key={serverId}
+            id={serverId}
             icon={<FaServer />}
-            text={e.server_name}
-            active={id == e.id}
-            hoverColor={"var(--color-yell-bubble)"}
-            spanPositions={spanPositions}
+            text={server_name}
+            active={id == serverId}
+            hoverColor="var(--color-yell-bubble)"
           />
         ))}
         <SideBarIcon
           id="addServer"
           icon={<FaPlus />}
           text="Créer un serveur"
-          active={0}
-          hoverColor={"var(--color-green-bubble)"}
+          active={false}
+          hoverColor="var(--color-green-bubble)"
           onClick={addServer}
-          spanPositions={spanPositions}
         />
         <SideBarIcon
           id="disconnect"
           icon={<FaSignOutAlt />}
           text="Déconnexion"
-          active={0}
-          hoverColor={"var(--color-red-bubble)"}
+          active={false}
+          hoverColor="var(--color-red-bubble)"
           onClick={disconnect}
         />
       </Parent>
