@@ -48,7 +48,9 @@ export function Users() {
       socket.on('historyResponse', (data) => {
         if (data.status === 'success') {
           setMessageList(data);
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1500);
           setLoaded(true);
           socket.disconnect();
         } else {
