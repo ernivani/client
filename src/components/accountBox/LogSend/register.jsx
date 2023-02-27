@@ -11,7 +11,7 @@ export const registerSend = (e,setErrorMessage) => {
         password: password,
         username: username
     };
-    const socket = io.connect('http://213.32.89.28:5000');
+    const socket = io.connect('https://api.impin.fr');
     socket.emit('register', data);
     socket.on('registerResponse', (data) => {
         // reponse du serveur : status et message
