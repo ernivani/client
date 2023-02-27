@@ -9,7 +9,6 @@ import './i18n';
 
 
 
-
 const root = document.getElementById('app');
 const app = (
   <BrowserRouter>
