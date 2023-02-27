@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 
 
-const socket = io('https://api.impin.fr');
+const socket = io('wss://api.impin.fr');
 const ChannelBar = (messageList) => {
   
   const [messages, setMessages] = useState(messageList.messageList.messageList.a);

@@ -5,7 +5,7 @@ export default function checkAuth(link) {
     const token = localStorage.getItem('token');
 
     if (token) {
-      const socket = io.connect('https://api.impin.fr');
+      const socket = io.connect('wss://api.impin.fr');
       socket.emit('auth', token);
       socket.on('authResponse', (data) => {
         if (data.status == 'success') {

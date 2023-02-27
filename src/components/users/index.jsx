@@ -33,7 +33,7 @@ export function Users() {
   useEffect(() => {
     checkAuth(window.location.pathname);
     const token = localStorage.getItem('token');
-    const socket = io.connect('https://api.impin.fr');
+    const socket = io.connect('wss://api.impin.fr');
     if (token) {
       socket.emit('getServer', token);
       socket.on('getServerResponse', (data) => {

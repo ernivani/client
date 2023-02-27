@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Routes, Route } from "react-router-dom";
 import { AccountBox } from "./components/accountBox";
-import { Home } from "./components/home";
+import Home from "./components/home";
 import { Users } from "./components/users";
 
 import { useTranslation } from "react-i18next";

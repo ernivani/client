@@ -11,7 +11,7 @@ export const loginSend = (e,setErrorMessage) => {
         email: email,
         password: password
     };
-    const socket = io.connect('https://api.impin.fr');
+    const socket = io.connect('wss://api.impin.fr');
     socket.emit('login', data);
     socket.on('loginResponse', (data) => {
         if (data.status === 'success') {

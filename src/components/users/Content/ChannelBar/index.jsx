@@ -179,14 +179,7 @@ const ChannelBar = () => {
                         </IconAvatar>
                         <NameTag>
                             <UsernameDiv>
-<<<<<<< Updated upstream
                                 <Username>{username}</Username>
-=======
-                                <Username>
-                                    {/* only 10 digits of username */}
-                                    {username.slice(0, 13)}
-                                    </Username>
->>>>>>> Stashed changes
                             </UsernameDiv>
                             <Tag>#0001</Tag>
                         </NameTag>
