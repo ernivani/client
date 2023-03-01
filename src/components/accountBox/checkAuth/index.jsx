@@ -15,12 +15,7 @@ export default function checkAuth(link) {
             }
             socket.disconnect();
         } else {
-          // user is not authenticated
-            if (link === '/log') {
-                window.location.href = '/channels/@me';
-            }else {
-                window.location.href = '/log';
-            }
+          window.location.href = '/log';
         }
       });
     } else {

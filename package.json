@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host --port 8080",
     "preview": "vite preview --host --port 8080",
-    "build": "vite build",
+    "build": "vite build --emptyOutDir",
     "serve": "vite preview --host --port 8080",
     "srv": "node srv.js"
   },

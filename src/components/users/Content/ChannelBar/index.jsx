@@ -12,11 +12,56 @@ const SideBar = styled.div`
     overflow: hidden;
 `;
 
-const PrivateChannels = styled.div`
+const Channels = styled.nav`
     display: flex;
     position: relative;
     overflow: hidden;
-    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 1 1 auto;
+    height: 100%;
+    width: 100%;
+`;
+
+const ServerName = styled.div`
+    cursor: pointer;
+    position: relative;
+    outline: 0;
+`;
+
+
+const ServerNameHeader = styled.header `
+    position: relative;
+    font-weight: 500;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    z-index: 3;
+    transition: 0.2s ease 0s;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
+`;
+
+const ServerNameHeaderContent = styled.div `
+    height: 24px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+`;
+
+const ServerNameHeaderContentName = styled.div `
+    flex: 1 1 auto;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+const ServerNameHeaderContentIcon = styled.div `
+    position: relative;
+    z-index: 4;
 `;
 
 const Panel = styled.section`
@@ -168,9 +213,36 @@ const username = localStorage.getItem('username');
 const ChannelBar = () => {
     return (
         <SideBar>
-            <PrivateChannels>
-                
-            </PrivateChannels>
+            <Channels>
+                <ServerName>
+                    <ServerNameHeader>
+                        <ServerNameHeaderContent>
+                            <ServerNameHeaderContentName>
+                                Server Name
+                            </ServerNameHeaderContentName>
+                            <ServerNameHeaderContentIcon>
+                                <div>
+                                    <svg width="18" height="18" class="button-2BMPJJ dropdownButton-1-5aBs"><g fill="none" fill-rule="evenodd"><path d="M0 0h18v18H0"></path><path stroke="currentColor" d="M4.5 4.5l9 9" stroke-linecap="round"></path><path stroke="currentColor" d="M13.5 4.5l-9 9" stroke-linecap="round"></path></g></svg>
+                                </div>
+                            </ServerNameHeaderContentIcon>
+                        </ServerNameHeaderContent>
+                    </ServerNameHeader>
+                </ServerName>
+                <ServerName>
+                    <ServerNameHeader>
+                        <ServerNameHeaderContent>
+                            <ServerNameHeaderContentName>
+                                Server Name
+                            </ServerNameHeaderContentName>
+                            <ServerNameHeaderContentIcon>
+                                <div>
+                                    <svg width="18" height="18" class="button-2BMPJJ dropdownButton-1-5aBs"><g fill="none" fill-rule="evenodd"><path d="M0 0h18v18H0"></path><path stroke="currentColor" d="M4.5 4.5l9 9" stroke-linecap="round"></path><path stroke="currentColor" d="M13.5 4.5l-9 9" stroke-linecap="round"></path></g></svg>
+                                </div>
+                            </ServerNameHeaderContentIcon>
+                        </ServerNameHeaderContent>
+                    </ServerNameHeader>
+                </ServerName>
+            </Channels>
             <Panel>
                 <PanelContainer>
                     <PanelAvatar>

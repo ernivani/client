@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import { Routes, Route } from "react-router-dom";
 import { AccountBox } from "./components/accountBox";
-import Home from "./components/home";
+import Home from "./components/Home";
+import Cours from "./page/Cours";
 import { Users } from "./components/users";
 
 import { useTranslation } from "react-i18next";
@@ -20,18 +21,22 @@ const AppContainer = styled.div`
 
 `;
 
+import To from "./page/Cours/to";
 
 function App() {
 
     const { t, i18n } = useTranslation();
 
-// is localStorage empty? if not, set language to localStorage value
 
-    if (localStorage.getItem('i18nextLng') === null) {
-        localStorage.setItem('i18nextLng', 'en');
-    } else {
-        i18n.changeLanguage(localStorage.getItem('language'));
-    }
+    // get the language from browser
+    const language = navigator.language.split(/[-_]/)[0]; 
+
+    // set the language
+    i18n.changeLanguage(language);
+    
+
+
+
     return (
         <AppContainer>
             <Routes>
@@ -43,6 +48,8 @@ function App() {
                         <h1>{t('notFound')}</h1>
                     </div>
                 } />
+                <Route path='/cours' element={<Cours />} />
+                <Route path='/cours/:id' element={<To />} />
             </Routes>
         </AppContainer>
     );
