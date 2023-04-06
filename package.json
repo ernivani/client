@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host --port 8080",
+    "dev": "vite --host --port 9000",
     "preview": "vite preview --host --port 8080",
-    "build": "vite build",
-    "serve": "vite preview --host --port 8080"
+    "build": "vite build --outDir ../rooter/dist",
+    "serve": "node ../rooter/srv.js"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.3",
     "axios": "^1.3.4",
     "chart.js": "^4.2.1",
     "framer-motion": "^9.1.6",
