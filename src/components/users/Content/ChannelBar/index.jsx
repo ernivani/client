@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
 const SideBar = styled.div`
     flex-direction: column;
@@ -160,26 +161,92 @@ const ButtonIcon = styled.svg`
 
 
 
-const token = localStorage.getItem('token');
-const username = localStorage.getItem('username');
 
 
+const   ChannelBar = () => {
+    
+    let username = ''
+    
+    const userCache = localStorage.getItem('userCache')
+    if (userCache) {
+        username = JSON.parse(userCache).username
+    }else {
+        window.location.href = '/log'
+    }
 
-const ChannelBar = () => {
+    const [seeProfile, setSeeProfile] = useState(false)
+
+    const handleSeeProfile = () => {
+        setSeeProfile(!seeProfile)
+    }
+    
+    // handle right click
+    const handleRightClick = (e) => {
+        e.preventDefault()
+    }
+
+    useEffect(() => {
+        document.addEventListener('contextmenu', handleRightClick)
+        return () => {
+            document.removeEventListener('contextmenu', handleRightClick)
+        }
+    }, [seeProfile])
+
+    
+
     return (
         <SideBar>
-            <PrivateChannels>
-                
-            </PrivateChannels>
+            <PrivateChannels/>
+            <div className="profile" style={
+                {
+                    display: seeProfile ? 'flex' : 'none',
+                    position: 'static',
+                    width: 'fit-content',
+                    height: 'fit-content',
+                    color: '#fff',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
+                    zIndex: '1',
+                    backgroundColor: '#111',
+                    borderRadius: '0 0 4px 4px',
+                    marginBottom: '14px',
+                    padding: '0 20px',
+                    boxShadow: '0 0 0 1px rgba(0,0,0,.1), 0 4px 8px rgba(0,0,0,.2)',
+                    transition: '0.2s ease 0s',
+                    }
+                }>
+                <div className="profile__avatar" style={{width: '32px', height: '32px', borderRadius: '50%'}}>
+                    <img
+                        src={`https://api.dicebear.com/6.x/personas/svg?seed=${username}`}
+                        alt="avatar"
+                        onError={(e)=>{e.target.onerror = null; e.target.src="https://api.dicebear.com/6.x/personas/svg?seed=avatar"}}
+                        style={{width: '32px', height: '32px', borderRadius: '50%'}}
+                    />
+                </div>
+                <div className="profile__name" style={{flex: '1 1 auto', margin: '0 8px', minWidth: '0', padding: '4px 0', fontSize: '14px', lineHeight: '18px', fontWeight: '400', color: '#fff', overflow: 'hidden'}}>
+                    <div className="profile__name__username" style={{lineHeight: '18px', fontWeight: '600', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>   
+                        {username}
+                    </div>
+                    <div className="profile__name__tag" style={{fontSize: '12px', lineHeight: '13px', fontWeight: '500', color: '#b9bbbe', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        #0001
+                    </div>
+                </div>
+            </div>
             <Panel>
                 <PanelContainer>
-                    <PanelAvatar>
+                    <PanelAvatar onClick={() => handleSeeProfile()}>
                         <IconAvatar>
-                            <img src={`https://api.dicebear.com/5.x/personas/svg?seed=${username}`} alt="avatar" />
+                            <img 
+                                src={`https://api.dicebear.com/6.x/personas/svg?seed=${username}`}
+                                alt="avatar"
+                                onError={(e)=>{e.target.onerror = null; e.target.src="https://api.dicebear.com/6.x/personas/svg?seed=avatar"}}
+                                style={{width: '32px', height: '32px', borderRadius: '50%'}}
+                            />
                         </IconAvatar>
                         <NameTag>
                             <UsernameDiv>
-                                <Username>ernicani</Username>
+                                <Username>{username}</Username>
                             </UsernameDiv>
                             <Tag>#0001</Tag>
                         </NameTag>

@@ -1,5 +1,6 @@
 
-import io from 'socket.io-client';
+import axios from 'axios';
+
 
 export const registerSend = (e,setErrorMessage) => {
     // fonction de register 
@@ -11,22 +12,14 @@ export const registerSend = (e,setErrorMessage) => {
         password: password,
         username: username
     };
-    const socket = io.connect('http://213.32.89.28:5000');
-    socket.emit('register', data);
-    socket.on('registerResponse', (data) => {
-        // reponse du serveur : status et message
-        if (data.status === 'success') {
-            localStorage.setItem('token', data.token); // set the token in local storage
-            localStorage.setItem('username', data.username); // set the username in local storage
-            window.location.href = '/channels/@me'; // redirect to the home page
-            // close the socket
-            socket.disconnect();
-          } else {
-            setErrorMessage(data.message);
-            // close the socket
-            socket.disconnect();
-        }
-    });
 
+    axios.post('https://api.impin.fr/user/register', data)
+        .then((res) => {
+            localStorage.setItem('token', res.data.token);
+            window.location.href = '/channels/@me';
+        })
+        .catch((err) => {
+            setErrorMessage(err.response.data.message);
+        });
 
 };
