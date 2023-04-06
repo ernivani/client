@@ -11,13 +11,14 @@ export const registerSend = (e,setErrorMessage) => {
         password: password,
         username: username
     };
-    const socket = io.connect('http://213.32.89.28:5000');
+    const socket = io.connect('wss://api.impin.fr');
     socket.emit('register', data);
     socket.on('registerResponse', (data) => {
         // reponse du serveur : status et message
         if (data.status === 'success') {
-            localStorage.setItem('token', data.token); // set the token in local storage
-            localStorage.setItem('username', data.username); // set the username in local storage
+            const token = data.token;
+            localStorage.setItem('token', token.token); // set the token in local storage
+            localStorage.setItem('username', token.username); // set the username in local storage
             window.location.href = '/channels/@me'; // redirect to the home page
             // close the socket
             socket.disconnect();

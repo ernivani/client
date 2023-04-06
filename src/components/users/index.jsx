@@ -33,7 +33,7 @@ export function Users() {
   useEffect(() => {
     checkAuth(window.location.pathname);
     const token = localStorage.getItem('token');
-    const socket = io.connect('http://213.32.89.28:5000');
+    const socket = io.connect('wss://api.impin.fr');
     if (token) {
       socket.emit('getServer', token);
       socket.on('getServerResponse', (data) => {
@@ -48,7 +48,9 @@ export function Users() {
       socket.on('historyResponse', (data) => {
         if (data.status === 'success') {
           setMessageList(data);
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1500);
           setLoaded(true);
           socket.disconnect();
         } else {

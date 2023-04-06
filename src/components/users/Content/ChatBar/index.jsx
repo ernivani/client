@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 
 
-const socket = io('http://213.32.89.28:5000');
+const socket = io('wss://api.impin.fr');
 const ChannelBar = (messageList) => {
   
   const [messages, setMessages] = useState(messageList.messageList.messageList.a);
@@ -24,11 +24,11 @@ const ChannelBar = (messageList) => {
     setUsername( localStorage.getItem('username'));
     
 
-
     socket.on('message', (message) => {
       message.timestamp = new Date(message.timestamp).addHours(2).toISOString().slice(0, 19).replace('T', ' ');
       setMessages((prevMessages) => [...prevMessages, message]);
     });
+    console.log(messages);
 
 
     return () => {

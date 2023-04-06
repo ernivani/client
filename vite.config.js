@@ -11,6 +11,8 @@ export default defineConfig({
       },
       port: 8080,
     },
+    // change the output directory to `dist/client`
+    outDir: '../rooting/dist',
   },
   dev : {
     port: 8080,
@@ -21,3 +23,4 @@ export default defineConfig({
     },
   },
 })
+
