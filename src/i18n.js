@@ -43,6 +43,7 @@ i18next
                     login_link_text: "Back to",
                     login_link: "Login",
                     app_button: "Open app",
+                    username_required: "Username is required",
                 },
             },
             fr: {
@@ -82,6 +83,7 @@ i18next
                     login_link_text: "Retour à",
                     login_link: "Connexion",
                     app_button: "Ouvrir l'application",
+                    username_required: "Le nom d'utilisateur est requis",
                 },
             },
         },
