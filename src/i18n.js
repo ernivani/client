@@ -32,7 +32,8 @@ i18next
                     already_have_account: "Already have an account ?",
                     signIn: "Login",
                     signUp: "Register",
-                    email_required: "Email is required",
+                    email_required: "A valid email is required",
+                    password_required: "Password is required",
                     reset_password_title: "Reset your password",
                     new_password_label: "Reset password",
                     new_password_placeholder: "Enter your new password",
@@ -68,7 +69,7 @@ i18next
                     already_have_account: "Vous avez déjà un compte ?",
                     signIn: "Connexion",
                     signUp: "Inscription",
-                    email_required: "L'email est requis",
+                    email_required: "Un email valide est requis",
                     reset_password_title: "Réinitialiser votre mot de passe",
                     new_password_label: "Mot de passe",
                     new_password_placeholder:
