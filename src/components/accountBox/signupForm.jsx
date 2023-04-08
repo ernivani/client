@@ -23,26 +23,56 @@ export function SignupForm(props) {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setErrorMessage] = useState(null);
+
+    const [error_email, setErrorEmail] = useState("");
+    const [error_username, setErrorUsername] = useState("");
+    const [error_password, setErrorPassword] = useState("");
+
+
+    const verify = (e) => {
+        e.preventDefault();
+        setErrorEmail("");
+        setErrorUsername("");
+        setErrorPassword("");
+
+        console.log(email);
+        console.log(username);
+        console.log(password);
+
+        if (email === "" || !email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+            setErrorEmail(t("email_required"));
+            return;
+        }
+
+        if (username === "") {
+            setErrorUsername(t("username_required"));
+            return;
+        }
+
+        if (password === "") {
+            setErrorPassword(t("password_required"));
+            return;
+        }
+
+        import("./LogSend/register")
+            .then((module) => {
+                module.registerSend(email,password,username, setErrorEmail, setErrorUsername, setErrorPassword);
+            })
+            .catch((error) => {
+                setErrorEmail(error);
+                setErrorUsername(error);
+                setErrorPassword(error);
+            });
+    };
+
 
     return (
         <BoxContainer>
-            <FormContainer
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    import("./LogSend/register")
-                        .then((module) => {
-                            module.registerSend(e, setErrorMessage);
-                        })
-                        .catch((error) => {
-                            alert(error);
-                        });
-                }}
-            >
+            <FormContainer>
                 <LabelInput>
                     {t("email_label")}
-                    {error ? (
-                        <ImportantSpan>- {error}</ImportantSpan>
+                    {error_email ? (
+                        <ImportantSpan>- {error_email}</ImportantSpan>
                     ) : (
                         <ImportantSpan>*</ImportantSpan>
                     )}
@@ -57,12 +87,11 @@ export function SignupForm(props) {
                     maxLength="999"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
-                    required
                 />
                 <LabelInput>
                     {t("username_label")}
-                    {error ? (
-                        <ImportantSpan>- {error}</ImportantSpan>
+                    {error_username ? (
+                        <ImportantSpan>- {error_username}</ImportantSpan>
                     ) : (
                         <ImportantSpan>*</ImportantSpan>
                     )}
@@ -77,12 +106,11 @@ export function SignupForm(props) {
                     maxLength="999"
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
-                    required
                 />
                 <LabelInput>
                     {t("password_label")}
-                    {error ? (
-                        <ImportantSpan>- {error}</ImportantSpan>
+                    {error_password ? (
+                        <ImportantSpan>- {error_password}</ImportantSpan>
                     ) : (
                         <ImportantSpan>*</ImportantSpan>
                     )}
@@ -97,10 +125,9 @@ export function SignupForm(props) {
                     maxLength="999"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    required
                 />
                 <Marginer direction="vertical" margin={15} />
-                <SubmitButton type="submit">
+                <SubmitButton onClick={(e)=>verify(e)}>
                     {t("register_button")}
                 </SubmitButton>
             </FormContainer>
