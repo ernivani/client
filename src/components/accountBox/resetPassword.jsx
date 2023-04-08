@@ -81,6 +81,7 @@ export function ResetPassword() {
     const [error, setErrorMessage] = useState(null);
 
     const resetPasswordSend = (e) => {
+        setErrorMessage("");
         e.preventDefault();
         const token = e.target.token.value;
         const data = {
@@ -91,8 +92,8 @@ export function ResetPassword() {
 
         axios
             .post("https://api.impin.fr/user/reset", data)
-            .then((res) => {
-                setErrorMessage(res.data.message);
+            .then(() => {
+                window.location.href = "/log";
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message);
