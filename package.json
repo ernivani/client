@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host --port 9000",
     "preview": "vite preview --host --port 8080",
-    "build": "vite build --outDir ../rooter/dist",
+    "build": "vite build --outDir ../rooter/dist --emptyOutDir",
     "serve": "node ../rooter/srv.js"
   },
   "dependencies": {

@@ -26,16 +26,7 @@ export default function SideBar({ serverList }) {
         }
     }, []);
 
-    let list = [];
 
-    for (let i = 0; i <= 20; i++) {
-        let serverName = "server" + i;
-        let server = { id: i, server_name: serverName };
-        list.push(server);
-    }
-
-    console.log(list);
-    serverList = list;
 
     return (
         <FakeParent>
