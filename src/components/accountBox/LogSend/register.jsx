@@ -2,11 +2,7 @@
 import axios from 'axios';
 
 
-export const registerSend = (e,setErrorMessage) => {
-    // fonction de register 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const username = e.target.username.value;
+export const registerSend = (email,password,username,setErrorEmail, setErrorUsername, setErrorPassword) => {
     const data = {
         email: email,
         password: password,
@@ -24,7 +20,9 @@ export const registerSend = (e,setErrorMessage) => {
             window.location.href = '/channels/@me';
         })
         .catch((err) => {
-            setErrorMessage(err.response.data.message);
+            setErrorEmail(err.response.data.message);
+            setErrorUsername(err.response.data.message);
+            setErrorPassword(err.response.data.message);
         });
 
 };
