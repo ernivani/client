@@ -14,6 +14,8 @@ import {
     ImportantSpan,
 } from "./common";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { bool } from "prop-types";
 
 export const BoldLinkk = styled(Link)`
     font-size: 11px;
@@ -40,25 +42,32 @@ const ResetPasswordContainer = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
 `;
 
 const ResetPasswordBox = styled(BoxContainer)`
-    max-width: 500px;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 10px;
+    width: 400px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 19px;
     background-color: rgb(30, 33, 36);
     box-shadow: rgba(15, 15, 15, 0.28) 0px 0px 2px;
-    filter: drop-shadow(rgb(17, 17, 17) 0px 0px 15px)
+    position: relative;
+    overflow: hidden;
+    filter: drop-shadow(rgb(17, 17, 17) 0px 0px 15px);
+
 `;
 
 const FormHeader = styled.div`
     width: 100%;
+    height: 250px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 0 1.8em;
-    padding-bottom: 2em;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    padding: 0px 1.8em 5em;
+
 `;
 
 const HeaderText = styled.h2`
@@ -67,11 +76,60 @@ const HeaderText = styled.h2`
     line-height: 1.24;
     color: #fff;
     margin: 0;
+    z-index: 10;
 `;
 
 const InnerContainer = styled(FormContainer)`
     padding: 0 1.8em;
 `;
+
+
+
+const BackDrop = styled(motion.div)`
+    width: 160%;
+    height: 550px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50%;
+    transform: rotate(60deg);
+    top: -330px;
+    left: -170px;
+    background: rgb(131, 114, 218);
+    background: linear-gradient(
+        58deg,
+        rgba(131, 114, 218, 1) 20%,
+        /* #7289da */ rgba(212, 176, 19, 1) 100% /* #f3ac12 */
+    );
+    @media screen and (max-width: 480px) {
+        width: 200%;
+        height: 550px;
+        top: -310px;
+        left: -150px;
+    }
+`;
+
+
+const backdropVariants = {
+    expanded: {
+        width: "233%",
+        height: "1050px",
+        borderRadius: "20%",
+        transform: "rotate(60deg)",
+    },
+    collapsed: {
+        width: "160%",
+        height: "550px",
+        borderRadius: "50%",
+        transform: "rotate(60deg)",
+    },
+};
+
+const expandingTransition = {
+    type: "spring",
+    duration: 2.5,
+    stiffness: 30,
+};
 
 export function ResetPassword() {
     const { t } = useTranslation();
@@ -79,6 +137,11 @@ export function ResetPassword() {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [error, setErrorMessage] = useState(null);
+
+    const [isExpanded, setExpanded] = useState(false);
+
+
+
 
     const resetPasswordSend = (e) => {
         setErrorMessage("");
@@ -103,7 +166,13 @@ export function ResetPassword() {
     return (
         <ResetPasswordContainer>
             <ResetPasswordBox>
-                <FormHeader>
+                <FormHeader> 
+                    <BackDrop
+                        initial={false}
+                        animate={isExpanded ? "expanded" : "collapsed"}
+                        variants={backdropVariants}
+                        transition={expandingTransition}
+                    />
                     <HeaderText>{t("reset_password_title")}</HeaderText>
                 </FormHeader>
                 <InnerContainer onSubmit={resetPasswordSend}>
@@ -121,6 +190,7 @@ export function ResetPassword() {
                         placeholder={t("new_password_placeholder")}
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
+                        autoComplete="new-password"
                         required
                     />
                     <LabelInput>
@@ -137,6 +207,7 @@ export function ResetPassword() {
                         placeholder={t("confirm_new_password_placeholder")}
                         onChange={(e) => setPassword2(e.target.value)}
                         value={password2}
+                        autoComplete="new-password"
                         required
                     />
                     <input
