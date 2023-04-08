@@ -15,7 +15,12 @@ export const registerSend = (e,setErrorMessage) => {
 
     axios.post('https://api.impin.fr/user/register', data)
         .then((res) => {
-            localStorage.setItem('token', res.data.token);
+            const userCache = {
+                token: res.data.token,
+                userId: res.data.uid,
+                username: res.data.username
+            };
+            localStorage.setItem('userCache', JSON.stringify(userCache));
             window.location.href = '/channels/@me';
         })
         .catch((err) => {
