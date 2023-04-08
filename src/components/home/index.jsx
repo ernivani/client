@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Marginer } from "../marginer";
@@ -127,12 +127,23 @@ const ButtonsContainer = styled.div`
 export const Home = () => {
     const { t } = useTranslation();
 
+    const [user, setUser] = useState(false);
+
+   
+
+    useEffect(() => {
+        const userCache = localStorage.getItem("userCache");
+        if (userCache) {
+            setUser(true)
+        }
+    }, []);
+
+
     return (
         <HomeBackground>
             <Header>
                 <Logo src="/Impin.svg" alt="Impin" />
-
-                <Button to="/log">{t("login_button")}</Button>
+                {user ? <Button to="/log">{t("app_button")}</Button> : <Button to="/log">{t("login_button")}</Button>}
             </Header>
             <ContentContainer>
                 <Title>{t("home_title")}</Title>

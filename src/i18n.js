@@ -41,6 +41,7 @@ i18next
                     reset_password_button: "Reset password",
                     login_link_text: "Back to",
                     login_link: "Login",
+                    app_button: "Open app",
                 },
             },
             fr: {
@@ -79,6 +80,7 @@ i18next
                     reset_password_button: "Réinitialiser le mot de passe",
                     login_link_text: "Retour à",
                     login_link: "Connexion",
+                    app_button: "Ouvrir l'application",
                 },
             },
         },
