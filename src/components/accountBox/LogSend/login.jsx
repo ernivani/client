@@ -1,17 +1,15 @@
 import axios from 'axios';
 
-export const loginSend = (e, setErrorMessage) => {
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+export const loginSend = (email,password, setErrorEmail, setErrorPassword) => {
 
     const data = {
         email: email,
         password: password
     };
+    
     console.log(data);
     axios.post('https://api.impin.fr/user/login', data)
         .then((res) => {
-            console.log(res);
             const userCache = {
                 token: res.data.token,
                 userId: res.data.uid,
@@ -21,6 +19,7 @@ export const loginSend = (e, setErrorMessage) => {
             window.location.href = '/channels/@me';
         })
         .catch((err) => {
-            setErrorMessage(err.response.data.message);
+            setErrorEmail(err.response.data.message);
+            setErrorPassword(err.response.data.message);
         });
 };
