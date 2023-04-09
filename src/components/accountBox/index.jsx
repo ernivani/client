@@ -130,11 +130,11 @@ const expandingTransition = {
 };
 
 import { useLocation } from "react-router-dom";
-export function AccountBox() {
+export function AccountLog() {
     const location = useLocation();
 
     const { t } = useTranslation();
-    const [isExpanded, setExpanded] = useState(false);
+    const [isExpanded, setExpanded] = useState(true);
     const [active, setActive] = useState(
         location.state ? location.state : "signin"
     );
@@ -169,6 +169,8 @@ export function AccountBox() {
         if (userCache) {
             window.location.href = "/channels/@me";
         }
+
+        setExpanded(false);
         
     }, []);
 

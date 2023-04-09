@@ -44,6 +44,10 @@ i18next
                     login_link: "Login",
                     app_button: "Open app",
                     username_required: "Username is required",
+                    password_too_short: "Password must be at least 8 characters",
+                    password_too_long: "Password must be less than 32 characters",
+                    passwords_not_match: "Passwords do not match",
+                    username_too_long: "Username must be less than 32 characters",
                 },
             },
             fr: {
@@ -84,6 +88,14 @@ i18next
                     login_link: "Connexion",
                     app_button: "Ouvrir l'application",
                     username_required: "Le nom d'utilisateur est requis",
+                    password_too_short:
+                        "Le mot de passe doit comporter au moins 8 caractères",
+                    password_too_long:
+                        "Le mot de passe doit comporter moins de 32 caractères",
+                    passwords_not_match: "Les mots de passe ne correspondent pas",
+                    username_too_long:
+                        "Le nom d'utilisateur doit comporter moins de 32 caractères",
+                        
                 },
             },
         },

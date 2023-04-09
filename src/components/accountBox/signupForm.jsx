@@ -48,11 +48,27 @@ export function SignupForm(props) {
             setErrorUsername(t("username_required"));
             return;
         }
+        if (username.length > 32) {
+            setErrorUsername(t("username_too_long"));
+            return;
+        }
 
         if (password === "") {
             setErrorPassword(t("password_required"));
             return;
         }
+
+        if (password.length < 8) {
+            setErrorPassword(t("password_too_short"));
+            return;
+        } else if (password.length > 32) {
+            setErrorPassword(t("password_too_long"));
+            return;
+        }
+        
+
+
+        
 
         import("./LogSend/register")
             .then((module) => {
