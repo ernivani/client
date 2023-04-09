@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 import { Routes, Route } from "react-router-dom";
-import { AccountBox } from "./components/accountBox";
+import { AccountLog } from "./components/accountBox";
 import { Home } from "./components/home";
 import { Users } from "./components/users";
 import { CheckAuth } from "./components/checkAuth";
@@ -37,7 +37,7 @@ function App() {
         <AppContainer>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/log' element={<AccountBox/>} />
+                <Route path='/log' element={<AccountLog/>} />
                 <Route path='/channels/:id' element={<Users />} />
                 <Route path='/reset/:token' element={<ResetPassword />} />
                 <Route path='*' element={

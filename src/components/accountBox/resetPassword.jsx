@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Marginer } from "../marginer";
@@ -136,7 +136,8 @@ export function ResetPassword() {
 
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const [error, setErrorMessage] = useState(null);
+    const [error1, setErrorMessage1] = useState(null);
+    const [error2, setErrorMessage2] = useState(null);
 
     const [isExpanded, setExpanded] = useState(false);
 
@@ -144,8 +145,22 @@ export function ResetPassword() {
 
 
     const resetPasswordSend = (e) => {
-        setErrorMessage("");
         e.preventDefault();
+        setErrorMessage1("");
+        setErrorMessage2("");
+
+        if (password.length < 8) {
+            setErrorMessage1(t("password_too_short"));
+            return;
+        } else if (password.length > 32) {
+            setErrorMessage1(t("password_too_long"));
+            return;
+        } else if (password !== password2) {
+            setErrorMessage2(t("passwords_not_match"));
+            return;
+        }
+       
+
         const token = e.target.token.value;
         const data = {
             password: password,
@@ -156,10 +171,16 @@ export function ResetPassword() {
         axios
             .post("https://api.impin.fr/user/reset", data)
             .then(() => {
+                setExpanded(true);
+                setTimeout(() => {
+                    setExpanded(false);
+                }, 700);
+
                 window.location.href = "/log";
             })
             .catch((err) => {
-                setErrorMessage(err.response.data.message);
+                setErrorMessage1(err.response.data.message);
+                setErrorMessage2(err.response.data.message);
             });
     };
 
@@ -178,8 +199,8 @@ export function ResetPassword() {
                 <InnerContainer onSubmit={resetPasswordSend}>
                     <LabelInput>
                         {t("new_password_label")}
-                        {error ? (
-                            <ImportantSpan>- {error}</ImportantSpan>
+                        {error1 ? (
+                            <ImportantSpan>- {error1}</ImportantSpan>
                         ) : (
                             <ImportantSpan>*</ImportantSpan>
                         )}
@@ -191,12 +212,11 @@ export function ResetPassword() {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         autoComplete="new-password"
-                        required
                     />
                     <LabelInput>
                         {t("confirm_new_password_label")}
-                        {error ? (
-                            <ImportantSpan>- {error}</ImportantSpan>
+                        {error2 ? (
+                            <ImportantSpan>- {error2}</ImportantSpan>
                         ) : (
                             <ImportantSpan>*</ImportantSpan>
                         )}
@@ -208,7 +228,6 @@ export function ResetPassword() {
                         onChange={(e) => setPassword2(e.target.value)}
                         value={password2}
                         autoComplete="new-password"
-                        required
                     />
                     <input
                         type="hidden"
@@ -216,14 +235,25 @@ export function ResetPassword() {
                         value={window.location.href.split("/")[4]}
                     />
                     <Marginer direction="vertical" margin={15} />
-                    <SubmitButton type="submit">
+                    <SubmitButton onclick={resetPasswordSend}>
                         {t("reset_password_button")}
                     </SubmitButton>
                 </InnerContainer>
                 <Marginer direction="vertical" margin={10} />
                 <InfoLink>
                     {t("login_link_text")}
-                    <BoldLinkk to="/log">{t("login_link")}</BoldLinkk>
+                    <BoldLinkk 
+                    onClick={ // isExpanded to true and wait for the animation to finish then redirect to login page
+                        () => {
+                            setExpanded(true);
+                            setTimeout(() => {
+                                window.location.href = "/log";
+                            }, 500);
+                        }
+                    }
+                    >
+                        {t("login_link")}
+                    </BoldLinkk>
                 </InfoLink>
 
             </ResetPasswordBox>
