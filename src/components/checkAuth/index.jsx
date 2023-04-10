@@ -24,7 +24,16 @@ export const CheckAuth = () => {
                     token: userCache.token,
                 })
                 .then((res) => {
-                    // console.log(res);
+                    // rewrite the token to update the id and the username without changing the token
+                    localStorage.setItem(
+                        "userCache",
+                        JSON.stringify({
+                            userId: res.data.id,
+                            username: res.data.username,
+                            token: userCache.token,
+                        })
+                    );
+                    
                 })
                 .catch((err) => {
                     console.log(err);
