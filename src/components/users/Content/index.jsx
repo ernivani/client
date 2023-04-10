@@ -17,7 +17,6 @@ const Contenue = styled.div`
 `;
 
 
-
 const Content = (messageList) => {
     return (
     <Base>
