@@ -23,27 +23,45 @@ export function LoginForm() {
     const [error_email, setErrorEmail] = useState("");
     const [error_password, setErrorPassword] = useState("");
 
-    const verify = (e) => {
+    const [ loading, setLoading ] = useState(false);
+
+    const validateEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return regex.test(email);
+    };
+    
+    const validatePassword = (password) => {
+        return password.length > 0;
+    };
+    
+    const verify = async (e) => {
         e.preventDefault();
+        setLoading(true);
         setErrorEmail("");
         setErrorPassword("");
-        if (email === "" || !email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+    
+        if (!validateEmail(email)) {
             setErrorEmail(t("email_required"));
+            setLoading(false);
             return;
         }
-        if (password === "") {
+        if (!validatePassword(password)) {
             setErrorPassword(t("password_required"));
+            setLoading(false);
             return;
         }
-        import("./LogSend/login")
-            .then((module) => {
-                module.loginSend(email,password, setErrorEmail, setErrorPassword);
-            })
-            .catch((error) => {
-                setErrorEmail(error);
-                setErrorPassword(error);
-            });
+    
+        try {
+            const { loginSend } = await import("./LogSend/login");
+            loginSend(email, password, setErrorEmail, setErrorPassword);
+        } catch (error) {
+            setErrorEmail(error);
+            setErrorPassword(error);
+        } finally {
+            setLoading(false);
+        }
     };
+    
 
                 
 
@@ -92,8 +110,10 @@ export function LoginForm() {
                 <BoldLink onClick={
                     (e) => {
                         setErrorEmail("");
+                        setLoading(true);
                         e.preventDefault();
                         if (email === "") {
+                            setLoading(false);
                             setErrorEmail(t("email_required"));
                             return;
                         }
@@ -106,10 +126,12 @@ export function LoginForm() {
                             .catch((error) => {
                                 console.log(error);
                             });
+                            setLoading(false);
                     }
                 }>{t("forgot_password")}</BoldLink>
                 <Marginer direction="vertical" margin="1.6em" />
-                <SubmitButton onClick={(e)=>verify(e)}>{t("login_button")}</SubmitButton>
+                {/* <SubmitButton onClick={(e)=>verify(e)}>{t("login_button")}</SubmitButton> */}
+                <SubmitButton onClick={(e)=>verify(e)}>{loading ? "Loading..." : t("login_button")}</SubmitButton>
             </FormContainer>
             <Marginer direction="vertical" margin="1em" />
             <InfoLink>

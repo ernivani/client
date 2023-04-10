@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import SideBar from "./sideBar";
 import Content from "./Content";
+import io from "socket.io-client";
+import AddFriendForm from "./AddFriendForm";
 
 const FakeParent = styled.div`
     height: 100%;
@@ -25,44 +27,39 @@ export function Users() {
     if (!(userCache)) {
         window.location.href = "/log";
     }
-    
+    const token = JSON.parse(userCache).token;
 
     const [loading, setLoading] = useState(true);
     const [loaded, setLoaded] = useState(false);
     const [serverList, setServerList] = useState([]);
     const [messageList, setMessageList] = useState([]);
-    // useEffect(() => {
-    //   const token = localStorage.getItem('token');
-    //   const socket = io.connect('http://213.32.89.28:5000');
-    //   if (token) {
-    //     socket.emit('getServer', token);
-    //     socket.on('getServerResponse', (data) => {
-    //       if (data.status === 'success') {
-    //         setServerList(data.server);
-    //         socket.emit('history', token);
-    //       } else {
-    //         console.log("error");
-    //       }
-    //     });
-    //     socket.emit('connection', token);
-    //     socket.on('historyResponse', (data) => {
-    //       if (data.status === 'success') {
-    //         setMessageList(data);
-    //         setLoading(false);
-    //         setLoaded(true);
-    //         socket.disconnect();
-    //       } else {
-    //         console.log("error");
-    //       }
-    //     });
-    //   }
-    // }, []);
+    const [socket, setSocket] = useState(null);
+    
+    useEffect(() => {
+        const newSocket = io("https://api.impin.fr", {
+            query: {
+                token: token,
+            },
+        });
+        setSocket(newSocket);
+
+        newSocket.on("message", (data) => {
+            console.log(data);
+        });
+
+        
+
+        console.log("connecting to socket");
+
+        return () => {
+            newSocket.disconnect();
+        };
+    }, []);
 
     setTimeout(() => {
         setLoading(false);
         setLoaded(true);
     }, 1000);
-
 
     if (loading) {
         return (
@@ -109,6 +106,8 @@ export function Users() {
                     </FakeParent>
                     <Content messageList={messageList} />
                 </User>
+                
+                <AddFriendForm socket={socket} />
             </User>
         );
     }
