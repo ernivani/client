@@ -36,15 +36,23 @@ const AddFriendForm = ({ socket }) => {
             setFriends(data);
             console.log(data);
         });
+        
+        socket.on("friend_request_received", (data) => {
+            console.log(data);
+            setFriendRequests((friendRequests) => [...friendRequests, data]);
+        });
 
 
         // When a friend request is accepted, remove it from the list and update the list of friends
         socket.on("friend_request_accepted", (data) => {
+            socket.emit("get_friend_request");
             console.log(data);
-            setFriendRequests((friendRequests) =>
-                friendRequests.filter((friendRequest) => friendRequest.user_id1 !== data.senderId)
-            );
-            setFriends((friends) => [...friends, data.senderId]);
+        });
+    
+        // When a friend request is declined, remove it from the list
+        socket.on("friend_request_declined", (data) => {
+            console.log(data);
+            socket.emit("get_friend_request");
         });
 
         socket.on("friend_request_canceled", (data) => {
