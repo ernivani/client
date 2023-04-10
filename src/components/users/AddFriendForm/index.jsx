@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 
 const AddFriendForm = ({ socket }) => {
     const [username, setUsername] = useState("");
@@ -39,7 +39,7 @@ const AddFriendForm = ({ socket }) => {
         
         socket.on("friend_request_received", (data) => {
             console.log(data);
-            setFriendRequests((friendRequests) => [...friendRequests, data]);
+            socket.emit("get_friend_request");
         });
 
 
@@ -51,23 +51,21 @@ const AddFriendForm = ({ socket }) => {
     
         // When a friend request is declined, remove it from the list
         socket.on("friend_request_declined", (data) => {
-            console.log(data);
+            console.log("friend_request_declined", data);
             socket.emit("get_friend_request");
         });
 
         socket.on("friend_request_canceled", (data) => {
             console.log(data);
-            setFriendRequests((friendRequests) =>
-                friendRequests.filter((friendRequest) => friendRequest.user_id1 !== data.senderId)
-            );
+            socket.emit("get_friend_request");
         });
 
     }, [socket]);
 
     const getDisplayUserId = (friendship) => {
-        console.log(friendship.user_id1 + " " + id);
         return friendship.user_id1 === id ? friendship.user_id2 : friendship.user_id1;
     };
+
     
     return (
         <div>
@@ -84,7 +82,7 @@ const AddFriendForm = ({ socket }) => {
                 <h3>Friend Requests</h3>
                 {friendRequests.map((friendRequest) => (
                     <div key={getDisplayUserId(friendRequest)}>
-                        <p>{getDisplayUserId(friendRequest)}</p>
+                        {friendRequest.user_id1 === id ? ( <p>{friendRequest.username2}</p> ) : ( <p>{friendRequest.username1}</p> )}
                         <p>{friendRequest.status}</p>
                         {friendRequest.user_id1 === id ? (
                             <button onClick={() => socket.emit("cancel_friend_request", {senderId: friendRequest.user_id1, receiverId: friendRequest.user_id2})}>Cancel</button>
@@ -101,10 +99,15 @@ const AddFriendForm = ({ socket }) => {
                 <h3>Friends</h3>
                 {friends.map((friend) => (
                     <div key={getDisplayUserId(friend)}>
-                        <p>{getDisplayUserId(friend)}</p>
+                        {/* {friend.user_id1 === id ? ( <p>{friend.username2}</p> ) : ( <p>{friend.username1}</p> )} */}
+                        {friend.user_id1 === id ? ( <Link to={`/channels/@me/${friend.user_id2}`}>{friend.username2}</Link> ) : ( <Link to={`/channels/@me/${friend.user_id1}`}>{friend.username1}</Link> )}
+                        <button onClick={() => socket.emit("remove_friend", {friendId: getDisplayUserId(friend)})}>Remove</button>
                     </div>
                 ))}
             </div>
+            <p>
+                votre id est : {id}
+            </p>
         </div>
     );
 };
