@@ -8,8 +8,11 @@ import { createRoot } from "react-dom/client";
 
 import { FakeParent, Parent, Serv, Enfant, Squircle, Divider } from "./css";
 
-export default function SideBar({ serverList }) {
+export default function SideBar({ socket,userId }) {
+
     const { id } = useParams();
+    console.log(id)
+    const [serverList, setServerList] = useState([]);
     
 
     const disconnect = useCallback((e) => {
@@ -18,12 +21,26 @@ export default function SideBar({ serverList }) {
     }, []);
 
     const addServer = useCallback((e) => {
-        console.log(e);
-        console.log("todo : handle add server");
-        const serverName = prompt("Nom du serveur :");
+        const serverName = prompt("Nom du serveur");
         if (serverName) {
-            console.log(serverName);
+            socket.emit("create-server", { serverName, userId });
         }
+    }, []);
+
+
+    useEffect(() => {
+        socket.emit("get-server-list", userId);
+
+        socket.on("server-list", (data) => {
+            setServerList(data);
+            console.log(data);
+
+        });
+        socket.on("server-created", (data) => {
+            setServerList((old) => [...old, data]);
+
+        });
+
     }, []);
 
 
@@ -39,7 +56,7 @@ export default function SideBar({ serverList }) {
                     hoverColor="var(--color-blurple)"
                 />
                 <Divider />
-                {serverList.map(({ id: serverId, server_name }) => (
+                {serverList.map(({ id: serverId, name:server_name }) => (
                     <SideBarIcon
                         key={serverId}
                         id={serverId}
@@ -72,7 +89,6 @@ export default function SideBar({ serverList }) {
 
 function SideBarIcon(props) {
     const { icon, text, active, onClick, onMouseEnter, hoverColor, id } = props;
-    const [hoverPosition, setHoverPosition] = useState(null);
 
     let pathModif = "";
     if (id === "addServer" || id === "disconnect") {
@@ -93,7 +109,7 @@ function SideBarIcon(props) {
                     top: `${pos}px`,
                     height: "fit-content",
                     zIndex: "999",
-                    opacity: "0",
+                    opacity: "1",
                     transition: "opacity 0.5s ease-in-out",
                     willChange: "opacity",
                 }}
@@ -106,10 +122,7 @@ function SideBarIcon(props) {
         container.setAttribute("id", "popup");
         document.querySelector(".user").appendChild(container);
     
-        // Définir l'opacité à 1 avec une transition
-        requestAnimationFrame(() => {
-            enfant.props.style.opacity = 1;
-        });
+        
         createRoot(container).render(enfant);
     };
     
