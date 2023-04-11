@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import SideBar from "./sideBar";
 import Content from "./Content";
+import ChatBar from "./ChatBar";
 
 import { io } from "socket.io-client";
 
@@ -17,8 +18,23 @@ const User = styled.div`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: flex; 
 `;
+
+const User2 = styled.div`
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    min-width: 320px;
+    display: flex;
+    @media (max-width: 768px) {
+        display: none;
+    }
+`;
+
+
 
 import "./loading.css";
 import { useRef } from "react";
@@ -39,7 +55,6 @@ export function Users() {
     useEffect(() => {
         socket.current = io("https://api.impin.fr/");
         socket.current.emit("add-user", userId );
-        console.log(socket.current)
     }, []);
 
 
@@ -87,13 +102,13 @@ export function Users() {
     } else {
         return (
             <User id="uwu">
-                <User className="user">
-                    <FakeParent className="fakeParent">
-                        <SideBar socket={socket.current} userId={userId} />
-                    </FakeParent>
-                    <Content socket={socket.current} />
-                </User>
-                
+                <User2 className="user">
+                        <FakeParent className="fakeParent">
+                            <SideBar socket={socket.current} userId={userId} />
+                        </FakeParent>
+                        <Content socket={socket.current} />
+                </User2>
+                <ChatBar socket={socket.current} userId={userId} />
             </User>
         );
     }

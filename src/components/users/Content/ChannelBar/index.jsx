@@ -20,14 +20,8 @@ import {
 
 const   ChannelBar = () => {
     
-    let username = ''
     
-    const userCache = localStorage.getItem('userCache')
-    if (userCache) {
-        username = JSON.parse(userCache).username
-    }else {
-        window.location.href = '/log'
-    }
+   
 
     const [seeProfile, setSeeProfile] = useState(false)
 
@@ -39,6 +33,9 @@ const   ChannelBar = () => {
     const handleRightClick = (e) => {
         e.preventDefault()
     }
+    
+    const userCache = localStorage.getItem('userCache')
+    const username = JSON.parse(userCache).username
 
     useEffect(() => {
         document.addEventListener('contextmenu', handleRightClick)

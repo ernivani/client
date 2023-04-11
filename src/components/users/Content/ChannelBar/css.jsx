@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SideBar = styled.div`
     flex-direction: column;
-    width: 240px;
+    width: 100%;
     height: 100%;
     background-color: rgb(43, 45, 49);
     color: #fff;

@@ -19,10 +19,6 @@ const Contenue = styled.div`
 
 const Content = ({socket}) => {
 
-    
-
-
-        
     return (
     <Base>
         <Contenue>
