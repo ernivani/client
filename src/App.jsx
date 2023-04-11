@@ -39,6 +39,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/log' element={<AccountLog/>} />
                 <Route path='/channels/:id' element={<Users />} />
+                <Route path='/channels/:id/:channelid' element={<Users />} />
                 <Route path='/reset/:token' element={<ResetPassword />} />
                 <Route path='*' element={
                     <div>

@@ -1,6 +1,6 @@
 import ChannelBar from "./ChannelBar";
-import ChatBar from "./ChatBar";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Base = styled.div`
     display: flex;
@@ -17,12 +17,16 @@ const Contenue = styled.div`
 `;
 
 
-const Content = (messageList) => {
+const Content = ({socket}) => {
+
+    
+
+
+        
     return (
     <Base>
         <Contenue>
             <ChannelBar />
-            <ChatBar messageList={messageList} />
         </Contenue>
     </Base>
     );
