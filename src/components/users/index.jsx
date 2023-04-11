@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 import SideBar from "./sideBar";
 import Content from "./Content";
-import io from "socket.io-client";
-import AddFriendForm from "./AddFriendForm";
+
+import { io } from "socket.io-client";
+
 
 const FakeParent = styled.div`
     height: 100%;
@@ -20,6 +21,7 @@ const User = styled.div`
 `;
 
 import "./loading.css";
+import { useRef } from "react";
 
 export function Users() {
 
@@ -28,37 +30,22 @@ export function Users() {
         window.location.href = "/log";
     }
     const token = JSON.parse(userCache).token;
+    const userId = JSON.parse(userCache).userId;
 
     const [loading, setLoading] = useState(true);
-    const [loaded, setLoaded] = useState(false);
-    const [serverList, setServerList] = useState([]);
-    const [messageList, setMessageList] = useState([]);
-    const [socket, setSocket] = useState(null);
-    
+
+    const socket = useRef();;
+
     useEffect(() => {
-        const newSocket = io("https://api.impin.fr", {
-            query: {
-                token: token,
-            },
-        });
-        setSocket(newSocket);
-
-        newSocket.on("message", (data) => {
-            console.log(data);
-        });
-
-        
-
-        console.log("connecting to socket");
-
-        return () => {
-            newSocket.disconnect();
-        };
+        socket.current = io("https://api.impin.fr/");
+        socket.current.emit("add-user", userId );
+        console.log(socket.current)
     }, []);
 
+
+    
     setTimeout(() => {
         setLoading(false);
-        setLoaded(true);
     }, 1000);
 
     if (loading) {
@@ -102,12 +89,11 @@ export function Users() {
             <User id="uwu">
                 <User className="user">
                     <FakeParent className="fakeParent">
-                        <SideBar serverList={serverList} />
+                        <SideBar socket={socket.current} userId={userId} />
                     </FakeParent>
-                    <Content messageList={messageList} />
+                    <Content socket={socket.current} />
                 </User>
                 
-                <AddFriendForm socket={socket} />
             </User>
         );
     }
