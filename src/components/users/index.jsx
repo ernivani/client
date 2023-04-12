@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-
-import SideBar from "./sideBar";
-import Content from "./Content";
-import ChatBar from "./ChatBar";
-
-import { io } from "socket.io-client";
-
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { io } from 'socket.io-client';
+import SideBar from './sideBar';
+import Content from './Content';
+import ChatBar from './ChatBar';
 
 const FakeParent = styled.div`
     height: 100%;
@@ -18,7 +15,7 @@ const User = styled.div`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    display: flex; 
+    display: flex;
 `;
 
 const User2 = styled.div`
@@ -30,85 +27,39 @@ const User2 = styled.div`
     min-width: 320px;
     display: flex;
     @media (max-width: 768px) {
-        display: none;
+        display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
     }
 `;
 
-
-
-import "./loading.css";
-import { useRef } from "react";
-
 export function Users() {
-
-    const userCache = localStorage.getItem('userCache')
-    if (!(userCache)) {
-        window.location.href = "/log";
+    const userCache = localStorage.getItem('userCache');
+    if (!userCache) {
+        window.location.href = '/log';
     }
     const token = JSON.parse(userCache).token;
     const userId = JSON.parse(userCache).userId;
 
     const [loading, setLoading] = useState(true);
-
-    const socket = useRef();;
+    const [isVisible, setIsVisible] = useState(false);
+    const socket = io('https://api.impin.fr/');
 
     useEffect(() => {
-        socket.current = io("https://api.impin.fr/");
-        socket.current.emit("add-user", userId );
+        socket.emit('add-user', userId);
+        setLoading(false);
     }, []);
 
-
-    
-    setTimeout(() => {
-        setLoading(false);
-    }, 1000);
-
     if (loading) {
-        return (
-            <div className="loading">
-                <svg
-                    width="200"
-                    height="200"
-                    viewBox="0 0 100 100"
-                    className="loading"
-                >
-                    <polyline
-                        className="line-cornered stroke-still"
-                        points="0,0 100,0 100,100"
-                        strokeWidth="10"
-                        fill="none"
-                    ></polyline>
-                    <polyline
-                        className="line-cornered stroke-still"
-                        points="0,0 0,100 100,100"
-                        strokeWidth="10"
-                        fill="none"
-                    ></polyline>
-                    <polyline
-                        className="line-cornered stroke-animation"
-                        points="0,0 100,0 100,100"
-                        strokeWidth="10"
-                        fill="none"
-                    ></polyline>
-                    <polyline
-                        className="line-cornered stroke-animation"
-                        points="0,0 0,100 100,100"
-                        strokeWidth="10"
-                        fill="none"
-                    ></polyline>
-                </svg>
-            </div>
-        );
+        return <div>Loading...</div>;
     } else {
         return (
             <User id="uwu">
-                <User2 className="user">
-                        <FakeParent className="fakeParent">
-                            <SideBar socket={socket.current} userId={userId} />
-                        </FakeParent>
-                        <Content socket={socket.current} />
+                <User2 className="user" isVisible={isVisible}>
+                    <FakeParent className="fakeParent">
+                        <SideBar socket={socket} userId={userId} isVisible={isVisible} setIsVisible={setIsVisible} />
+                    </FakeParent>
+                    <Content socket={socket} />
                 </User2>
-                <ChatBar socket={socket.current} userId={userId} />
+                <ChatBar socket={socket} userId={userId} isVisible={isVisible} setIsVisible={setIsVisible} />
             </User>
         );
     }
