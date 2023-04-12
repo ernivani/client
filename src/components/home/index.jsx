@@ -142,7 +142,7 @@ export const Home = () => {
     return (
         <HomeBackground>
             <Header>
-                <Logo src="/Impin.svg" alt="Impin" />
+                <Logo src="/Impin.svg" alt="Impin" width={100} height={100} />
                 {user ? <Button to="/log">{t("app_button")}</Button> : <Button to="/log">{t("login_button")}</Button>}
             </Header>
             <ContentContainer>
