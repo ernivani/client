@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 
 const SideBar = styled.div`
@@ -17,7 +18,8 @@ const PrivateChannels = styled.div`
     display: flex;
     position: relative;
     overflow: hidden;
-    flex: 1;
+    flex: 1 1 0%;
+    width: 100%;
 `;
 
 const Panel = styled.section`
@@ -124,7 +126,7 @@ const PanelButtons = styled.div`
     
 `;
 
-const AddButton = styled.button`
+const AddButton = styled.i`
     cursor: pointer;
     width: 32px;
     height: 32px;
@@ -158,5 +160,56 @@ const ButtonIcon = styled.svg`
     fill: currentColor;
 `;
 
+const ChannelsListContainer = styled.div`
+    width: 100%;
+`;
 
-export {SideBar, PrivateChannels, Panel, PanelContainer, PanelAvatar, IconAvatar, MaskIcon, NameTag, UsernameDiv, Username, Tag, PanelButtons, AddButton, ButtonIconDiv, ButtonIcon};
+
+const ChannelsList = styled.ul`
+    margin: 10px;
+    padding: 0;
+`;
+
+const ChannelsListItem = styled.li`
+    background-color: rgba(50, 53, 55, 0.8);
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: 0.2s ease 0s;
+    border-radius: 5px;
+    &:hover {
+        background-color: rgba(79,84,92,0.4);
+    }
+`;
+
+const ChannelsListLink = styled(Link)`
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 10px 25px;
+
+
+`;
+
+export {
+    SideBar,
+    PrivateChannels, 
+    Panel, 
+    PanelContainer, 
+    PanelAvatar, 
+    IconAvatar, 
+    MaskIcon, 
+    NameTag, 
+    UsernameDiv, 
+    Username, 
+    Tag, 
+    PanelButtons, 
+    AddButton, 
+    ButtonIconDiv, 
+    ButtonIcon, 
+    ChannelsList,
+    ChannelsListContainer, 
+    ChannelsListItem,
+    ChannelsListLink
+}
