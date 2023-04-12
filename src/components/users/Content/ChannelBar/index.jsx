@@ -14,13 +14,19 @@ import {
     PanelButtons,
     AddButton,
     ButtonIconDiv,
-    ButtonIcon } from "./css";
+    ButtonIcon,
+    ChannelsListContainer,
+    ChannelsList,
+    ChannelsListItem,
+    ChannelsListLink
+ } from "./css";
+import { useParams } from "react-router-dom";
 
 
 
-const   ChannelBar = () => {
+const ChannelBar = () => {
     
-    
+    console.log(useParams())
    
 
     const [seeProfile, setSeeProfile] = useState(false)
@@ -45,26 +51,32 @@ const   ChannelBar = () => {
     }, [seeProfile])
 
     
-
     return (
         <SideBar>
-            <PrivateChannels/>
+            <PrivateChannels>
+                <ChannelsListContainer>
+                    <ChannelsList>
+                        <ChannelsListItem>
+                            <ChannelsListLink to="/channels/@me/1">User1</ChannelsListLink>
+                        </ChannelsListItem>
+                    </ChannelsList>
+                </ChannelsListContainer>
+            </PrivateChannels>
             <div className="profile" style={
                 {
                     display: seeProfile ? 'flex' : 'none',
-                    position: 'static',
+                    position: 'absolute',
                     width: 'fit-content',
                     height: 'fit-content',
                     color: '#fff',
                     alignItems: 'center',
                     justifyContent: 'center',
                     overflow: 'hidden',
-                    zIndex: '1',
+                    zIndex: '99',
                     backgroundColor: '#111',
-                    borderRadius: '0 0 4px 4px',
+                    borderRadius: '5px',
                     marginBottom: '14px',
                     padding: '0 20px',
-                    boxShadow: '0 0 0 1px rgba(0,0,0,.1), 0 4px 8px rgba(0,0,0,.2)',
                     transition: '0.2s ease 0s',
                     }
                 }>
