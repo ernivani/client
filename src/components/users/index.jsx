@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { io } from 'socket.io-client';
-import SideBar from './sideBar';
-import Content from './Content';
-import ChatBar from './ChatBar';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { io } from "socket.io-client";
+import SideBar from "./sideBar";
+import Content from "./Content";
+import ChatBar from "./ChatBar";
 
 const FakeParent = styled.div`
     height: 100%;
@@ -27,24 +27,24 @@ const User2 = styled.div`
     min-width: 320px;
     display: flex;
     @media (max-width: 768px) {
-        display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+        display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
     }
 `;
 
 export function Users() {
-    const userCache = localStorage.getItem('userCache');
+    const userCache = localStorage.getItem("userCache");
     if (!userCache) {
-        window.location.href = '/log';
+        window.location.href = "/log";
     }
     const token = JSON.parse(userCache).token;
     const userId = JSON.parse(userCache).userId;
 
     const [loading, setLoading] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
-    const socket = io('https://api.impin.fr/');
+    const socket = io("https://api.impin.fr/");
 
     useEffect(() => {
-        socket.emit('add-user', userId);
+        socket.emit("add-user", userId);
         setLoading(false);
     }, []);
 
@@ -55,11 +55,21 @@ export function Users() {
             <User id="uwu">
                 <User2 className="user" isVisible={isVisible}>
                     <FakeParent className="fakeParent">
-                        <SideBar socket={socket} userId={userId} isVisible={isVisible} setIsVisible={setIsVisible} />
+                        <SideBar
+                            socket={socket}
+                            userId={userId}
+                            isVisible={isVisible}
+                            setIsVisible={setIsVisible}
+                        />
                     </FakeParent>
                     <Content socket={socket} />
                 </User2>
-                <ChatBar socket={socket} userId={userId} isVisible={isVisible} setIsVisible={setIsVisible} />
+                <ChatBar
+                    socket={socket}
+                    userId={userId}
+                    isVisible={isVisible}
+                    setIsVisible={setIsVisible}
+                />
             </User>
         );
     }

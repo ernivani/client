@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 
 const SideBar = styled.div`
     flex-direction: column;
@@ -28,10 +27,9 @@ const Panel = styled.section`
     background-color: rgb(35, 36, 40);
     z-index: 1;
     /* width: 240px; */
-    
 `;
 
-const PanelContainer = styled.div `
+const PanelContainer = styled.div`
     display: flex;
     height: 52px;
     padding: 0 8px;
@@ -56,9 +54,8 @@ const PanelAvatar = styled.div`
     transition: 0.2s ease 0s;
     cursor: pointer;
     &:hover {
-        background-color: rgba(79,84,92,0.4);
+        background-color: rgba(79, 84, 92, 0.4);
     }
-
 `;
 
 const IconAvatar = styled.div`
@@ -67,7 +64,6 @@ const IconAvatar = styled.div`
     border-radius: 50%;
     position: relative;
     outline: 0;
-
 `;
 
 const MaskIcon = styled.svg`
@@ -84,7 +80,7 @@ const NameTag = styled.div`
     min-width: 0;
     padding-bottom: 4px;
     padding-left: 8px;
-    padding-top: 4px; 
+    padding-top: 4px;
 `;
 
 const UsernameDiv = styled.div`
@@ -93,7 +89,6 @@ const UsernameDiv = styled.div`
     font-weight: 400;
     color: #fff;
     overflow: hidden;
-
 `;
 
 const Username = styled.div`
@@ -101,7 +96,7 @@ const Username = styled.div`
     font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;    
+    white-space: nowrap;
 `;
 
 const Tag = styled.div`
@@ -125,7 +120,6 @@ const PanelButtons = styled.div`
     margin-left: auto;
     margin-right: 0;
     padding: 0 8px;
-    
 `;
 
 const AddButton = styled.i`
@@ -147,7 +141,7 @@ const AddButton = styled.i`
     flex: 0 0 auto;
     transition: 0.2s ease 0s;
     &:hover {
-        background-color: rgba(79,84,92,0.4);
+        background-color: rgba(79, 84, 92, 0.4);
     }
 `;
 
@@ -169,7 +163,6 @@ const ChannelsListContainer = styled.div`
     flex: 1 1 0%;
 `;
 
-
 const ChannelsList = styled.ul`
     margin: 5px 5px;
     padding: 0;
@@ -183,7 +176,7 @@ const ChannelsListItem = styled.li`
     transition: 0.2s ease 0s;
     border-radius: 5px;
     &:hover {
-        background-color: rgba(79,84,92,0.4);
+        background-color: rgba(79, 84, 92, 0.4);
     }
 `;
 
@@ -195,7 +188,6 @@ const ChannelsListLink = styled(Link)`
     padding: 10px 25px;
     display: flex;
     align-items: center;
-    
 `;
 
 const ChannelName = styled.div`
@@ -209,46 +201,44 @@ const ChannelName = styled.div`
 `;
 
 const ServerName = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
-  color: #fff;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: 0.2s ease 0s;
-  &:hover {
-    background-color: rgba(79, 84, 92, 0.4);
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease 0s;
+    &:hover {
+        background-color: rgba(79, 84, 92, 0.4);
+    }
 `;
-
-
 
 export {
     SideBar,
-    PrivateChannels, 
-    Panel, 
-    PanelContainer, 
-    PanelAvatar, 
-    IconAvatar, 
-    MaskIcon, 
-    NameTag, 
-    UsernameDiv, 
-    Username, 
-    Tag, 
-    PanelButtons, 
-    AddButton, 
-    ButtonIconDiv, 
-    ButtonIcon, 
+    PrivateChannels,
+    Panel,
+    PanelContainer,
+    PanelAvatar,
+    IconAvatar,
+    MaskIcon,
+    NameTag,
+    UsernameDiv,
+    Username,
+    Tag,
+    PanelButtons,
+    AddButton,
+    ButtonIconDiv,
+    ButtonIcon,
     ChannelsList,
-    ChannelsListContainer, 
+    ChannelsListContainer,
     ChannelsListItem,
     ChannelsListLink,
     ChannelName,
     ServerName,
-}
+};

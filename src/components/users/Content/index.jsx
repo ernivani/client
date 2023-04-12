@@ -16,16 +16,14 @@ const Contenue = styled.div`
     flex: 1 1 auto;
 `;
 
-
-const Content = ({socket}) => {
-
+const Content = ({ socket }) => {
     return (
-    <Base>
-        <Contenue>
-            <ChannelBar socket={socket}/>
-        </Contenue>
-    </Base>
+        <Base>
+            <Contenue>
+                <ChannelBar socket={socket} />
+            </Contenue>
+        </Base>
     );
-}
+};
 
 export default Content;
