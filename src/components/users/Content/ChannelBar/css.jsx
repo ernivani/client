@@ -13,6 +13,7 @@ const SideBar = styled.div`
     justify-content: center;
     overflow: hidden;
     border-radius: 10px 0 0 10px;
+    max-width: 240px;
 `;
 
 const PrivateChannels = styled.div`
@@ -170,7 +171,7 @@ const ChannelsListContainer = styled.div`
 
 
 const ChannelsList = styled.ul`
-    margin: 10px;
+    margin: 5px 5px;
     padding: 0;
 `;
 
@@ -208,20 +209,25 @@ const ChannelName = styled.div`
 `;
 
 const ServerName = styled.div`
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    color: #fff;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    background-color: #2f3136;
-    padding: 25px 25px;
-    border-radius: 5px;
-    &:hover {
-        background-color: rgba(79,84,92,0.4);
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s ease 0s;
+  &:hover {
+    background-color: rgba(79, 84, 92, 0.4);
+  }
 `;
+
+
 
 export {
     SideBar,
@@ -244,5 +250,5 @@ export {
     ChannelsListItem,
     ChannelsListLink,
     ChannelName,
-    ServerName
+    ServerName,
 }
