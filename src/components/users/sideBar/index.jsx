@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { FakeParent, Parent, Serv, Enfant, Squircle, Divider } from "./css";
 
 
-export default function SideBar({ socket, userId }) {
+export default function SideBar({ socket, userId, isVisible, setIsVisible }) {
 
     const { id } = useParams();
     const [serverList, setServerList] = useState([]);
@@ -40,6 +40,10 @@ export default function SideBar({ socket, userId }) {
 
     }, []);
 
+    const disableVisibility = useCallback((e) => {
+        setIsVisible(false);
+    }, []);
+
 
 
     return (  
@@ -51,6 +55,7 @@ export default function SideBar({ socket, userId }) {
                         text="Messages privé"
                         active={id === "@me"}
                         hoverColor="var(--color-blurple)"
+                        onClick={disableVisibility}
                     />
                     <Divider />
                     {serverList.map(({ id: serverId, name:server_name ,cid: cid }) => (
@@ -61,6 +66,7 @@ export default function SideBar({ socket, userId }) {
                             icon={<FaServer />}
                             text={server_name}
                             active={id == serverId}
+                            onClick={disableVisibility}
                             hoverColor="var(--color-yell-bubble)"
                         />
                     ))}
