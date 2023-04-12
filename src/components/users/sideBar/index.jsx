@@ -3,18 +3,16 @@ import { useParams, Link } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 
 import { createRoot } from "react-dom/client";
-
-// import alll the styles from css.jsx
+import styled from 'styled-components';
 
 import { FakeParent, Parent, Serv, Enfant, Squircle, Divider } from "./css";
 
-export default function SideBar({ socket,userId }) {
+
+export default function SideBar({ socket, userId, isVisible, setIsVisible }) {
 
     const { id } = useParams();
-    console.log(id)
     const [serverList, setServerList] = useState([]);
     
-
     const disconnect = useCallback((e) => {
         localStorage.removeItem("userCache");
         window.location.href = "/log";
@@ -33,8 +31,7 @@ export default function SideBar({ socket,userId }) {
 
         socket.on("server-list", (data) => {
             setServerList(data);
-            console.log(data);
-
+            console.log(data)
         });
         socket.on("server-created", (data) => {
             setServerList((old) => [...old, data]);
@@ -43,58 +40,68 @@ export default function SideBar({ socket,userId }) {
 
     }, []);
 
+    const disableVisibility = useCallback((e) => {
+        setIsVisible(false);
+    }, []);
 
 
-    return (
-        <FakeParent>
-            <Parent>
-                <SideBarIcon
-                    id="@me"
-                    icon={<FaFire />}
-                    text="Messages privé"
-                    active={id === "@me"}
-                    hoverColor="var(--color-blurple)"
-                />
-                <Divider />
-                {serverList.map(({ id: serverId, name:server_name }) => (
+
+    return (  
+            <FakeParent>
+                <Parent>
                     <SideBarIcon
-                        key={serverId}
-                        id={serverId}
-                        icon={<FaServer />}
-                        text={server_name}
-                        active={id == serverId}
-                        hoverColor="var(--color-yell-bubble)"
+                        id="@me"
+                        icon={<FaFire />}
+                        text="Messages privé"
+                        active={id === "@me"}
+                        hoverColor="var(--color-blurple)"
+                        onClick={disableVisibility}
                     />
-                ))}
-                <SideBarIcon
-                    id="addServer"
-                    icon={<FaPlus />}
-                    text="Créer un serveur"
-                    active={false}
-                    hoverColor="var(--color-green-bubble)"
-                    onClick={addServer}
-                />
-                <SideBarIcon
-                    id="disconnect"
-                    icon={<FaSignOutAlt />}
-                    text="Déconnexion"
-                    active={false}
-                    hoverColor="var(--color-red-bubble)"
-                    onClick={disconnect}
-                />
-            </Parent>
-        </FakeParent>
+                    <Divider />
+                    {serverList.map(({ id: serverId, name:server_name ,cid: cid }) => (
+                        <SideBarIcon
+                            key={serverId}
+                            id={serverId}
+                            cid={cid}
+                            icon={<FaServer />}
+                            text={server_name}
+                            active={id == serverId}
+                            onClick={disableVisibility}
+                            hoverColor="var(--color-yell-bubble)"
+                        />
+                    ))}
+                    <SideBarIcon
+                        id="addServer"
+                        icon={<FaPlus />}
+                        text="Créer un serveur"
+                        active={false}
+                        hoverColor="var(--color-green-bubble)"
+                        onClick={addServer}
+                    />
+                    <SideBarIcon
+                        id="disconnect"
+                        icon={<FaSignOutAlt />}
+                        text="Déconnexion"
+                        active={false}
+                        hoverColor="var(--color-red-bubble)"
+                        onClick={disconnect}
+                    />
+                </Parent>
+            </FakeParent>
     );
 }
 
 function SideBarIcon(props) {
-    const { icon, text, active, onClick, onMouseEnter, hoverColor, id } = props;
-
+    const { icon, text, active, onClick, onMouseEnter, hoverColor, id, cid } = props;
     let pathModif = "";
     if (id === "addServer" || id === "disconnect") {
         pathModif = "#";
     } else {
-        pathModif = "/channels/" + id;
+        if (id === "@me") {
+            pathModif = `/channels/${id}`;
+        }else {
+            pathModif = `/channels/${id}/${cid}`;
+        }
     }
 
     const handleMouseEnterInternal = (event) => {

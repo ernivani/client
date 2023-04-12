@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 
 const SideBar = styled.div`
     flex-direction: column;
-    width: 240px;
+    width: 100%;
     height: 100%;
     background-color: rgb(43, 45, 49);
     color: #fff;
@@ -11,13 +12,15 @@ const SideBar = styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 10px 0 0 10px;
 `;
 
 const PrivateChannels = styled.div`
     display: flex;
     position: relative;
     overflow: hidden;
-    flex: 1;
+    flex: 1 1 0%;
+    width: 100%;
 `;
 
 const Panel = styled.section`
@@ -124,7 +127,7 @@ const PanelButtons = styled.div`
     
 `;
 
-const AddButton = styled.button`
+const AddButton = styled.i`
     cursor: pointer;
     width: 32px;
     height: 32px;
@@ -158,5 +161,88 @@ const ButtonIcon = styled.svg`
     fill: currentColor;
 `;
 
+const ChannelsListContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    flex: 1 1 0%;
+`;
 
-export {SideBar, PrivateChannels, Panel, PanelContainer, PanelAvatar, IconAvatar, MaskIcon, NameTag, UsernameDiv, Username, Tag, PanelButtons, AddButton, ButtonIconDiv, ButtonIcon};
+
+const ChannelsList = styled.ul`
+    margin: 10px;
+    padding: 0;
+`;
+
+const ChannelsListItem = styled.li`
+    background-color: inherit;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: 0.2s ease 0s;
+    border-radius: 5px;
+    &:hover {
+        background-color: rgba(79,84,92,0.4);
+    }
+`;
+
+const ChannelsListLink = styled(Link)`
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    
+`;
+
+const ChannelName = styled.div`
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`;
+
+const ServerName = styled.div`
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #2f3136;
+    padding: 25px 25px;
+    border-radius: 5px;
+    &:hover {
+        background-color: rgba(79,84,92,0.4);
+    }
+`;
+
+export {
+    SideBar,
+    PrivateChannels, 
+    Panel, 
+    PanelContainer, 
+    PanelAvatar, 
+    IconAvatar, 
+    MaskIcon, 
+    NameTag, 
+    UsernameDiv, 
+    Username, 
+    Tag, 
+    PanelButtons, 
+    AddButton, 
+    ButtonIconDiv, 
+    ButtonIcon, 
+    ChannelsList,
+    ChannelsListContainer, 
+    ChannelsListItem,
+    ChannelsListLink,
+    ChannelName,
+    ServerName
+}
