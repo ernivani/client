@@ -22,12 +22,18 @@ import {
  } from "./css";
 import { useParams } from "react-router-dom";
 
+import FriendChannel from "./FriendChannel";
+import ServerChannel from "./ServerChannel";
 
 
 const ChannelBar = () => {
     
-    console.log(useParams())
-   
+    let params = useParams()
+
+    useEffect(() => {
+        console.log(params)
+    }, [params])
+
 
     const [seeProfile, setSeeProfile] = useState(false)
 
@@ -49,17 +55,16 @@ const ChannelBar = () => {
             document.removeEventListener('contextmenu', handleRightClick)
         }
     }, [seeProfile])
-
     
     return (
         <SideBar>
             <PrivateChannels>
                 <ChannelsListContainer>
-                    <ChannelsList>
-                        <ChannelsListItem>
-                            <ChannelsListLink to="/channels/@me/1">User1</ChannelsListLink>
-                        </ChannelsListItem>
-                    </ChannelsList>
+                            {params.id === '@me' ? (
+                                <FriendChannel/>
+                            ) : (
+                                <ServerChannel/>
+                            )}
                 </ChannelsListContainer>
             </PrivateChannels>
             <div className="profile" style={
