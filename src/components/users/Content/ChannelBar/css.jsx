@@ -216,7 +216,7 @@ const ServerName = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: #2f3136;
-    padding: 10px 25px;
+    padding: 25px 25px;
     border-radius: 5px;
     &:hover {
         background-color: rgba(79,84,92,0.4);
