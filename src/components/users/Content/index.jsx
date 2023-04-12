@@ -22,7 +22,7 @@ const Content = ({socket}) => {
     return (
     <Base>
         <Contenue>
-            <ChannelBar />
+            <ChannelBar socket={socket}/>
         </Contenue>
     </Base>
     );
