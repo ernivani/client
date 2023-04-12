@@ -26,8 +26,10 @@ import FriendChannel from "./FriendChannel";
 import ServerChannel from "./ServerChannel";
 
 
-const ChannelBar = () => {
+const ChannelBar = (socket) => {
     
+    
+
     let params = useParams()
 
     useEffect(() => {
@@ -63,7 +65,7 @@ const ChannelBar = () => {
                             {params.id === '@me' ? (
                                 <FriendChannel/>
                             ) : (
-                                <ServerChannel/>
+                                <ServerChannel socket={socket} serverId={params.id} channelId={params.channelId}/>
                             )}
                 </ChannelsListContainer>
             </PrivateChannels>
