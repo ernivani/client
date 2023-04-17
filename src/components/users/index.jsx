@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import styled from "styled-components";
 import { io } from "socket.io-client";
 import SideBar from "./sideBar";
@@ -43,12 +43,39 @@ export function Users() {
     const [isVisible, setIsVisible] = useState(false);
     const socket = io("https://api.impin.fr/");
 
+    const [serverList, setServerList] = useState([]);
+
     useEffect(() => {
         socket.emit("add-user", userId);
-        setTimeout(() => {
+
+        socket.emit("get-server-list", userId);
+
+        socket.on("server-list", (data) => {
+            setServerList(data);
+            console.log(data)
             setLoading(false);
+        });
+        
+        socket.on("server-created", (data) => {
+            setServerList((old) => [...old, data]);
+        });
+        console.log(serverList);
+
+    }, []);
+
+
+    const addServer = (e) => {
+        e.preventDefault();
+        const serverName = prompt("Nom du serveur");
+        if (serverName) {
+            socket.emit("create-server", { serverName, userId });
         }
-        , 1000);
+    };
+
+    
+    const disconnect = useCallback((e) => {
+        localStorage.removeItem("userCache");
+        window.location.href = "/log";
     }, []);
 
     if (loading) {
@@ -59,10 +86,11 @@ export function Users() {
                 <User2 className="user" isVisible={isVisible}>
                     <FakeParent className="fakeParent">
                         <SideBar
-                            socket={socket}
+                            serverList={serverList}
                             userId={userId}
-                            isVisible={isVisible}
                             setIsVisible={setIsVisible}
+                            addServer={addServer}
+                            disconnect={disconnect}
                         />
                     </FakeParent>
                     <Content socket={socket} />
