@@ -16,8 +16,11 @@ import { useTranslation } from "react-i18next";
 export function LoginForm() {
     const { t } = useTranslation();
     const { switchToSignup } = useContext(AccountContext);
+    
+    const emailCache = JSON.parse(localStorage.getItem("emailCache"));
+    const [email, setEmail] = useState(emailCache ? emailCache.email || "" : "");
+    
 
-    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [error_email, setErrorEmail] = useState("");
@@ -62,6 +65,7 @@ export function LoginForm() {
         }
     };
     
+
 
                 
 
