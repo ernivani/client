@@ -44,7 +44,7 @@ const ChannelBar = (socket) => {
     };
 
     const userCache = localStorage.getItem("userCache");
-    const username = JSON.parse(userCache).username;
+    const username = JSON.parse(userCache).username || "username";  
 
     useEffect(() => {
         document.addEventListener("contextmenu", handleRightClick);
