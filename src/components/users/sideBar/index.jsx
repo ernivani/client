@@ -3,42 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 
 import { createRoot } from "react-dom/client";
-import styled from 'styled-components';
-
 import { FakeParent, Parent, Serv, Enfant, Squircle, Divider } from "./css";
 
 
-export default function SideBar({ socket, userId, isVisible, setIsVisible }) {
+export default function SideBar({ serverList, userId, setIsVisible,addServer, disconnect }) {
 
     const { id } = useParams();
-    const [serverList, setServerList] = useState([]);
+    // const [serverList, setServerList] = useState(serverList);
     
-    const disconnect = useCallback((e) => {
-        localStorage.removeItem("userCache");
-        window.location.href = "/log";
-    }, []);
 
-    const addServer = useCallback((e) => {
-        const serverName = prompt("Nom du serveur");
-        if (serverName) {
-            socket.emit("create-server", { serverName, userId });
-        }
-    }, []);
-
-
-    useEffect(() => {
-        socket.emit("get-server-list", userId);
-
-        socket.on("server-list", (data) => {
-            setServerList(data);
-            console.log(data)
-        });
-        socket.on("server-created", (data) => {
-            setServerList((old) => [...old, data]);
-
-        });
-
-    }, []);
 
     const disableVisibility = useCallback((e) => {
         setIsVisible(false);
