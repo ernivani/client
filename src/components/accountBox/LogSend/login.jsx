@@ -15,6 +15,11 @@ export const loginSend = (email,password, setErrorEmail, setErrorPassword) => {
                 userId: res.data.uid,
                 username: res.data.username
             };
+
+            const emailCache = {
+                email: email
+            };
+            localStorage.setItem('emailCache', JSON.stringify(emailCache));
             localStorage.setItem('userCache', JSON.stringify(userCache));
             window.location.href = '/channels/@me';
         })
