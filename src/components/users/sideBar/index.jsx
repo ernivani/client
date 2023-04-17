@@ -150,6 +150,7 @@ function SideBarIcon(props) {
                 to={pathModif}
                 id={id}
                 b={active ? 1 : 0}
+                aria-label="Server"
             >
                 {icon ? icon : text[0]}
             </Squircle>

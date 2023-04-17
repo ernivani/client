@@ -45,7 +45,10 @@ export function Users() {
 
     useEffect(() => {
         socket.emit("add-user", userId);
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false);
+        }
+        , 1000);
     }, []);
 
     if (loading) {
