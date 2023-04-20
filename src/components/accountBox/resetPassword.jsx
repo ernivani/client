@@ -208,7 +208,7 @@ export function ResetPassword() {
                     <Input
                         name="new-password"
                         type="password"
-                        placeholder={t("new_password_placeholder")}
+                        aria-label={t("new_password_placeholder")}
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         autoComplete="new-password"
@@ -224,7 +224,7 @@ export function ResetPassword() {
                     <Input
                         name="new-password-confirm"
                         type="password"
-                        placeholder={t("confirm_new_password_placeholder")}
+                        aria-label={t("confirm_new_password_placeholder")}
                         onChange={(e) => setPassword2(e.target.value)}
                         value={password2}
                         autoComplete="new-password"

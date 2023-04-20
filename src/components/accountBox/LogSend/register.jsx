@@ -9,6 +9,7 @@ export const registerSend = (email,password,username,setErrorEmail, setErrorUser
         username: username
     };
 
+
     axios.post('https://api.impin.fr/user/register', data)
         .then((res) => {
             const userCache = {
@@ -16,6 +17,12 @@ export const registerSend = (email,password,username,setErrorEmail, setErrorUser
                 userId: res.data.uid,
                 username: res.data.username
             };
+            
+            const emailCache = {
+                email: email
+            };
+            
+            localStorage.setItem('emailCache', JSON.stringify(emailCache));
             localStorage.setItem('userCache', JSON.stringify(userCache));
             window.location.href = '/channels/@me';
         })

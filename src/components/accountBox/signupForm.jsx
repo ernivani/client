@@ -96,7 +96,6 @@ export function SignupForm(props) {
                 <Input
                     name="email"
                     type="email"
-                    placeholder={t("email_placeholder")}
                     autoComplete="off"
                     aria-label={t("email_placeholder")}
                     spellCheck="false"
@@ -115,7 +114,6 @@ export function SignupForm(props) {
                 <Input
                     name="username"
                     type="text"
-                    placeholder={t("username_placeholder")}
                     autoComplete="off"
                     aria-label={t("username_placeholder")}
                     spellCheck="false"
@@ -134,7 +132,6 @@ export function SignupForm(props) {
                 <Input
                     name="password"
                     type="password"
-                    placeholder={t("password_placeholder")}
                     autoComplete="off"
                     aria-label={t("password_placeholder")}
                     spellCheck="false"
