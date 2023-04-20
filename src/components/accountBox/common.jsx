@@ -55,6 +55,7 @@ export const Input = styled.input`
     font-size: 12px;
     background-color: rgba(10, 10, 10, 0.3);
     color: rgba(200, 200, 200, 1);
+    border-radius: 4px;
 
     &::placeholder {
         color: rgba(200, 200, 200, 1);
