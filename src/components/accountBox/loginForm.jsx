@@ -83,7 +83,6 @@ export function LoginForm() {
                 <Input
                     name="email"
                     type="email"
-                    placeholder={t("email_placeholder")}
                     autoComplete="off"
                     aria-label={t("email_placeholder")}
                     spellCheck="false"
@@ -102,7 +101,6 @@ export function LoginForm() {
                 <Input
                     name="password"
                     type="password"
-                    placeholder={t("password_placeholder")}
                     autoComplete="off"
                     aria-label={t("password_placeholder")}
                     spellCheck="false"
