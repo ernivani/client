@@ -19,7 +19,7 @@ export const CheckAuth = () => {
         if (userCache !== null) {
             console.log(userCache);
             axios
-                .post("/api/user/token", {
+                .post("https://api.impin.fr/user/token", {
                     uid: userCache.userId,
                     token: userCache.token,
                 })
