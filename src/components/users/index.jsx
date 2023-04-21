@@ -41,7 +41,7 @@ export function Users() {
 
     const [loading, setLoading] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
-    const socket = io("https://api.impin.fr/");
+    const socket = io("https://api.impin.fr");
 
     const [serverList, setServerList] = useState([]);
 

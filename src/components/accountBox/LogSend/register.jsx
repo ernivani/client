@@ -10,7 +10,7 @@ export const registerSend = (email,password,username,setErrorEmail, setErrorUser
     };
 
 
-    axios.post('https://api.impin.fr/user/register', data)
+    axios.post('/api/user/register', data)
         .then((res) => {
             const userCache = {
                 token: res.data.token,

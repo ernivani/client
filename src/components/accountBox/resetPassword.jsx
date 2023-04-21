@@ -169,7 +169,7 @@ export function ResetPassword() {
         };
 
         axios
-            .post("https://api.impin.fr/user/reset", data)
+            .post("/api/user/reset", data)
             .then(() => {
                 setExpanded(true);
                 setTimeout(() => {
