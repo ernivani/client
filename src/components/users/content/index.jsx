@@ -1,6 +1,5 @@
 import {  
     BottomContent,
-    SideBar,
     Content,
     Top,
     ChannelName,
@@ -21,13 +20,17 @@ import {
     MemberName,
     MemberActivity,
     MemberActivityName,
+    SideBar,
+    ServerNameContainer,
 } from "./css";
 
 export default function BotContent() {
     return (
         <BottomContent>
             <SideBar>
-                <div>test</div>
+                <ServerNameContainer>
+                    test
+                </ServerNameContainer>
             </SideBar>
             <Content>
                 <Top>
