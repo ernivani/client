@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 
 :root {
-	--color-full-white: #fff;
-	--color-dark: #2c2f33;
-	--color-lighter-dark: #2f3136;
-	--color-not-quite-black: #36393f;
-	--color-actually-little-black: #2f3136;
-	--color-blurple: #7289da;
-	--color-yell-bubble: #d0b34e;
-	--color-red-bubble: #ff5555;
-	--color-green-bubble: #57f287;
-	--font-family: "Quicksand", Quicksand;
+	--color-primary: #202224;
+	--color-full-white: #FFFFFF;
+	--color-lighter-grey: #FFFFFF;
+	--color-grey: #35393F;
+	--color-dark-grey: #2F3137;
+    --color-blurple: #7289da;
+    --color-yell-bubble: #d0b34e;
+    --color-green-bubble: #43b581;
+	--color-red-bubble: #f04747;
+	--color-input: #23252A;
 }
 
 html,
