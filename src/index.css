@@ -4,23 +4,29 @@
 :root {
 	--color-primary: #202224;
 	--color-full-white: #FFFFFF;
+	--color-darker-white: #F2F3F5;
 	--color-lighter-grey: #FFFFFF;
+	--color-light-grey: #99AAB5;
 	--color-grey: #35393F;
 	--color-dark-grey: #2F3137;
-    --color-blurple: #7289da;
-    --color-yell-bubble: #d0b34e;
-    --color-green-bubble: #43b581;
+	--color-blurple: #7289da;
+	--color-yell-bubble: #d0b34e;
 	--color-red-bubble: #f04747;
+	--color-green-bubble: #43b581;
 	--color-input: #23252A;
 }
 
 html,
 body {
+	height: 100%;
 	margin: 0;
-	font-family: "Quicksand", Quicksand;
-	color: #ffffff;
-  	text-rendering: optimizeLegibility;
-
+	padding: 0;
+	-webkit-overflow-scrolling: touch;
+	font-family: 'Poppins', sans-serif;
+	color: var(--color-light-grey);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.5;
 }
 
 * {
