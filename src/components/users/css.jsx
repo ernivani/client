@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const UwU = styled.div`
-    
 	position: relative;
 	overflow: hidden;
 	width: 100%;

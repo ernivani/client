@@ -52,7 +52,7 @@ const Squircle = styled.span`
     &:after {
         content: "";
         position: absolute;
-        bottom: -30px;
+        bottom: -25px;
         left: 0px;
         width: 100%;
         height: 20px;
@@ -65,7 +65,7 @@ const Squircle = styled.span`
     }
 
     &:hover:after {
-        bottom: ${(props) => (props.b ? "-30px" : "-27px")};
+        bottom: ${(props) => (props.b ? "-25px" : "-22px")};
         opacity: 1;
         transform: scale(${(props) => (props.b ? 1 : 0.7)});
     }

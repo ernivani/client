@@ -7,6 +7,7 @@ import {
     Topbar,
 } from "./css.jsx";
 
+import BotContent from "./content/index.jsx";
 
 export function Users() {
     const userCache = localStorage.getItem("userCache");
@@ -69,8 +70,13 @@ export function Users() {
                             disconnect={disconnect}
                         />
                 </Topbar>
-                <div style={{ width: "100%", height: "100%", backgroundColor: "var(--color-grey)", overflow: "hidden", borderRadius: "15px 15px 0px 0px", display: "flex", flexDirection: "row" }}>
-                 </div>
+                <BotContent
+                    serverList={serverList}
+                    userId={userId}
+                    socket={socket}
+                    isVisible={isVisible}
+                    setIsVisible={setIsVisible}
+                />
             </UwU>
 
         );
