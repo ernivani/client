@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 const TopbarNav = styled.nav`
 	display: flex;
 	flex-direction: row;
@@ -17,7 +15,6 @@ const TopbarNav = styled.nav`
         display: none;
     }
 `;
-
 
 const Serv = styled.div`
     display: inline-flex;
