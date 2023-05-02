@@ -1,84 +1,86 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { io } from "socket.io-client";
 import TopBar from "./topBar";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { 
-    UwU, 
-    Topbar,
-} from "./css.jsx";
+import { UwU, Topbar } from "./css.jsx";
 
 import BotContent from "./content/index.jsx";
 
+import { MessageProvider } from "./MessageContext";
+
 export function Users() {
-    const userCache = localStorage.getItem("userCache");
-    if (!userCache) {
-        window.location.href = "/log";
-    }
-    const token = JSON.parse(userCache).token;
-    const userId = JSON.parse(userCache).userId;
+	const { id } = useParams();
+	const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(true);
-    const [isVisible, setIsVisible] = useState(false);
-    const socket = io("https://api.impin.fr");
+	const userCache = localStorage.getItem("userCache");
+	if (!userCache) {
+		window.location.href = "/log";
+	}
+	const token = JSON.parse(userCache).token;
+	const userId = JSON.parse(userCache).userId;
 
-    const [serverList, setServerList] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [isVisible, setIsVisible] = useState(false);
+	const socket = io("https://api.impin.fr");
 
-    useEffect(() => {
-        socket.emit("add-user", userId);
+	const [serverList, setServerList] = useState([]);
 
-        socket.emit("get-server-list", userId);
+	useEffect(() => {
+		socket.emit("add-user", userId);
 
-        socket.on("server-list", (data) => {
-            setServerList(data);
-            console.log(data)
-            setLoading(false);
-        });
-        
-        socket.on("server-created", (data) => {
-            setServerList((old) => [...old, data]);
-        });
-        console.log(serverList);
+		socket.emit("get-server-list", userId);
 
-    }, []);
+		socket.on("server-list", (data) => {
+			setServerList(data);
+			console.log(data);
+			setLoading(false);
+		});
 
+		socket.on("server-created", (data) => {
+			setServerList((old) => [...old, data]);
+		});
+		console.log(serverList);
+	}, []);
 
-    const addServer = (e) => {
-        e.preventDefault();
-        const serverName = prompt("Nom du serveur");
-        if (serverName) {
-            socket.emit("create-server", { serverName, userId });
-        }
-    };
+	const addServer = (e) => {
+		e.preventDefault();
+		const serverName = prompt("Nom du serveur");
+		if (serverName) {
+			socket.emit("create-server", { serverName, userId });
+		}
+	};
 
-    
-    const disconnect = useCallback((e) => {
-        localStorage.removeItem("userCache");
-        window.location.href = "/log";
-    }, []);
+	const disconnect = useCallback((e) => {
+		localStorage.removeItem("userCache");
+		window.location.href = "/log";
+	}, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    } else {
-        return (
-            <UwU id="UwU">
-                <Topbar  className="user">
+	if (loading) {
+		return <div>Loading...</div>;
+	} else {
+		return (
+            <MessageProvider>
+                <UwU id="UwU">
+                    <Topbar className="user">
                         <TopBar
                             serverList={serverList}
                             userId={userId}
                             setIsVisible={setIsVisible}
                             addServer={addServer}
                             disconnect={disconnect}
+                            navigate={navigate}
                         />
-                </Topbar>
-                <BotContent
-                    serverList={serverList}
-                    userId={userId}
-                    socket={socket}
-                    isVisible={isVisible}
-                    setIsVisible={setIsVisible}
-                />
-            </UwU>
-
-        );
-    }
+                    </Topbar>
+                    <BotContent
+                        serverList={serverList}
+                        userId={userId}
+                        socket={socket}
+                        isVisible={isVisible}
+                        setIsVisible={setIsVisible}
+                    />
+                </UwU>
+            </MessageProvider>
+		);
+	}
 }

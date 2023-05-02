@@ -45,7 +45,6 @@ const Footer = styled.footer`
 `;
 
 const Logo = styled.img`
-  height: 40px;
 `;
 
 const Button = styled(Link)`
@@ -142,7 +141,7 @@ export const Home = () => {
     return (
         <HomeBackground>
             <Header>
-                <Logo src="/Impin.svg" alt="Impin" width={100} height={100} />
+                <Logo src="/Impin.svg" alt="Impin" width={100} height={60} />
                 {user ? <Button to="/log">{t("app_button")}</Button> : <Button to="/log">{t("login_button")}</Button>}
             </Header>
             <ContentContainer>

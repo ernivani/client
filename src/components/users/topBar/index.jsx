@@ -1,5 +1,5 @@
 import { FaFire, FaPlus, FaSignOutAlt, FaServer } from "react-icons/fa";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React, { useCallback, useEffect } from "react";
 
 import { TopbarNav, Serv, Squircle, Divider } from "./css";
@@ -10,9 +10,9 @@ export default function TopBar({
 	setIsVisible,
 	addServer,
 	disconnect,
+	navigate
 }) {
 	const { id } = useParams();
-	const navigate = useNavigate();
 
 	// serverList doit etre multipliée par 10 pour que le scroll fonctionne
 

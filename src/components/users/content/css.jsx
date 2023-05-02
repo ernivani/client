@@ -34,7 +34,7 @@ export const ChannelName = styled.span`
 	font-weight: 600;
 	font-size: 1.5rem;
 	line-height: 2.25rem;
-	color: var(--color-lighter-grey);
+	color: var(--color-full-white);
 	margin-left: 1rem;
 `;
 
@@ -51,28 +51,25 @@ export const Messages = styled.div`
 `;
 
 export const InputContainer = styled.div`
-	height: 4rem;
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	padding: 0 1rem;
+	margin: 0.8rem;
+	background-color: var(--color-primary);
+	border-radius: 10px;
 `;
 
 export const InputWrapper = styled.div`
-	width: 100%;
-	height: 70%;
-	margin: 1rem;
-	margin-bottom: 2rem;
 	display: flex;
 	flex-direction: row;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
 	align-items: center;
-	background-color: var(--color-input);
-	border-radius: 10px;
+	min-height: 48px;
 `;
 
 export const AttachButton = styled.button`
 	background: transparent;
-	color: var(--color-lighter-grey);
+	color: var(--color-full-white);
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -84,24 +81,25 @@ export const Input = styled.input`
 	border: none;
 	width: 100%;
 	outline: none;
-	padding-left: 1rem;
 	font-style: normal;
 	font-weight: 500;
 	font-size: 1rem;
 	line-height: 1.5rem;
-	color: var(--color-lighter-grey);
+	color: var(--color-full-white);
+	padding: 0 1rem;
+	margin: 10px 0;
 `;
 
 export const RightBar = styled.div`
 	height: 100%;
 	background-color: var(--color-dark-grey);
 	z-index: 1;
-	width: 25rem;
-	min-width: 25rem;
+	width: 20rem;
+	min-width: 20rem;
 
-    @media (max-width: 768px) {
-        display: none;
-    }
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 export const MembersWarp = styled.div`
@@ -183,7 +181,7 @@ export const MembersContainer = styled.div`
 `;
 
 export const Member = styled.div`
-	margin: 1rem 1rem 0rem 1rem;
+	margin: 1rem 1rem 0rem 0.5rem;
 	height: fit-content;
 	display: flex;
 	flex-direction: row;
@@ -233,8 +231,10 @@ export const SideBar = styled.div`
 	height: 100%;
 	background-color: var(--color-dark-grey);
 	z-index: 1;
-	width: 20rem;
-	min-width: 25rem;
+	width: 24rem;
+	min-width: 24rem;
+	display: flex;
+	flex-direction: column;
 
 	@media (max-width: 768px) {
 		display: none;
@@ -253,4 +253,61 @@ export const ServerNameContainer = styled.div`
 	&:hover {
 		background-color: var(--color-hover-grey);
 	}
+`;
+
+export const ServerInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-left: 1rem;
+`;
+
+export const ServerName = styled.div`
+	font-style: normal;
+	font-weight: 700;
+	font-size: 1.2rem;
+	line-height: 1.5rem;
+	color: var(--color-full-white);
+`;
+
+export const ServerMembers = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const ServerMembersTotal = styled.div`
+	margin-right: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+	color: var(--color-darker-white);
+`;
+
+export const ServerMembersCount = styled.span`
+	font-style: normal;
+	font-weight: 700;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+	color: var(--color-full-white);
+	margin-left: 0.2rem;
+`;
+
+export const ServerMembersText = styled.span`
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+	color: var(--color-whiter-dark);
+	margin-left: 0.2rem;
+`;
+
+export const ServerMembersOnline = styled.div`
+	margin-right: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+	color: var(--color-darker-white);
 `;

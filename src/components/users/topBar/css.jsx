@@ -42,7 +42,7 @@ const Squircle = styled.span`
     -webkit-box-align: center;
     align-items: center;
     text-decoration: none;
-    color: var(--color-lighter-grey);
+    color: var(--color-full-white);
 
     &:hover {
         border-radius: 36%;
