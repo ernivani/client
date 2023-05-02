@@ -1,313 +1,229 @@
 import styled from "styled-components";
 
 export const BottomContent = styled.div`
-	width: 100%;
-	height: 100%;
-	background-color: var(--color-grey);
-	overflow: hidden;
-	border-radius: 15px 15px 0px 0px;
-	display: flex;
-	flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-grey);
+    overflow: hidden;
+    border-radius: 15px 15px 0px 0px;
+    display: flex;
+    flex-direction: row;
 `;
 
 export const Content = styled.div`
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const Top = styled.div`
-	width: 100%;
-	height: 5rem;
-	background-color: var(--color-grey);
-	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+    width: 100%;
+    height: 5rem;
+    background-color: var(--color-grey);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `;
 
 export const ChannelName = styled.span`
-	font-family: "Poppins", sans-serif;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 1.5rem;
-	line-height: 2.25rem;
-	color: var(--color-full-white);
-	margin-left: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+    color: var(--color-full-white);
+    margin-left: 1rem;
 `;
 
 export const Messages = styled.div`
-	flex-grow: 1;
-	overflow-y: auto;
-	overflow-x: hidden;
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-	overflow: -moz-scrollbars-none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
 `;
 
 export const InputContainer = styled.div`
-	padding: 0 1rem;
-	margin: 0.8rem;
-	background-color: var(--color-primary);
-	border-radius: 10px;
+    padding: 0 1rem;
+    margin: 0.8rem;
+    background-color: var(--color-primary);
+    border-radius: 10px;
 `;
 
 export const InputWrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	height: 100%;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	min-height: 48px;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
 `;
 
 export const AttachButton = styled.button`
-	background: transparent;
-	color: var(--color-full-white);
-	border: none;
-	outline: none;
-	cursor: pointer;
+    background: transparent;
+    color: var(--color-full-white);
+    border: none;
+    outline: none;
+    cursor: pointer;
 `;
 
 export const Input = styled.input`
-	border-radius: inherit;
-	background-color: inherit;
-	border: none;
-	width: 100%;
-	outline: none;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 1.5rem;
-	color: var(--color-full-white);
-	padding: 0 1rem;
-	margin: 10px 0;
+    border-radius: inherit;
+    background-color: inherit;
+    border: none;
+    width: 100%;
+    outline: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-full-white);
+    padding: 0 1rem;
+    margin: 10px 0;
 `;
 
 export const RightBar = styled.div`
-	height: 100%;
-	background-color: var(--color-dark-grey);
-	z-index: 1;
-	width: 20rem;
-	min-width: 20rem;
+    height: 100%;
+    background-color: var(--color-dark-grey);
+    z-index: 1;
+    width: 20rem;
+    min-width: 20rem;
 
-	@media (max-width: 768px) {
-		display: none;
-	}
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export const MembersWarp = styled.div`
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	overflow-y: auto;
-	overflow-x: hidden;
-	position: relative;
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 5px;
-		height: 100%;
-		background-color: transparent;
-		pointer-events: none;
-		z-index: 10;
-		transition: background-color 0.2s ease;
-	}
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        background-color: transparent;
+        pointer-events: none;
+        z-index: 10;
+        transition: background-color 0.2s ease;
+    }
 
-	&:hover::before {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
+    &:hover::before {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 
-	&::-webkit-scrollbar {
-		width: 5px;
-		background: transparent;
-	}
+    &::-webkit-scrollbar {
+        width: 5px;
+        background: transparent;
+    }
 
-	&::-webkit-scrollbar-thumb {
-		background-color: transparent;
-		border-radius: 19px;
-	}
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 19px;
+    }
 
-	&:hover::-webkit-scrollbar-thumb {
-		background-color: #0d0d0e;
-	}
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: #0d0d0e;
+    }
 `;
 
 export const MembersHeader = styled.div`
-	margin: 1rem 1rem 0rem 1rem;
-	height: fit-content;
-	display: flex;
-	flex-direction: row;
-	padding: 0.5rem;
-	border-radius: 5px;
-	background: linear-gradient(
-		80deg,
-		var(--color-blurple) -50%,
-		var(--color-grey) 100%
-	);
+    margin: 1rem 1rem 0rem 1rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: linear-gradient(
+        80deg,
+        var(--color-blurple) -50%,
+        var(--color-grey) 100%
+    );
 `;
 
 export const MembersTitle = styled.span`
-	font-style: normal;
-	font-weight: 700;
-	font-size: 1rem;
-	line-height: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
 `;
 
 export const MembersCount = styled.span`
-	margin-left: auto;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 1rem;
+    margin-left: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
 `;
 
 export const MembersContainer = styled.div`
-	width: 100%;
-	height: fit-content;
+    width: 100%;
+    height: fit-content;
 
-	&::-webkit-scrollbar {
-		width: 0px;
-		background: transparent;
-	}
+    &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
 `;
 
 export const Member = styled.div`
-	margin: 1rem 1rem 0rem 0.5rem;
-	height: fit-content;
-	display: flex;
-	flex-direction: row;
-	padding: 0.5rem;
-	border-radius: 5px;
-	align-items: center;
-	cursor: pointer;
+    margin: 1rem 1rem 0rem 0.5rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
 
-	&:hover {
-		background-color: var(--color-grey);
-	}
+    &:hover {
+        background-color: var(--color-grey);
+    }
 `;
 
 export const MemberAvatar = styled.div`
-	& > img {
-		height: 2rem;
-		width: 2rem;
-		border-radius: 50%;
-	}
+    & > img {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+    }
 `;
 
 export const MemberInfo = styled.div`
-	width: 100%;
+    width: 100%;
 `;
 
 export const MemberName = styled.div`
-	margin-left: 1rem;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 10px;
+    margin-left: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 10px;
 `;
 
 export const MemberActivity = styled.div`
-	margin-left: 1rem;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 0.8rem;
-	color: #7c7979;
+    margin-left: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #7c7979;
 `;
 
 export const MemberActivityName = styled.span`
-	color: #a8a8a8;
-`;
-
-export const SideBar = styled.div`
-	height: 100%;
-	background-color: var(--color-dark-grey);
-	z-index: 1;
-	width: 24rem;
-	min-width: 24rem;
-	display: flex;
-	flex-direction: column;
-
-	@media (max-width: 768px) {
-		display: none;
-	}
-`;
-
-export const ServerNameContainer = styled.div`
-	height: 5rem;
-	min-height: 5rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 0 1rem;
-	cursor: pointer;
-
-	&:hover {
-		background-color: var(--color-hover-grey);
-	}
-`;
-
-export const ServerInfo = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-left: 1rem;
-`;
-
-export const ServerName = styled.div`
-	font-style: normal;
-	font-weight: 700;
-	font-size: 1.2rem;
-	line-height: 1.5rem;
-	color: var(--color-full-white);
-`;
-
-export const ServerMembers = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-`;
-
-export const ServerMembersTotal = styled.div`
-	margin-right: 1rem;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 0.8rem;
-	line-height: 1.5rem;
-	color: var(--color-darker-white);
-`;
-
-export const ServerMembersCount = styled.span`
-	font-style: normal;
-	font-weight: 700;
-	font-size: 0.8rem;
-	line-height: 1.5rem;
-	color: var(--color-full-white);
-	margin-left: 0.2rem;
-`;
-
-export const ServerMembersText = styled.span`
-	font-style: normal;
-	font-weight: 500;
-	font-size: 0.8rem;
-	line-height: 1.5rem;
-	color: var(--color-whiter-dark);
-	margin-left: 0.2rem;
-`;
-
-export const ServerMembersOnline = styled.div`
-	margin-right: 1rem;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 0.8rem;
-	line-height: 1.5rem;
-	color: var(--color-darker-white);
+    color: #a8a8a8;
 `;
