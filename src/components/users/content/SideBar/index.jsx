@@ -17,7 +17,7 @@ import {
     UserInformation,
     UserName,
     UserTag,
-} from "./css";
+} from "./SideBarElements";
 
 export default function SideBar() {
     return (

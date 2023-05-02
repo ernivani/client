@@ -8,21 +8,10 @@ import {
     InputWrapper,
     AttachButton,
     Input,
-    RightBar,
-    MembersWarp,
-    MembersHeader,
-    MembersTitle,
-    MembersCount,
-    MembersContainer,
-    Member,
-    MemberInfo,
-    MemberAvatar,
-    MemberName,
-    MemberActivity,
-    MemberActivityName,
 } from "./css";
 
 import SideBar from "./SideBar";
+import RightBar from "./RightBar";
 
 export default function BotContent() {
     return (
@@ -54,33 +43,7 @@ export default function BotContent() {
                     </InputWrapper>
                 </InputContainer>
             </Content>
-            <RightBar>
-                <MembersWarp>
-                    <MembersHeader>
-                        <MembersTitle>Server Owner</MembersTitle>
-                        <MembersCount>1</MembersCount>
-                    </MembersHeader>
-                    <MembersContainer>
-                        <Member>
-                            <MemberAvatar>
-                                <img
-                                    src="https://api.dicebear.com/5.x/personas/svg?seed=ernicani"
-                                    alt="avatar"
-                                />
-                            </MemberAvatar>
-                            <MemberInfo>
-                                <MemberName>ernicani</MemberName>
-                                <MemberActivity>
-                                    Playing{" "}
-                                    <MemberActivityName>
-                                        Visual Studio Code
-                                    </MemberActivityName>
-                                </MemberActivity>
-                            </MemberInfo>
-                        </Member>
-                    </MembersContainer>
-                </MembersWarp>
-            </RightBar>
+            <RightBar />
         </BottomContent>
     );
 }
