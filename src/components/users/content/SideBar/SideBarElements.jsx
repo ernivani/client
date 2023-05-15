@@ -138,10 +138,4 @@ export const UserName = styled.div`
     color: var(--color-full-white);
 `;
 
-export const UserTag = styled.div`
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.8rem;
-    line-height: 10px;
-    color: var(--color-whiter-dark);
-`;
+export const UserTag = styled.div``;

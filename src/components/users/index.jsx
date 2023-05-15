@@ -13,15 +13,19 @@ export function Users() {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const userCache = localStorage.getItem("userCache");
-	if (!userCache) {
+	let userId;
+	try {
+		const userCache = localStorage.getItem("userCache");
+		if (!userCache) {
+			window.location.href = "/log";
+		}
+		userId = JSON.parse(userCache).userId;
+	} catch (e) {
+		localStorage.removeItem("userCache");
 		window.location.href = "/log";
 	}
-	const token = JSON.parse(userCache).token;
-	const userId = JSON.parse(userCache).userId;
 
 	const [loading, setLoading] = useState(true);
-	const [isVisible, setIsVisible] = useState(false);
 	const socket = io("https://api.impin.fr");
 
 	const [serverList, setServerList] = useState([]);
@@ -33,14 +37,12 @@ export function Users() {
 
 		socket.on("server-list", (data) => {
 			setServerList(data);
-			console.log(data);
 			setLoading(false);
 		});
 
 		socket.on("server-created", (data) => {
 			setServerList((old) => [...old, data]);
 		});
-		console.log(serverList);
 	}, []);
 
 	const addServer = (e) => {
@@ -52,6 +54,7 @@ export function Users() {
 	};
 
 	const disconnect = useCallback((e) => {
+		e.preventDefault();
 		localStorage.removeItem("userCache");
 		window.location.href = "/log";
 	}, []);
@@ -60,27 +63,23 @@ export function Users() {
 		return <div>Loading...</div>;
 	} else {
 		return (
-            <MessageProvider>
-                <UwU id="UwU">
-                    <Topbar className="user">
-                        <TopBar
-                            serverList={serverList}
-                            userId={userId}
-                            setIsVisible={setIsVisible}
-                            addServer={addServer}
-                            disconnect={disconnect}
-                            navigate={navigate}
-                        />
-                    </Topbar>
-                    <BotContent
-                        serverList={serverList}
-                        userId={userId}
-                        socket={socket}
-                        isVisible={isVisible}
-                        setIsVisible={setIsVisible}
-                    />
-                </UwU>
-            </MessageProvider>
+			<MessageProvider>
+				<UwU id="UwU">
+					<Topbar className="user">
+						<TopBar
+							serverList={serverList}
+							addServer={addServer}
+							disconnect={disconnect}
+							navigate={navigate}
+						/>
+					</Topbar>
+					<BotContent
+						serverList={serverList}
+						userId={userId}
+						socket={socket}
+					/>
+				</UwU>
+			</MessageProvider>
 		);
 	}
 }

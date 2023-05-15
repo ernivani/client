@@ -13,7 +13,8 @@ import {
 import SideBar from "./SideBar";
 import RightBar from "./RightBar";
 
-export default function BotContent() {
+export default function BotContent(params) {
+    console.log(params);
     return (
         <BottomContent>
             <SideBar />

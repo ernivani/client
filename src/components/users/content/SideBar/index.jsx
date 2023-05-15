@@ -19,6 +19,8 @@ import {
     UserTag,
 } from "./SideBarElements";
 
+import ButtonSettings from "./ButtonSettings";
+
 export default function SideBar() {
     return (
         <SideBarContainer>
@@ -69,7 +71,7 @@ export default function SideBar() {
                     </svg>
                 </ServerAction>
             </ServerNameContainer>
-            <div style={{ background: "red", flex: 1 }}></div>
+            <div style={{ flex: 1 }}></div>
             <UserInfoContainer>
                 <UserInfoWarp>
                     <UserInfo>
@@ -80,9 +82,10 @@ export default function SideBar() {
                             />
                         </UserAvatar>
                         <UserInformation>
-                            <UserName>Ernicani</UserName>
-                            <UserTag>#0001</UserTag>
+                            <UserName>ernicani</UserName>
+                            <UserTag></UserTag>
                         </UserInformation>
+                        <ButtonSettings />
                     </UserInfo>
                 </UserInfoWarp>
             </UserInfoContainer>
