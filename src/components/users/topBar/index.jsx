@@ -4,13 +4,9 @@ import React, { useCallback, useEffect } from "react";
 
 import { TopbarNav, Serv, Squircle, Divider } from "./css";
 
-export default function TopBar({
-    serverList,
-    addServer,
-    disconnect,
-    navigate,
-}) {
-    const { id } = useParams();
+export default function TopBar( props ) {
+
+    const { id,cid,serverList, navigate, addServer } = props;
 
     useEffect(() => {
         const topbarNav = document.querySelector(".topbar_nav");
@@ -61,15 +57,6 @@ export default function TopBar({
                 hoverColor="var(--color-green-bubble)"
                 onClick={addServer}
             />
-            <SideBarIcon
-                id="disconnect"
-                nav={navigate}
-                icon={<FaSignOutAlt />}
-                text="Déconnexion"
-                active={false}
-                hoverColor="var(--color-red-bubble)"
-                onClick={disconnect}
-            />
         </TopbarNav>
     );
 }
@@ -78,7 +65,7 @@ function SideBarIcon(props) {
     const { icon, text, active, hoverColor, id, cid, nav, onClick } = props;
 
     let pathModif = "";
-    if (id !== "addServer" && id !== "disconnect") {
+    if (id !== "addServer") {
         pathModif = id === "@me" ? `/channels/${id}` : `/channels/${id}/${cid}`;
     }
 

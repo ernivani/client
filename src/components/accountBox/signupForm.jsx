@@ -35,9 +35,6 @@ export function SignupForm(props) {
         setErrorUsername("");
         setErrorPassword("");
 
-        console.log(email);
-        console.log(username);
-        console.log(password);
 
         if (email === "" || !email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
             setErrorEmail(t("email_required"));

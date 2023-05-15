@@ -19,7 +19,7 @@ const buttonStyles = {
     margin: "0",
     transition: "0.2s ease 0s",
     "&:hover": {
-        backgroundColor: "var(--color-hover-grey)",
+        backgroundColor: "var(--color-dark-grey)",
     },
 };
 

@@ -29,7 +29,7 @@ export const CheckAuth = () => {
 					);
 				})
 				.catch((err) => {
-					console.log(err);
+					console.error(err);
 					localStorage.removeItem("userCache");
 					window.location.href = "/log";
 				});

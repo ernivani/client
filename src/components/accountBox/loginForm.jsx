@@ -121,12 +121,11 @@ export function LoginForm() {
                         }
                         import("./LogSend/resetPassword")
                             .then((module) => {
-                                console.log(email)
                                 module.resetPasswordSend(email, setErrorEmail);
                             }
                             )
                             .catch((error) => {
-                                console.log(error);
+                                console.error(error);
                             });
                             setLoading(false);
                     }

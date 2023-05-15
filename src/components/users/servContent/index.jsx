@@ -19,7 +19,10 @@ export default function BotContentServer(params) {
     console.log(params);
     return (
         <BottomContent>
-            <SideBar toggleSettings={params.toggleSettings} />
+            <SideBar
+                toggleSettings={params.toggleSettings}
+                ServerName={params.ActualServer.name}
+            />
             <Content>
                 <Top>
                     <ChannelName>#general</ChannelName>

@@ -28,7 +28,7 @@ const LinkContainer = styled.div`
     border-radius: 5px;
     align-items: center;
     cursor: pointer;
-    background-color: var(--color-hover-grey);
+    background-color: var(--color-dark-grey);
     transition: 0.2s ease 0s;
     &:hover {
         background-color: var(--color-grey);
@@ -63,10 +63,7 @@ export default function ChannelsContainer() {
                     <LinkText>Friends</LinkText>
                 </LinkContainer>
                 <LinkContainer>
-                    <LinkInboxIcon
-                        viewBox="0 0 24 24"
-                        version="1.1"
-                    >
+                    <LinkInboxIcon viewBox="0 0 24 24" version="1.1">
                         <title>inbox_fill</title>
                         <g
                             stroke="none"

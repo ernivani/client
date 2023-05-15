@@ -15,30 +15,11 @@ import { FaPlusCircle } from "react-icons/fa";
 
 import SideBar from "./SideBar";
 
-export default function BotContentFriends() {
+export default function BotContentFriends(props) {
     return (
         <BottomContent>
-            <SideBar />
-            <Content>
-                <Top>
-                    <ChannelName>#general</ChannelName>
-                </Top>
-                <Messages></Messages>
-                <InputContainer>
-                    <InputWrapper>
-                        <AttachButton>
-                            <FaPlusCircle style={{ fontSize: "1.5rem" }} />
-                        </AttachButton>
-                        <Input
-                            placeholder="Message #general"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                        />
-                    </InputWrapper>
-                </InputContainer>
-            </Content>
+            <SideBar toggleSettings= {props.toggleSettings}/>
+            <Content></Content>
         </BottomContent>
     );
 }

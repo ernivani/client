@@ -7,7 +7,6 @@ export const loginSend = (email,password, setErrorEmail, setErrorPassword) => {
         password: password
     };
     
-    console.log(data);
     axios.post('https://api.impin.fr/user/login', data)
         .then((res) => {
             const userCache = {

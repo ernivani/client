@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
-import MuteB from "./Buttons/MuteB";
-import DeafB from "./Buttons/DeafB";
-import SettingsB from "./Buttons/SettingsB";
+import MuteB from "../servContent/SideBar/Buttons/MuteB";
+import DeafB from "../servContent/SideBar/Buttons/DeafB";
+import SettingsB from "../servContent/SideBar/Buttons/SettingsB";
 
 const PanelButton = styled.div`
     flex: 0 1 auto;

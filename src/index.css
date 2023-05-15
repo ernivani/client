@@ -1,19 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
 :root {
-	--color-primary: #202224;
+	--color-primary: #1e1e1e;
 	--color-full-white: #ffffff;
 	--color-darker-white: #f2f3f5;
-	--color-light-grey: #99aab5;
-	--color-grey: #35393f;
-	--color-dark-grey: #2f3137;
-	--color-blurple: #7289da;
-	--color-yell-bubble: #d0b34e;
-	--color-red-bubble: #f04747;
-	--color-green-bubble: #43b581;
-	--color-input: #23252a;
+	--color-grey: #3e3e42;
+	--color-dark-grey: #2d2d30;
 	--color-whiter-dark: #7c7979;
-	--color-hover-grey: #4e505899;
+	--color-blurple: #007acc;
+	--color-yell-bubble: #ffaa00;
+	--color-red-bubble: #cc1f00;
+	--color-green-bubble: #00b300;
 }
 
 html,
@@ -27,7 +24,7 @@ body {
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 1.5;
-	color:#fff;
+	color: #fff;
 }
 
 * {

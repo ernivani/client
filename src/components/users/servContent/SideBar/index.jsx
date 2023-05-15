@@ -9,26 +9,18 @@ import {
     ServerMembersText,
     ServerMembersOnline,
     ServerAction,
-    UserInfoContainer,
-    UserInfoWarp,
-    UserInfo,
-    UserAvatar,
-    ImgAvatar,
-    UserInformation,
-    UserName,
-    UserTag,
 } from "./SideBarElements";
 
 import { FaChevronDown } from "react-icons/fa";
 
-import ButtonSettings from "./ButtonSettings";
+import UserDiv from "../../utils/UserDiv";
 
 export default function SideBar(props) {
     return (
         <SideBarContainer>
             <ServerNameContainer>
                 <ServerInfo>
-                    <ServerName>Ernicani's Server</ServerName>
+                    <ServerName>{props.ServerName}</ServerName>
                     <ServerMembers>
                         <ServerMembersTotal>
                             <svg
@@ -65,23 +57,7 @@ export default function SideBar(props) {
                 </ServerAction>
             </ServerNameContainer>
             <div style={{ flex: 1 }}></div>
-            <UserInfoContainer>
-                <UserInfoWarp>
-                    <UserInfo>
-                        <UserAvatar>
-                            <ImgAvatar
-                                src="https://api.dicebear.com/5.x/personas/svg?seed=ernicani"
-                                alt="avatar"
-                            />
-                        </UserAvatar>
-                        <UserInformation>
-                            <UserName>ernicani</UserName>
-                            <UserTag></UserTag>
-                        </UserInformation>
-                        <ButtonSettings toggleSettings={props.toggleSettings} />
-                    </UserInfo>
-                </UserInfoWarp>
-            </UserInfoContainer>
+            <UserDiv toggleSettings={props.toggleSettings} />
         </SideBarContainer>
     );
 }
