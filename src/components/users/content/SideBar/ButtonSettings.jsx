@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
-import MuteB from "./Buttons/Mute";
+import MuteB from "./Buttons/MuteB";
+import DeafB from "./Buttons/DeafB";
 
 const PanelButton = styled.div`
     flex: 0 1 auto;
@@ -40,9 +41,20 @@ export default function ButtonSettings() {
             });
     };
 
+    const toggleDeafen = () => {
+        setIsDeafened(!isDeafened);
+        console.log("Deafen");
+
+        if (isMuted) {
+            toggleMute();
+        }
+    };
+    
+
     return (
         <PanelButton>
             <MuteB isMuted={isMuted} toggleMute={toggleMute} />
+            <DeafB isDeafened={isDeafened} toggleDeafen={toggleDeafen} />
         </PanelButton>
     );
 }
