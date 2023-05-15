@@ -1,3 +1,4 @@
+import React from "react";
 import {
     BottomContent,
     Content,
@@ -8,19 +9,16 @@ import {
     InputWrapper,
     AttachButton,
     Input,
-} from "./css";
+} from "../servContent/css";
 
 import { FaPlusCircle } from "react-icons/fa";
 
-
 import SideBar from "./SideBar";
-import RightBar from "./RightBar";
 
-export default function BotContent(params) {
-    console.log(params);
+export default function BotContentFriends() {
     return (
         <BottomContent>
-            <SideBar toggleSettings={params.toggleSettings} />
+            <SideBar />
             <Content>
                 <Top>
                     <ChannelName>#general</ChannelName>
@@ -41,7 +39,6 @@ export default function BotContent(params) {
                     </InputWrapper>
                 </InputContainer>
             </Content>
-            <RightBar />
         </BottomContent>
     );
 }

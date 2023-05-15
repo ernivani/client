@@ -5,7 +5,9 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { UwU, Topbar } from "./css.jsx";
 
-import BotContent from "./content/index.jsx";
+import BotContentServer from "./servContent/index.jsx";
+
+import BotContentFriends from "./friendsContent/index.jsx";
 
 import { MessageProvider } from "./MessageContext";
 
@@ -67,9 +69,6 @@ export function Users() {
 
     if (loading) {
         return <div>Loading...</div>;
-    }
-    if (isInSettings) {
-        return <div onClick={toggleSettings}>Settings</div>;
     } else {
         return (
             <MessageProvider>
@@ -83,8 +82,10 @@ export function Users() {
                         />
                     </Topbar>
 
-                    {!id || id === "@me" ? null : (
-                        <BotContent
+                    {!id || id === "@me" ? (
+                        <BotContentFriends />
+                    ) : (
+                        <BotContentServer
                             serverList={serverList}
                             userId={userId}
                             socket={socket}

@@ -6,15 +6,11 @@ import { TopbarNav, Serv, Squircle, Divider } from "./css";
 
 export default function TopBar({
     serverList,
-    userId,
-    setIsVisible,
     addServer,
     disconnect,
     navigate,
 }) {
     const { id } = useParams();
-
-    // serverList doit etre multipliée par 10 pour que le scroll fonctionne
 
     useEffect(() => {
         const topbarNav = document.querySelector(".topbar_nav");
@@ -86,13 +82,13 @@ function SideBarIcon(props) {
         pathModif = id === "@me" ? `/channels/${id}` : `/channels/${id}/${cid}`;
     }
 
-    let handleClick = onClick ? onClick : () => nav(pathModif);
-
     return (
         <Serv>
             <Squircle
                 a={hoverColor}
-                onClick={handleClick}
+                onClick={
+                    active ? null : onClick ? onClick : () => nav(pathModif)
+                }
                 id={id}
                 b={active ? 1 : 0}
                 aria-label={text}
