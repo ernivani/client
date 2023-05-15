@@ -19,9 +19,11 @@ import {
     UserTag,
 } from "./SideBarElements";
 
+import { FaChevronDown } from "react-icons/fa";
+
 import ButtonSettings from "./ButtonSettings";
 
-export default function SideBar() {
+export default function SideBar(props) {
     return (
         <SideBarContainer>
             <ServerNameContainer>
@@ -59,16 +61,7 @@ export default function SideBar() {
                     </ServerMembers>
                 </ServerInfo>
                 <ServerAction>
-                    <svg
-                        stroke="currentColor"
-                        fill="currentColor"
-                        strokeWidth={0}
-                        viewBox="0 0 24 24"
-                        height="2em"
-                        width="2em"
-                    >
-                        <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"></path>
-                    </svg>
+                    <FaChevronDown style={{ fontSize: "1.5rem" }} />
                 </ServerAction>
             </ServerNameContainer>
             <div style={{ flex: 1 }}></div>
@@ -85,7 +78,7 @@ export default function SideBar() {
                             <UserName>ernicani</UserName>
                             <UserTag></UserTag>
                         </UserInformation>
-                        <ButtonSettings />
+                        <ButtonSettings toggleSettings={props.toggleSettings} />
                     </UserInfo>
                 </UserInfoWarp>
             </UserInfoContainer>

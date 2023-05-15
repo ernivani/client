@@ -30,6 +30,8 @@ export function Users() {
 
     const [serverList, setServerList] = useState([]);
 
+    const [isInSettings, setIsInSettings] = useState(false);
+
     useEffect(() => {
         socket.emit("add-user", userId);
 
@@ -59,8 +61,15 @@ export function Users() {
         window.location.href = "/log";
     }, []);
 
+    const toggleSettings = useCallback(() => {
+        setIsInSettings(!isInSettings);
+    }, [isInSettings]);
+
     if (loading) {
         return <div>Loading...</div>;
+    }
+    if (isInSettings) {
+        return <div onClick={toggleSettings}>Settings</div>;
     } else {
         return (
             <MessageProvider>
@@ -74,12 +83,12 @@ export function Users() {
                         />
                     </Topbar>
 
-                    {/* if we are not on /channels/@me */}
                     {!id || id === "@me" ? null : (
                         <BotContent
                             serverList={serverList}
                             userId={userId}
                             socket={socket}
+                            toggleSettings={toggleSettings}
                         />
                     )}
                 </UwU>

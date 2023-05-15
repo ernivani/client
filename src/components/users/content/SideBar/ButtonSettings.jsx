@@ -1,10 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
 import MuteB from "./Buttons/MuteB";
 import DeafB from "./Buttons/DeafB";
+import SettingsB from "./Buttons/SettingsB";
 
 const PanelButton = styled.div`
     flex: 0 1 auto;
@@ -18,10 +18,9 @@ const PanelButton = styled.div`
     padding: 0 8px;
 `;
 
-export default function ButtonSettings() {
+export default function ButtonSettings(props) {
     const [isMuted, setIsMuted] = useState(false);
     const [isDeafened, setIsDeafened] = useState(false);
-    const [isInSettings, setIsInSettings] = useState(false);
 
     const toggleMute = () => {
         navigator.mediaDevices
@@ -42,19 +41,17 @@ export default function ButtonSettings() {
     };
 
     const toggleDeafen = () => {
-        setIsDeafened(!isDeafened);
-        console.log("Deafen");
-
         if (isMuted) {
             toggleMute();
         }
+        setIsDeafened(!isDeafened);
     };
-    
 
     return (
         <PanelButton>
             <MuteB isMuted={isMuted} toggleMute={toggleMute} />
             <DeafB isDeafened={isDeafened} toggleDeafen={toggleDeafen} />
+            <SettingsB toggleSettings={props.toggleSettings} />
         </PanelButton>
     );
 }
