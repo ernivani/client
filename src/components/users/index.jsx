@@ -18,12 +18,14 @@ export function Users() {
 	const navigate = useNavigate();
 
 	let userId;
+	let username;
 	try {
 		const userCache = localStorage.getItem("userCache");
 		if (!userCache) {
 			window.location.href = "/log";
 		}
 		userId = JSON.parse(userCache).userId;
+		username = JSON.parse(userCache).username;
 	} catch (e) {
 		localStorage.removeItem("userCache");
 		window.location.href = "/log";
@@ -43,7 +45,7 @@ export function Users() {
 
 		socket.on("server-list", (data) => {
 			setServerList(data);
-            setLoading(false);
+			setLoading(false);
 		});
 
 		socket.on("server-created", (data) => {
@@ -159,13 +161,17 @@ export function Users() {
 					</Topbar>
 
 					{!id || id === "@me" ? (
-						<BotContentFriends toggleSettings={toggleSettings} />
+						<BotContentFriends
+							toggleSettings={toggleSettings}
+							userName={username}
+						/>
 					) : (
 						<BotContentServer
 							userId={userId}
 							socket={socket}
 							toggleSettings={toggleSettings}
 							ActualServer={ActualServer}
+							userName={username}
 						/>
 					)}
 				</UwU>
