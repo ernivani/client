@@ -164,8 +164,6 @@ export function AccountLog() {
     const contextValue = { switchToSignup, switchToSignin };
 
     useEffect(() => {
-        // get the userCache
-        // if the userCache is not empty then redirect to the /channels/@me
         const userCache = localStorage.getItem("userCache");
         if (userCache) {
             window.location.href = "/channels/@me";

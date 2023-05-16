@@ -1,0 +1,106 @@
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+
+const SettingsContainer = styled.div`
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-primary);
+
+    opacity: 0;
+    transform: scale(1.3);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+
+    &.expand {
+        opacity: 1;
+        transform: scale(1);
+    }
+`;
+
+const Backdrop = styled(motion.div)`
+    position: relative;
+    background: var(--color-grey);
+    z-index: 1000;
+`;
+
+const SettingsTitle = styled.h1`
+    font-size: 2rem;
+    color: var(--color-full-white);
+    margin: 0;
+    padding: 0;
+`;
+
+const SettingsButton = styled.button`
+    background: var(--color-whiter-dark);
+    color: var(--color-full-white);
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        background: var(--color-little-dark-hover);
+    }
+`;
+
+const backdropVariants = {
+    initial: {
+        opacity: 0,
+        scale: 1.3,
+    },
+    animate: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+        },
+    },
+    exit: {
+        opacity: 0,
+        scale: 1.3,
+        transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+        },
+    },
+};
+
+export default function SettingsContent(props) {
+    const [isExpanded, setExpanded] = useState(false);
+
+    useEffect(() => {
+        setExpanded(true);
+    }, []);
+
+    const handleCloseSettings = (e) => {
+        e.preventDefault();
+        setExpanded(false);
+
+        setTimeout(() => {
+            props.toggleSettings();
+        }, 300);
+    };
+
+    return (
+        <SettingsContainer className={isExpanded ? "expand" : ""}>
+            <Backdrop
+                variants={backdropVariants}
+                initial="initial"
+                animate={isExpanded ? "animate" : "exit"}
+            >
+                <SettingsTitle>Settings</SettingsTitle>
+
+                <SettingsButton onClick={handleCloseSettings}>
+                    Close Settings
+                </SettingsButton>
+                <SettingsButton onClick={props.disconnect}>
+                    Logout
+                </SettingsButton>
+            </Backdrop>
+        </SettingsContainer>
+    );
+}
