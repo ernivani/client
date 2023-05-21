@@ -12,6 +12,7 @@
 	--color-red-bubble: #cc1f00;
 	--color-green-bubble: #00b300;
 	--color-little-dark-hover: #1e1e1e;
+	--color-hover-grey: #4e505899;
 }
 
 html,
@@ -36,4 +37,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	user-select: none;
+	height: 100%;
+	width: 100%;
 }

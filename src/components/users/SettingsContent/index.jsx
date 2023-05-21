@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const SettingsContainer = styled.div`
     position: absolute;
@@ -39,11 +40,46 @@ const SettingsButton = styled.button`
     background: var(--color-whiter-dark);
     color: var(--color-full-white);
     border: none;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 
     &:hover {
         cursor: pointer;
         background: var(--color-little-dark-hover);
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &:active {
+        background: var(--color-darker-hover);
+    }
+`;
+
+function Marginer(props) {
+    const { direction } = props;
+
+    if (direction === "horizontal") return <HorizontalMargin {...props} />;
+    else {
+        return <VerticalMargin {...props} />;
+    }
+}
+
+const HorizontalMargin = styled.span`
+    display: flex;
+    width: ${({ margin }) =>
+        typeof margin === "string" ? margin : `${margin}px`};
+`;
+
+const VerticalMargin = styled.span`
+    display: flex;
+    height: ${({ margin }) =>
+        typeof margin === "string" ? margin : `${margin}px`};
 `;
 
 const backdropVariants = {
@@ -71,6 +107,7 @@ const backdropVariants = {
 
 export default function SettingsContent(props) {
     const [isExpanded, setExpanded] = useState(false);
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         setExpanded(true);
@@ -85,6 +122,13 @@ export default function SettingsContent(props) {
         }, 300);
     };
 
+    const handleChangeLanguage = (lang) => (e) => {
+        e.preventDefault();
+        i18n.changeLanguage(lang);
+    };
+
+    const langa = localStorage.getItem("i18nextLng");
+
     return (
         <SettingsContainer className={isExpanded ? "expand" : ""}>
             <Backdrop
@@ -93,6 +137,24 @@ export default function SettingsContent(props) {
                 animate={isExpanded ? "animate" : "exit"}
             >
                 <SettingsTitle>Settings</SettingsTitle>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    <h2>Language</h2>
+                    <SettingsButton
+                        onClick={handleChangeLanguage("fr")}
+                        disabled={langa === "fr"}
+                    >
+                        Français
+                    </SettingsButton>
+                    <SettingsButton
+                        onClick={handleChangeLanguage("en")}
+                        disabled={langa === "en"}
+                    >
+                        English, UK
+                    </SettingsButton>
+                </div>
+
+                <Marginer direction="vertical" margin="1rem" />
 
                 <SettingsButton onClick={handleCloseSettings}>
                     Close Settings

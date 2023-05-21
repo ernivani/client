@@ -120,21 +120,21 @@ const ButtonsContainer = styled.div`
 	}
 `;
 
-export const Home = () => {
+const Home = () => {
 	const { t } = useTranslation();
 
 	const [user, setUser] = useState(false);
 
 	useEffect(() => {
 		const userCache = localStorage.getItem("userCache");
-		setUser(userCache ? true : false)
+		setUser(userCache ? true : false);
 	}, []);
 
 	return (
 		<HomeBackground>
 			<Header>
 				<Logo src="/Impin.svg" alt="Impin" width={100} height={60} />
-                {/*  */}
+				{/*  */}
 				{user ? (
 					<Button to="/log">{t("app_button")}</Button>
 				) : (
@@ -154,3 +154,5 @@ export const Home = () => {
 		</HomeBackground>
 	);
 };
+
+export default Home;

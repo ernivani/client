@@ -14,21 +14,79 @@ import { FaPlusCircle } from "react-icons/fa";
 
 import SideBar from "./SideBar";
 import RightBar from "./RightBar";
+import { useEffect, useState } from "react";
 
 export default function BotContentServer(params) {
-	console.log(params);
+	const [messages, setMessages] = useState([]);
+	const [channels, setChannels] = useState([]);
+
+	useEffect(() => {
+		params.socket.emit("GetMessages", {
+			serverId: params.ActualServer.id,
+			channelId: params.cid,
+		});
+
+		params.socket.emit("GetChannels", {
+			serverId: params.ActualServer.id,
+		});
+
+		const handleGetMessages = (data) => {
+			setMessages(data);
+		};
+		params.socket.on("GetMessages", handleGetMessages);
+
+		const handleSendMessages = (data) => {
+			setMessages((messages) => [...messages, data]);
+		};
+		params.socket.on("SendMessages", handleSendMessages);
+
+		const handleGetChannels = (data) => {
+			setChannels(data);
+		};
+		params.socket.on("GetChannels", handleGetChannels);
+
+		return () => {
+			params.socket.off("GetMessages", handleGetMessages);
+			params.socket.off("SendMessages", handleSendMessages);
+		};
+	}, [params.ActualServer, params.cid, params.socket]);
+
+	const sendMessage = (message) => {
+		params.socket.emit("SendMessages", {
+			content: message,
+			channelId: params.cid,
+			userId: params.userId,
+			serverId: params.ActualServer.id,
+			username: params.userName,
+			avatar: params.userAvatar,
+		});
+	};
+
+	
 	return (
 		<BottomContent>
 			<SideBar
 				toggleSettings={params.toggleSettings}
-				ServerName={params.ActualServer.name}
+				ActualServer={params.ActualServer}
 				userName={params.userName}
+				cid={params.cid}
+				channels={channels}
+				navigate={params.navigate}
+				socket={params.socket}
 			/>
 			<Content>
 				<Top>
 					<ChannelName>#general</ChannelName>
 				</Top>
-				<Messages></Messages>
+				<Messages>
+					{messages.map((message) => {
+						return (
+							<div key={message.id}>
+								{message.user.name}: {message.content}
+							</div>
+						);
+					})}
+				</Messages>
 				<InputContainer>
 					<InputWrapper>
 						<AttachButton>
@@ -36,10 +94,16 @@ export default function BotContentServer(params) {
 						</AttachButton>
 						<Input
 							placeholder="Message #general"
-							autocomplete="off"
-							autocorrect="off"
-							autocapitalize="off"
-							spellcheck="false"
+							autoComplete="off"
+							autoCorrect="off"
+							autoCapitalize="off"
+							spellCheck="false"
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									sendMessage(e.target.value);
+									e.target.value = "";
+								}
+							}}
 						/>
 					</InputWrapper>
 				</InputContainer>

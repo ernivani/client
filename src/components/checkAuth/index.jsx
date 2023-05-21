@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 
-export const CheckAuth = () => {
-
+const CheckAuth = () => {
 	useEffect(() => {
 		let userCache = null;
 		try {
@@ -38,3 +37,5 @@ export const CheckAuth = () => {
 
 	return <></>;
 };
+
+export default CheckAuth;

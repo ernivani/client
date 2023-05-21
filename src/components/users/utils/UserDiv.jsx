@@ -52,7 +52,6 @@ export const UserName = styled.div`
 import ButtonSettings from "./ButtonSettings";
 
 export default function UserDiv(props) {
-    console.log(props);
     return (
         <UserInfoContainer>
             <UserInfoWarp>

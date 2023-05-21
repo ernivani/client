@@ -131,7 +131,7 @@ const expandingTransition = {
     stiffness: 30,
 };
 
-export function ResetPassword() {
+const ResetPassword = () => {
     const { t } = useTranslation();
 
     const [password, setPassword] = useState("");
@@ -260,3 +260,5 @@ export function ResetPassword() {
         </ResetPasswordContainer>
     );
 }
+
+export default ResetPassword
