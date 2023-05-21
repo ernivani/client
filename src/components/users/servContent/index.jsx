@@ -62,7 +62,8 @@ export default function BotContentServer(params) {
 		});
 	};
 
-	
+	console.log(messages);
+
 	return (
 		<BottomContent>
 			<SideBar
@@ -82,7 +83,14 @@ export default function BotContentServer(params) {
 					{messages.map((message) => {
 						return (
 							<div key={message.id}>
-								{message.user.name}: {message.content}
+								<div>
+									{message.user.name} -{" "}
+									{new Date(
+										message.created_at
+									).toLocaleTimeString()}
+								</div>
+
+								{message.content}
 							</div>
 						);
 					})}

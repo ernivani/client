@@ -64,17 +64,27 @@ const CategoryAction = styled.div`
 `;
 
 export default function SideBar(props) {
+	const [closeCategories, setcloseCategories] = useState([]);
+
 	const handleChannelClick = (e, type) => {
-		if (e.target.id === props.cid || type === "voice") {
+		if (type === "voice") {
 			(e) => e.preventDefault();
-			props.socket.emit("JoinChannel", {
-				channelId: e.target.id,
-				serverId: props.ActualServer.id,
-			});
+			alert("In building");
+			return;
 		}
 
 		const path = `/channels/${props.ActualServer.id}/${e.target.id}`;
 		props.navigate(path);
+	};
+
+	const handleCategoryClick = (categoryId) => {
+		if (closeCategories.includes(categoryId)) {
+			setcloseCategories(
+				closeCategories.filter((id) => id !== categoryId)
+			);
+		} else {
+			setcloseCategories([...closeCategories, categoryId]);
+		}
 	};
 
 	useState(() => {
@@ -82,7 +92,7 @@ export default function SideBar(props) {
 			console.log(data);
 		});
 	}, []);
-	
+
 	return (
 		<SideBarContainer>
 			<ServerNameContainer>
@@ -148,45 +158,58 @@ export default function SideBar(props) {
 				})}
 				{props.channels.map((categoryChannel) => {
 					if (categoryChannel.type === "category") {
+						const isCategoryClose = closeCategories.includes(
+							categoryChannel.id
+						);
 						return (
 							<CategoryContainer key={categoryChannel.id}>
-								<CategoryName>
+								<CategoryName
+									onClick={() =>
+										handleCategoryClick(categoryChannel.id)
+									}
+								>
 									<span>{categoryChannel.name}</span>
 									<CategoryAction>
 										<FaChevronDown
-											style={{ fontSize: "0.7rem" }}
+											style={{
+												fontSize: "0.7rem",
+												transform: !isCategoryClose
+													? "rotate(0deg)"
+													: "rotate(-90deg)",
+											}}
 										/>
 									</CategoryAction>
 								</CategoryName>
-								{props.channels.map((innerChannel) => {
-									if (
-										innerChannel.parent_id ===
-										categoryChannel.id
-									) {
-										return (
-											<Channel
-												key={innerChannel.id}
-												id={innerChannel.id}
-												type={innerChannel.type}
-												onClick={(e) =>
-													handleChannelClick(
-														e,
-														innerChannel.type
-													)
-												}
-											>
-												{innerChannel.type ===
-												"text" ? (
-													<FaHashtag />
-												) : (
-													<FaVolumeUp />
-												)}
-												{innerChannel.name}
-											</Channel>
-										);
-									}
-									return null;
-								})}
+								{!isCategoryClose &&
+									props.channels.map((innerChannel) => {
+										if (
+											innerChannel.parent_id ===
+											categoryChannel.id
+										) {
+											return (
+												<Channel
+													key={innerChannel.id}
+													id={innerChannel.id}
+													type={innerChannel.type}
+													onClick={(e) =>
+														handleChannelClick(
+															e,
+															innerChannel.type
+														)
+													}
+												>
+													{innerChannel.type ===
+													"text" ? (
+														<FaHashtag />
+													) : (
+														<FaVolumeUp />
+													)}
+													{innerChannel.name}
+												</Channel>
+											);
+										}
+										return null;
+									})}
 							</CategoryContainer>
 						);
 					}
